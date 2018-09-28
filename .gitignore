@@ -46,4 +46,4 @@ Thumbs.db
 
 # VTU files #
 #############
-.vtu
+*.vtu

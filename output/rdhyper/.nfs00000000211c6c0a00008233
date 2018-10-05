@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Xdmf Version="3.0">
+  <Domain>
+    <Grid CollectionType="Temporal" GridType="Collection" Name="TimeSeries_phi">
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/0/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/0/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.050000000000000003" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/0</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/1</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/2/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/2/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.10000000000000001" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/2</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/3</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/4/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/4/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.15000000000000002" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/4</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/5</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/6/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/6/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.20000000000000001" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/6</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/7</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/8/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/8/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.25" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/8</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/9</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/10/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/10/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.29999999999999999" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/10</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/11</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/12/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/12/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.34999999999999998" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/12</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/13</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/14/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/14/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.39999999999999997" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/14</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/15</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/16/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/16/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.44999999999999996" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/16</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/17</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/18/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/18/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.49999999999999994" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/18</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/19</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/20/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/20/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.54999999999999993" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/20</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/21</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/22/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/22/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.59999999999999998" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/22</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/23</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/24/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/24/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.65000000000000002" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/24</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/25</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/26/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/26/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.70000000000000007" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/26</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/27</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/28/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/28/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.75000000000000011" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/28</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/29</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/30/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/30/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.80000000000000016" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/30</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/31</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/32/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/32/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.8500000000000002" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/32</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/33</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/34/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/34/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.90000000000000024" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/34</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/35</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/36/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/36/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.95000000000000029" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/36</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/37</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid GridType="Uniform" Name="mesh">
+        <Topology NodesPerElement="3" NumberOfElements="3200" TopologyType="Triangle">
+          <DataItem Dimensions="3200 3" Format="HDF" NumberType="UInt">solution.h5:/Mesh/38/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="1681 2" Format="HDF">solution.h5:/Mesh/38/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="1.0000000000000002" />
+        <Attribute AttributeType="Scalar" Center="Node" Name="phi">
+          <DataItem Dimensions="1681 1" Format="HDF">solution.h5:/VisualisationVector/38</DataItem>
+        </Attribute>
+      <Attribute AttributeType="Vector" Center="Node" Name="disp">
+          <DataItem Dimensions="1681 3" Format="HDF">solution.h5:/VisualisationVector/39</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+    </Domain>
+</Xdmf>

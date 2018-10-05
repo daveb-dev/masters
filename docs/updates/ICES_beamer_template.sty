@@ -1,0 +1,36 @@
+\mode<presentation> {
+  \definecolor{ICES_blue}{RGB}{94, 156, 174}
+  %\usetheme{Madrid}
+  \usetheme{Boadilla}
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{mini frames}{}
+  \setbeamertemplate{section in head/foot}{}
+  \setbeamercovered{transparent=0}
+  \setbeameroption{show notes}
+  \setbeamercolor{structure}{bg=ICES_blue,fg=ICES_blue}
+  \setbeamercolor{block title}{bg=ICES_blue,fg=white}
+  \setbeamercolor{block body}{bg=ICES_blue!20,fg=black}
+  \setbeamercolor{title in head/foot}{bg=ICES_blue,fg=white}
+  \setbeamertemplate{footline}
+  {%
+    \leavevmode
+    \ifnum \insertpagenumber=1
+        \includegraphics[width=\paperwidth]{ICES_footer.pdf}
+    \else
+     \hbox{%
+      \begin{beamercolorbox}[wd=.333\paperwidth,ht=2.25ex,dp=1ex,left,leftskip=2ex]{title in head/foot}%
+        \insertshortauthor
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+        \insertshorttitle
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.333\paperwidth,ht=2.25ex,dp=1ex,right,rightskip=4ex]{title in head/foot}%
+      \usebeamerfont{title in head/foot}
+      \insertframenumber/\inserttotalframenumber
+      \end{beamercolorbox}%
+     }%
+     \vskip 0pt
+     \fi
+  }
+
+}

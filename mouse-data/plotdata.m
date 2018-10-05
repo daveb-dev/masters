@@ -1,7 +1,7 @@
 close all
 filesNums = {'01','02','05','06','09','12'};
 rat = struct('tslices',[],'area',[],'skulls',{},'initial',[],'time',[],...
-    'sbound',{},'tbound',{},'meancells',[],'meanarea',[]);
+    'sbound',{},'tbound',{},'meancells',[],'meanarea',[],'maxlayer',[]);
 
 %% Number of cells in slice z at time t
 close all
@@ -56,19 +56,19 @@ for n = 1:length(filesNums)
     for z = 1:16
         [row,col,~] = find(skull(:,:,z) == 1);
         k = boundary(row,col);
-        rat(n).skulls{z} = [col row];
-        rat(n).sbound{z} = [col(k) row(k)];
+        rat(n).skulls{z} = [col 41-row];
+        rat(n).sbound{z} = [col(k) 41-row(k)];
         [row,col,~] = find(cells(:,:,z) > 0);
         k = boundary(row,col);
-        rat(n).tbound{z} = [col(k) row(k)];
+        rat(n).tbound{z} = [col(k) 41-row(k)];
     end
 end
 %% Initial condition based on max initial count
 for n = 1:length(filesNums)
     load(strcat('W',filesNums{n},'_model_data.mat'));
     days = size(cells,4);
-    [~,maxlayer] = max(rat(n).tslices(1,:));  % Slice with most cells
-    rat(n).initial = cells(:,:,maxlayer,1);   % Initial value
+    [~,rat(n).maxlayer] = max(rat(n).tslices(1,:));  % Slice with most cells
+    rat(n).initial = cells(:,:,rat(n).maxlayer,1);   % Initial value
 end
 
 %% Montages
@@ -102,7 +102,7 @@ for n = 1:length(filesNums)
     saveas(gcf,strcat('Montage',filesNums{n}),'png');
 end
 
-%%
+%% Last
 for n = 1:length(filesNums)
     load(strcat('W',filesNums{n},'_model_data.mat'));
     days = size(cells,4);

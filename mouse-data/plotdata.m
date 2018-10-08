@@ -17,13 +17,13 @@ for n = 1:length(filesNums)
     end
     % Number of tumor cells vs time
     sumSlices = sum(rat(n).tslices,2);
-    plot(time,sumSlices,'o-'); hold on
-    xlabel('time (days)')
-    ylabel('Number of Tumor Cells')
-    legend(filesNums,'Location','Northwest');
+    plot(time,sumSlices,'o-','Linewidth',2); hold on
+    xlabel('time (days)','FontSize',14)
+    ylabel('Number of Tumor Cells','FontSize',14)
+    legend(filesNums,'Location','Northwest','FontSize',14);
 end
-set(gcf,'Fontsize',12);
-saveas(gcf,'numtumorcells','png');
+set(get(legend,'Title'),'String','Rat ID')
+saveas(gcf,'images/numtumorcells','png');
 %% Time
 for n = 1:length(filesNums)
     load(strcat('W',filesNums{n},'_model_data.mat'));
@@ -42,12 +42,13 @@ for n = 1:length(filesNums)
         end
     end
     sumArea = sum(rat(n).area,2);
-    plot(time,sumArea,'o-'); hold on
-    xlabel('time (days)')
-    ylabel('# of Voxels with Tumor Cells)')
-    legend(filesNums,'Location','Northwest');
+    plot(time,sumArea,'o-','Linewidth',2); hold on
+    xlabel('time (days)','FontSize',14)
+    ylabel('# of Voxels with Tumor Cells)','FontSize',14)
+    legend(filesNums,'Location','Northwest','FontSize',14);
 end
-saveas(gcf,'voxtumorcells','png');
+set(get(legend,'Title'),'String','Rat ID')
+saveas(gcf,'images/voxtumorcells','png');
 %% Boundaries
 for n = 1:length(filesNums)
     load(strcat('W',filesNums{n},'_model_data.mat'));
@@ -97,98 +98,99 @@ for n = 1:length(filesNums)
         D = B+C;
         imds = cat(4,imds,D);
     end
-    montage(imds); hold on
+    montage(imds,'Size',[NaN 3]); hold on
     cbar = colorbar('eastoutside'); hold on
+    ylabel(cbar,'Number of Tumor Cells in Pixel','FontSize',14)
     caxis([mincell maxcell]); colormap jet;
-    saveas(gcf,strcat('Montage',filesNums{n}),'png');
+    saveas(gcf,strcat('images/Montage',filesNums{n}),'png');
 end
 
 %% Last
-for n = 1:length(filesNums)
-    load(strcat('W',filesNums{n},'_model_data.mat'));
-    days = size(cells,4);
-    rat(n).tslices = zeros(days,16);
-    rat(n).area = zeros(days,16);
-    rat(n).skulls = cell(1,16);
-    rat(n).time = time;
-    for z = 1:16
-        % Slices with tumor cells
-        for t = 1:days
-            c = sum(sum(cells(:,:,z,t)));
-            rat(n).tslices(t,z) = c;
-            a = sum(sum(cells(:,:,z,t)>0));
-            rat(n).area(t,z) = a;
-        end
-        
-        % Skull & tumor boundary for each slice
-        [row,col,~] = find(skull(:,:,z) == 1);
-        k = boundary(row,col);
-        rat(n).skulls{z} = [row(k) col(k)];
-        [row,col,~] = find(cells(:,:,z) == 1);
-        k = boundary(row,col);
-        rat(n).skulls{z} = [row(k) col(k)];
-    end
-    rat(n).sbound = rat(n).skulls{maxlayer};
-    
-    % Number of tumor cells vs time
-    figure(1)
-    sumSlices = sum(rat(n).tslices,2);
-    plot(time,sumSlices,'o-'); hold on
-        
-    % "Volume" (# of pixels) of tumor cells vs time
-    figure(2)
-    sumArea = sum(rat(n).area,2);
-    plot(time,sumArea,'o-'); hold on
-    
-    % Plot evolution of tumor in brain
-    [~,maxlayer] = max(rat(n).tslices(1,:));  % Slice with most cells
-    rat(n).initial = cells(:,:,maxlayer,1);   % Initial value
-    if days <= 6
-        b = 3;
-    else
-        b = 4;
-    end
-    tumor = cells(:,:,maxlayer,:);
-    mincell = min(tumor(tumor>0));  maxcell = max(max(max(max(tumor))));
-    imds = [];
-    for t = 1:days
-        % Turn data into RGB for layering on brain
-        tumor = cells(:,:,maxlayer,t);
-        [B,~] = real2rgb(tumor,'jet',[mincell maxcell]);
-        B3 = B(:,:,3); B3(tumor==0) = 0; B(:,:,3) = B3;
-        
-        % Turn off brain data where tumor goes, convert to RGB
-        brain = anatomical(:,:,maxlayer,t);
-        [C,~] = real2rgb(brain,'bone',[0 45]);
-        t3 = [tumor tumor tumor]; t3 = reshape(t3,41,61,3);
-        C(t3 > 0 ) = 0;
-        
-        % Add images together and cat for montage
-        D = B+C;
-        imds = cat(4,imds,D);
-    end
-    f = gcf;
-    figure(f.Number+n)
-    montage(imds); hold on
-    cbar = colorbar('eastoutside'); hold on
-    caxis([mincell maxcell]); colormap jet;
-    
-end
-
-figure(1)
-rat(1).meancells(rat(1).meancells == 0) = nan;
-plot(mean(rat(1).meancells,2,'omitnan'),'Linewidth',2);
-title('Evoluation of Total Tumor Cells in Rat Brain')
-xlabel('time (days)')
-ylabel('Number of Tumor Cells')
-legend([filesNums 'mean'],'Location','Northwest');
-
-figure(2)
-rat(1).meanarea(rat(1).meanarea == 0) = nan;
-plot(mean(rat(1).meanarea,2,'omitnan'),'Linewidth',2);
-title('Evoluation of Total Tumor Volume in Rat Brain')
-xlabel('time (days)')
-ylabel('Volume of Tumor Cells (pixels with cells)')
-legend([filesNums 'mean'],'Location','Northwest');
+% for n = 1:length(filesNums)
+%     load(strcat('W',filesNums{n},'_model_data.mat'));
+%     days = size(cells,4);
+%     rat(n).tslices = zeros(days,16);
+%     rat(n).area = zeros(days,16);
+%     rat(n).skulls = cell(1,16);
+%     rat(n).time = time;
+%     for z = 1:16
+%         % Slices with tumor cells
+%         for t = 1:days
+%             c = sum(sum(cells(:,:,z,t)));
+%             rat(n).tslices(t,z) = c;
+%             a = sum(sum(cells(:,:,z,t)>0));
+%             rat(n).area(t,z) = a;
+%         end
+%         
+%         % Skull & tumor boundary for each slice
+%         [row,col,~] = find(skull(:,:,z) == 1);
+%         k = boundary(row,col);
+%         rat(n).skulls{z} = [row(k) col(k)];
+%         [row,col,~] = find(cells(:,:,z) == 1);
+%         k = boundary(row,col);
+%         rat(n).skulls{z} = [row(k) col(k)];
+%     end
+%     rat(n).sbound = rat(n).skulls{maxlayer};
+%     
+%     % Number of tumor cells vs time
+%     figure(1)
+%     sumSlices = sum(rat(n).tslices,2);
+%     plot(time,sumSlices,'o-'); hold on
+%         
+%     % "Volume" (# of pixels) of tumor cells vs time
+%     figure(2)
+%     sumArea = sum(rat(n).area,2);
+%     plot(time,sumArea,'o-'); hold on
+%     
+%     % Plot evolution of tumor in brain
+%     [~,maxlayer] = max(rat(n).tslices(1,:));  % Slice with most cells
+%     rat(n).initial = cells(:,:,maxlayer,1);   % Initial value
+%     if days <= 6
+%         b = 3;
+%     else
+%         b = 4;
+%     end
+%     tumor = cells(:,:,maxlayer,:);
+%     mincell = min(tumor(tumor>0));  maxcell = max(max(max(max(tumor))));
+%     imds = [];
+%     for t = 1:days
+%         % Turn data into RGB for layering on brain
+%         tumor = cells(:,:,maxlayer,t);
+%         [B,~] = real2rgb(tumor,'jet',[mincell maxcell]);
+%         B3 = B(:,:,3); B3(tumor==0) = 0; B(:,:,3) = B3;
+%         
+%         % Turn off brain data where tumor goes, convert to RGB
+%         brain = anatomical(:,:,maxlayer,t);
+%         [C,~] = real2rgb(brain,'bone',[0 45]);
+%         t3 = [tumor tumor tumor]; t3 = reshape(t3,41,61,3);
+%         C(t3 > 0 ) = 0;
+%         
+%         % Add images together and cat for montage
+%         D = B+C;
+%         imds = cat(4,imds,D);
+%     end
+%     f = gcf;
+%     figure(f.Number+n)
+%     montage(imds); hold on
+%     cbar = colorbar('eastoutside'); hold on
+%     caxis([mincell maxcell]); colormap jet;
+%     
+% end
+% 
+% figure(1)
+% rat(1).meancells(rat(1).meancells == 0) = nan;
+% plot(mean(rat(1).meancells,2,'omitnan'),'Linewidth',2);
+% title('Evoluation of Total Tumor Cells in Rat Brain')
+% xlabel('time (days)')
+% ylabel('Number of Tumor Cells')
+% legend([filesNums 'mean'],'Location','Northwest');
+% 
+% figure(2)
+% rat(1).meanarea(rat(1).meanarea == 0) = nan;
+% plot(mean(rat(1).meanarea,2,'omitnan'),'Linewidth',2);
+% title('Evoluation of Total Tumor Volume in Rat Brain')
+% xlabel('time (days)')
+% ylabel('Volume of Tumor Cells (pixels with cells)')
+% legend([filesNums 'mean'],'Location','Northwest');
 
 save('finaldata.mat','rat');

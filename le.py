@@ -27,4 +27,4 @@ def varprob(V, W, mbc, phi, mu, lam, omega):
     u = Function(V)
     solve(a == L, u, mbc)
     vmstress = vm(u, mu, lam, W)
-    return u
+    return vmstress

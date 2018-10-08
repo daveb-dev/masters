@@ -18,5 +18,5 @@ x_kidney = cos(angle)*R2;
 y_kidney = sin(angle)*R2;
 output_filename = 'gmsh_test.geo';
 util_generateGmshGeo(output_filename,20,10);
-!D:\Programs\gmsh-3.0.6-Windows64\gmsh gmsh_test.geo -2 -o gmsh_test.msh
-!D:\Programs\gmsh-3.0.6-Windows64\gmsh gmsh_test.msh
+!~/gmsh/gmsh gmsh_test.geo -2 -o gmsh_test.msh
+!~/gmsh/gmsh gmsh_test.msh

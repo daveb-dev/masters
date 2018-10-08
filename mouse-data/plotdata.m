@@ -22,6 +22,7 @@ for n = 1:length(filesNums)
     ylabel('Number of Tumor Cells')
     legend(filesNums,'Location','Northwest');
 end
+set(gcf,'Fontsize',12);
 saveas(gcf,'numtumorcells','png');
 %% Time
 for n = 1:length(filesNums)

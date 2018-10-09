@@ -52,17 +52,17 @@ saveas(gcf,'images/voxtumorcells','png');
 %% Boundaries
 for n = 1:length(filesNums)
     load(strcat('W',filesNums{n},'_model_data.mat'));
-    rat(n).skulls = cell(1,16);
-    rat(n).sbound = cell(1,16);
-    rat(n).tbound = cell(1,16);
-    for z = 1:16
+    [~,z] = max(rat(n).tslices(1,:));
+    %rat(n).skulls = cell(1,16);
+    rat(n).sbound = cell(1,length(rat(n).time));
+    rat(n).tbound = cell(1,length(rat(n).time));
+    for t = 1:length(rat(n).time)
         [row,col,~] = find(skull(:,:,z) == 1);
         k = boundary(row,col);
-        rat(n).skulls{z} = [col 41-row];
-        rat(n).sbound{z} = [col(k) 41-row(k)];
-        [row,col,~] = find(cells(:,:,z) > 0);
-        k = boundary(row,col);
-        rat(n).tbound{z} = [col(k) 41-row(k)];
+        rat(n).sbound{t} = [col(k) 41-row(k)];
+        [row,col,~] = find(cells(:,:,z,t) > 0);
+        k = boundary(row,col,1);
+        rat(n).tbound{t} = [col(k) 41-row(k)];
     end
 end
 %% Initial condition based on max initial count
@@ -74,12 +74,11 @@ for n = 1:length(filesNums)
 end
 
 %% Montages
-for n = 1:length(filesNums)
+for n = 1%:length(filesNums)
     close all
     load(strcat('W',filesNums{n},'_model_data.mat'));
     days = size(cells,4);
-    [~,maxlayer] = max(rat(n).tslices(1,:));  % Slice with most cells
-    tumor = cells(:,:,maxlayer,:);
+    tumor = cells(:,:,rat(n).maxlayer,:); % Slice with most cells
     mincell = min(tumor(tumor>0));  maxcell = max(max(max(max(tumor))));
     imds = [];
     for t = 1:days
@@ -94,8 +93,23 @@ for n = 1:length(filesNums)
         t3 = [tumor tumor tumor]; t3 = reshape(t3,41,61,3);
         C(t3 > 0 ) = 0;
         
+        % Skull and tumor outline
+        xy = []; 
+        s = rat(n).sbound{t};
+        for i = 1:length(s)-1
+            xy = [xy(1:end-1,:); bresenham(s(i,1),s(i,2),s(i+1,1),s(i+1,2))];
+        end
+        xy(end+1,:) = xy(end,:);
+        tu = rat(n).tbound{t};
+        for i = 1:length(tu)-1
+            xy = [xy(1:end-1,:); bresenham(tu(i,1),tu(i,2),tu(i+1,1),tu(i+1,2))];
+        end
+        sout = (41-xy(:,2))+41*(xy(:,1)-1);
+        sout = [sout; sout+41*61; sout+41*61*2];
+        
         % Add images together and cat for montage
         D = B+C;
+        D(sout) = 1;
         imds = cat(4,imds,D);
     end
     montage(imds,'Size',[NaN 3]); hold on

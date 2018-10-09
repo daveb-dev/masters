@@ -1,7 +1,7 @@
 close all
 filesNums = {'01','02','05','06','09','12'};
-rat = struct('tslices',[],'area',[],'skulls',{},'initial',[],'time',[],...
-    'sbound',{},'tbound',{},'meancells',[],'meanarea',[],'maxlayer',[]);
+rat = struct('tslices',[],'area',[],'initial',[],'time',[],...
+    'sbound',{},'tbound',{},'meanarea',[],'maxlayer',[]);
 
 %% Number of cells in slice z at time t
 close all
@@ -18,16 +18,22 @@ for n = 1:length(filesNums)
     % Number of tumor cells vs time
     sumSlices = sum(rat(n).tslices,2);
     plot(time,sumSlices,'o-','Linewidth',2); hold on
-    xlabel('time (days)','FontSize',14)
-    ylabel('Number of Tumor Cells','FontSize',14)
-    legend(filesNums,'Location','Northwest','FontSize',14);
 end
+xlabel('time (days)','FontSize',14)
+ylabel('Number of Tumor Cells','FontSize',14)
+legend(filesNums,'Location','Northwest','FontSize',14);
 set(get(legend,'Title'),'String','Rat ID')
 saveas(gcf,'images/numtumorcells','png');
 %% Time
 for n = 1:length(filesNums)
     load(strcat('W',filesNums{n},'_model_data.mat'));
     rat(n).time = time;
+end
+%% Initial condition based on max initial count
+for n = 1:length(filesNums)
+    load(strcat('W',filesNums{n},'_model_data.mat'));
+    [~,rat(n).maxlayer] = max(rat(n).tslices(1,:));  % Slice with most cells
+    rat(n).initial = cells(:,:,rat(n).maxlayer,1);   % Initial value
 end
 %% Area
 close all
@@ -41,12 +47,23 @@ for n = 1:length(filesNums)
             rat(n).area(t,z) = a;
         end
     end
-    sumArea = sum(rat(n).area,2);
-    plot(time,sumArea,'o-','Linewidth',2); hold on
-    xlabel('time (days)','FontSize',14)
-    ylabel('# of Voxels with Tumor Cells)','FontSize',14)
-    legend(filesNums,'Location','Northwest','FontSize',14);
+    area = rat(n).area(:,rat(n).maxlayer);
+    plot(rat(n).time,area,'o-','Linewidth',2); hold on
 end
+xlabel('time (days)','FontSize',14)
+ylabel('# of Voxels with Tumor Cells)','FontSize',14)
+legend(filesNums,'Location','Northwest','FontSize',14);
+set(get(legend,'Title'),'String','Rat ID')
+saveas(gcf,'images/areatumorcells','png');
+%% Volume
+close all
+for n = 1:length(filesNums)
+    volume = sum(rat(n).area,2);
+    plot(rat(n).time,volume,'o-','Linewidth',2); hold on
+end
+xlabel('time (days)','FontSize',14)
+ylabel('# of Voxels with Tumor Cells)','FontSize',14)
+legend(filesNums,'Location','Northwest','FontSize',14);
 set(get(legend,'Title'),'String','Rat ID')
 saveas(gcf,'images/voxtumorcells','png');
 %% Boundaries
@@ -65,30 +82,23 @@ for n = 1:length(filesNums)
         rat(n).tbound{t} = [col(k) 41-row(k)];
     end
 end
-%% Initial condition based on max initial count
-for n = 1:length(filesNums)
-    load(strcat('W',filesNums{n},'_model_data.mat'));
-    days = size(cells,4);
-    [~,rat(n).maxlayer] = max(rat(n).tslices(1,:));  % Slice with most cells
-    rat(n).initial = cells(:,:,rat(n).maxlayer,1);   % Initial value
-end
-
 %% Montages
-for n = 1%:length(filesNums)
+for n = 1:length(filesNums)
     close all
     load(strcat('W',filesNums{n},'_model_data.mat'));
     days = size(cells,4);
-    tumor = cells(:,:,rat(n).maxlayer,:); % Slice with most cells
+    z = rat(n).maxlayer;
+    tumor = cells(:,:,z,:); % Slice with most cells
     mincell = min(tumor(tumor>0));  maxcell = max(max(max(max(tumor))));
     imds = [];
     for t = 1:days
         % Turn data into RGB for layering on brain
-        tumor = cells(:,:,maxlayer,t);
+        tumor = cells(:,:,z,t);
         [B,~] = real2rgb(tumor,'jet',[mincell maxcell]);
         B3 = B(:,:,3); B3(tumor==0) = 0; B(:,:,3) = B3;
         
         % Turn off brain data where tumor goes, convert to RGB
-        brain = anatomical(:,:,maxlayer,t);
+        brain = anatomical(:,:,z,t);
         [C,~] = real2rgb(brain,'bone',[0 45]);
         t3 = [tumor tumor tumor]; t3 = reshape(t3,41,61,3);
         C(t3 > 0 ) = 0;
@@ -109,7 +119,7 @@ for n = 1%:length(filesNums)
         
         % Add images together and cat for montage
         D = B+C;
-        D(sout) = 1;
+        D(sout) = 0;
         imds = cat(4,imds,D);
     end
     montage(imds,'Size',[NaN 3]); hold on
@@ -118,6 +128,7 @@ for n = 1%:length(filesNums)
     caxis([mincell maxcell]); colormap jet;
     saveas(gcf,strcat('images/Montage',filesNums{n}),'png');
 end
+%% Test Mean
 
 %% Last
 % for n = 1:length(filesNums)

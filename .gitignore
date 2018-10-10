@@ -33,6 +33,10 @@
 # Latex extra files #
 #####################
 *.aux
+*.out
+*.nav
+*.snm
+*.toc
 
 # OS generated files #
 ######################
@@ -47,3 +51,29 @@ Thumbs.db
 # VTU files #
 #############
 *.vtu
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt

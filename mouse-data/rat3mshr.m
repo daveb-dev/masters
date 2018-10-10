@@ -16,5 +16,5 @@ x_tumor = rat3tbound(1:end-1,1);
 y_tumor = rat3tbound(1:end-1,2);
 output_filename = 'rat3gmsh.geo';
 util_generateGmshGeo(output_filename,20,10);
-!~/gmsh/gmsh rat3gmsh.geo -2 -o rat3gmsh.msh
-!~/gmsh/gmsh rat3gmsh.msh
+!~/gmsh2/gmsh rat3gmsh.geo -2 -o rat3gmsh.msh
+!~/gmsh2/gmsh rat3gmsh.msh

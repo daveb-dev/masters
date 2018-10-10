@@ -2,4 +2,4 @@
 \select@language {english}
 \beamer@sectionintoc {1}{Data for Fenics}{2}{0}{1}
 \beamer@subsectionintoc {1}{1}{Total Growth}{2}{0}{1}
-\beamer@subsectionintoc {1}{2}{Individual Rat Data}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Individual Rat Data}{4}{0}{1}

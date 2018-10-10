@@ -26,19 +26,18 @@ def varprob(V, W, T, n, mbc, phi, mu, lam, omega):
     solve(a == L, u, mbc)
     return u
 
+def sigma1(u, mu, lam, beta, phi):
+    return 2*mu*(E(u)-beta*phi*Identity(2))+lam*(tr(E(u))-2*beta*phi)*Identity(2)
 
-def sigma1(u, mu, lam, omega, phi):
-    return 2*mu*(E(u)-omega*phi*Identity(2))+lam*(tr(E(u))-2*omega*phi)*Identity(2)
-
-def vm1(u, mu, lam, omega, phi, W):
-    s = sigma1(u, mu, lam, omega, phi) - (1./3)*tr(sigma1(u, mu, lam, omega, phi))*Identity(2)  # deviatoric stress
+def vm1(u, mu, lam, beta, phi, W):
+    s = sigma1(u, mu, lam, beta, phi) - (1./3)*tr(sigma1(u, mu, lam, beta, phi))*Identity(2)  # deviatoric stress
     von_Mises = sqrt(3./2*inner(s, s))
     return project(von_Mises, W)
 
 def varprob1(V, W, T, n, mbc, phi, mu, lam, omega):
     u = TrialFunction(V)
     v = TestFunction(V)
-    F = -inner(sigma1(u, mu, lam, omega, phi), E(v))*dx + dot(T*n,v)*ds
+    F = -inner(sigma1(u, mu, lam, beta, phi), E(v))*dx + dot(T*n,v)*ds
     a, L = lhs(F), rhs(F)
     
     # Compute solution

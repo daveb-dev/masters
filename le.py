@@ -34,7 +34,7 @@ def vm1(u, mu, lam, beta, phi, W):
     von_Mises = sqrt(3./2*inner(s, s))
     return project(von_Mises, W)
 
-def varprob1(V, W, T, n, mbc, phi, mu, lam, omega):
+def varprob1(V, W, T, n, mbc, phi, mu, lam, beta):
     u = TrialFunction(V)
     v = TestFunction(V)
     F = -inner(sigma1(u, mu, lam, beta, phi), E(v))*dx + dot(T*n,v)*ds

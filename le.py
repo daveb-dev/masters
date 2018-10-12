@@ -37,6 +37,7 @@ def vm1(u, mu, lam, beta, phi, W):
 def varprob1(V, W, T, n, mbc, phi, mu, lam, beta):
     u = TrialFunction(V)
     v = TestFunction(V)
+    print(type(sigma1(u, mu, lam, beta, phi)))
     F = -inner(sigma1(u, mu, lam, beta, phi), E(v))*dx + dot(T*n,v)*ds
     a, L = lhs(F), rhs(F)
     

@@ -1,3 +1,6 @@
+% This code was used to edit rats 09 and 12 data so that imaging values
+% were comparable to other images
+
 clear
 load('W09_model_data.mat');
 anatomical = anatomical_original;

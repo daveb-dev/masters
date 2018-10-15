@@ -8,7 +8,7 @@ clc;
 close all;
 addpath ./
 
-filesNums = {'01','02','05','06','09','12'};
+filesNums = %{'01','02','05','06','09','12'};
 for i = 1:length(filesNums)
     cd(strcat('./rat',filesNums{i}))
     load('skull_out.mat')
@@ -21,8 +21,8 @@ for i = 1:length(filesNums)
     output_filename = 'gmsh.geo';
     util_generateGmshGeo(output_filename,20,10);
     !~/gmsh2/gmsh gmsh.geo -2 -o gmsh.msh
+    !~/gmsh2/gmsh gmsh.msh
     cd ..
-    % !~/gmsh2/gmsh rat05gmsh.msh
 end
 
 rmpath ./

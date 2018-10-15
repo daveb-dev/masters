@@ -65,7 +65,7 @@ for n = 1:length(filesNums)
     % Tumor
     tumor_out = [];
     [row,col,~] = find(cells(:,:,z,1) > 0);
-    k = boundary(row,col,1);
+    k = boundary(row,col,.9);
     tu = [col(k) 41-row(k)];
     for i = 1:length(tu)-1
         tumor_out = [tumor_out(1:end-1,:); bresenham(tu(i,1),tu(i,2),tu(i+1,1),tu(i+1,2))];

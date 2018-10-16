@@ -2,7 +2,7 @@
 from fenics import *
 
 # Define and solve variational problem
-def varprob(dt, V, phi_n, D, alpha):
+def rd(dt, V, phi_n, D, alpha):
     phi = Function(V)
     v = TestFunction(V)
     k = Constant(dt)

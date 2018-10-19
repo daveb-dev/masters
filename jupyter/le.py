@@ -14,11 +14,11 @@ def vm(u, mu, lam, W):
     von_Mises = sqrt(3./2*inner(s, s))
     return project(von_Mises, W)
 
-def varprob(V, W, T, n, mbc, phi, mu, lam, omega):
+def varprob(V, W, mbc, phi, mu, lam, omega):
     # Define variational problem
     u = TrialFunction(V)
     v = TestFunction(V)
-    F = -inner(sigma(u, mu, lam), E(v))*dx - dot(grad(omega*phi), v)*dx + dot(T*n,v)*ds
+    F = -inner(sigma(u, mu, lam), E(v))*dx - dot(grad(omega*phi), v)*dx #+ dot(T*n,v)*ds
     a, L = lhs(F), rhs(F)
     
     # Compute solution
@@ -34,10 +34,10 @@ def vm1(u, W, phi, mu, lam, beta):
     von_Mises = sqrt(3./2*inner(s, s))
     return project(von_Mises, W)
 
-def varprob1(V, W, T, n, mbc, phi, mu, lam, beta):
+def varprob1(V, W, mbc, phi, mu, lam, beta):
     u = TrialFunction(V)
     v = TestFunction(V)
-    F = -inner(sigma1(u, phi, mu, lam, beta), E(v))*dx + dot(T*n,v)*ds
+    F = -inner(sigma1(u, phi, mu, lam, beta), E(v))*dx #+ dot(T*n,v)*ds
     a, L = lhs(F), rhs(F)
     
     # Compute solution

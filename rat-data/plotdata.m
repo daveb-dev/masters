@@ -41,7 +41,7 @@ for n = 1:length(filesNums)
     for t = 2:length(rat(n).time)
         tumor = cells(:,:,rat(n).maxlayer,t);  
         days = num2str(rat(n).time(t)-rat(n).time(1));
-        eval(strcat('save(''./',fstr,'/tumor_t',days,'.mat'',''ic'');'));
+        eval(strcat('save(''./',fstr,'/tumor_t',days,'.mat'',''tumor'');'));
     end
 end
 

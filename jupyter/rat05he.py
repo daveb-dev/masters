@@ -8,6 +8,7 @@ from scipy.interpolate import RegularGridInterpolator
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib import colors
+from xdmf_parser import xparse as xp
 
 set_log_level(PROGRESS) 
 
@@ -209,7 +210,7 @@ input_dir  = "../rat-data/rat05/"
 output_dir = './output/rat05'
 
 # Prepare output file
-file_results = XDMFFile(os.path.join(output_dir,'he.xdmf'))
+file_results = XDMFFile(osjoin(output_dir,'he.xdmf'))
 file_results.parameters["flush_output"] = True
 file_results.parameters["functions_share_mesh"] = True
 rtime = 10 # How often to record results
@@ -243,21 +244,20 @@ initial_p.rename('initial','tumor at day 0')
 target_p = forward(initial_p, False, False)
 
 # Visualize initial cellularity and target cellularity
-vis_obs(initial_p,target_p,'initial','target') 
+#vis_obs(initial_p,target_p,'initial','target') 
 
 # Initial guesses
-    D0     = Constant(2.)   # mobility or diffusion coefficient
-    k0     = Constant(1.5)    # growth rate initial guess
-    k      = project(k0,V)
+D0     = Constant(2.)   # mobility or diffusion coefficient
+k0     = Constant(1.5)    # growth rate initial guess
+k      = project(k0,V)
 
 # Optimization module
 [k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
 model_p = forward(initial_p,False, False) # run the forward model using the optimized k field
-vis_obs(model_p,target_p,'model','actual')
-plot(k)
 
 print('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2)))
 print('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.)))
 print('D0 = '+str(D0.values()[0]))
 print('Elapsed time is ' + str((time()-t1)/60) + ' minutes')
 
+xp(osjoin(output_dir,'he.xdmf'))

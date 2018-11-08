@@ -8,8 +8,6 @@ from scipy.interpolate import RegularGridInterpolator
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib import colors
-import resource
-resource.setrlimit(resource.RLIMIT_CPU,(60,80))
 
 set_log_level(PROGRESS) 
 

@@ -8,8 +8,6 @@ from scipy.interpolate import RegularGridInterpolator
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib import colors
-import resource
-resource.setrlimit(resource.RLIMIT_CPU,(60,80))
 
 set_log_level(PROGRESS) 
 
@@ -231,10 +229,11 @@ k      = project(k0,V)
 # Optimization module
 [k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
 model_p = forward(initial_p,False,False) # run the forward model using the optimized k field
-vis_obs(model_p,target_p,'model','actual')
-plot(k)
 
 print('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2)))
 print('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.)))
 print('D0 = '+str(D0.values()[0]))
 print('Elapsed time is ' + str((time()-t1)/60) + ' minutes')
+
+vis_obs(model_p,target_p,'model','actual')
+plot(k)

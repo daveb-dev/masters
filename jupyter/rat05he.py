@@ -10,7 +10,7 @@ import matplotlib.cm as cm
 from matplotlib import colors
 from xdmf_parser import xparse as xp
 
-set_log_level(PROGRESS) 
+set_log_level(INFO) 
 
 class InterpolatedParameter(Expression):
     '''
@@ -28,7 +28,7 @@ def interp(file_loc,mat_name):
     """
         Function to accept matlab .mat file with tumor data and interpolate values onto mesh
     """
-    print("Interpolating "+mat_name+"...")
+    file_print.write("Interpolating "+mat_name+"...\n")
     mat = sc_io_loadmat(file_loc)[mat_name]
     mat = fliplr(mat.T)/theta  # Needs to be adjusted to fit the mesh correctly; also scaled
     x,y = mat.shape[0], mat.shape[1]
@@ -41,9 +41,9 @@ def vis_obs(quantity1,quantity2,title1,title2,take_diff=False):
         Calculates difference and writes that to file if requested
         Accepts titles for each plot
     '''
-    print("Plotting "+title1+" and "+title2)
+    file_print.write("Plotting "+title1+" and "+title2+"\n")
     cm1 = cm.get_cmap('jet')
-    plt.figure()
+    fig = plt.figure()
     plt.subplot(1,2,1)
     plt.title(title1)
     plot(quantity1,cmap=cm1)
@@ -52,17 +52,17 @@ def vis_obs(quantity1,quantity2,title1,title2,take_diff=False):
     plt.title(title2)
     plot(quantity2,cmap=cm1)
     
-    savefig(title1+'_and_'+title2+'.png')
+    fig.savefig(osjoin(output_dir,title1+'_and_'+title2+'.png'))
     if take_diff:
+        diff_results = XDMFFile(osjoin(output_dir,'diff.xdmf'))
+        diff_results.parameters["flush_output"] = True
+        diff_results.parameters["functions_share_mesh"] = True
         diff = Function(V,annotation=False)
         diff.rename('diff','diff tumor fraction')
         diff.vector()[:] = quantity1.vector()-quantity2.vector()
-        file_results.write(diff)
-    
+        diff_results.write(diff)
 
-def forward(initial_p,record=False, annotate=False):
-    print("Running the forward problem...")
-    
+def forward(initial_p, name, record=False, annotate=False):    
     """ 
         Here, we define the forward problem. 
     """
@@ -138,13 +138,13 @@ def forward(initial_p,record=False, annotate=False):
         if (n%rtime == 0):
             print("Solving reaction diffusion for time = "+str(t))
             if record:        # save the current solution, k field, displacement, and diffusion
-                u.rename('u','displacement')
-                p_n.rename('phi_T','tumor fraction')
-                vm.rename("vm","Von Mises")
-                D.rename("D","diffusion coefficient")
-                k.rename('k','k field')          
-                file_results.write(p_n,t)
+                u.rename('u_'+name,'displacement')
+                p_n.rename('phi_T_'+name,'tumor fraction')
+                vm.rename('vm_'+name,'Von Mises')
+                D.rename('D_'+name,'diffusion coefficient')
+                k.rename('k_'+name,'k field')  
                 file_results.write(u,t)
+                file_results.write(p_n,t)
                 file_results.write(k,t)
                 file_results.write(vm,t)
                 file_results.write(D,t)
@@ -165,20 +165,20 @@ def forward(initial_p,record=False, annotate=False):
 # Callback function for the optimizer; Writes intermediate results to a logfile
 def eval_cb(j, m):
     """ The callback function keeping a log """
-    print("objective = %15.10e " % j)
+    file_print.write("objective = %15.10e \n" % j)
 
 def objective(p, target_p, r_coeff1, r_coeff2):
     return assemble(inner(p-target_p, p-target_p)*dx) + r_coeff1*assemble(k*k*dx) + r_coeff2*assemble(dot(grad(k),grad(k))*dx)
 
 def optimize(dbg=False):
     """ The optimization routine """
-    print("Optimizing...")
+    file_print.write("Optimizing...\n")
     
     # Define the control
     m = [Control(k), Control(D0)]
     
     # Execute first time to annotate and record the tape
-    p = forward(initial_p, True, True)
+    p = forward(initial_p,'true', True, True)
 
     J = objective(p, target_p, r_coeff1, r_coeff2)
 
@@ -212,7 +212,8 @@ output_dir = './output/rat05/he'
 file_results = XDMFFile(osjoin(output_dir,'he.xdmf'))
 file_results.parameters["flush_output"] = True
 file_results.parameters["functions_share_mesh"] = True
-rtime = 10 # How often to record results
+file_print = open(osjoin(output_dir,'info.log'),'w+')
+rtime = 5 # How often to record results
 
 # Prepare a mesh
 mesh = Mesh(input_dir+"gmsh.xml")
@@ -241,7 +242,7 @@ initial_p.rename('initial','tumor at day 0')
 # target_p.rename('target','tumor at day 2')
 
 annotate=False
-target_p = forward(initial_p, False, False)
+target_p = forward(initial_p, None, False, False)
 
 # Visualize initial cellularity and target cellularity
 vis_obs(initial_p,target_p,'initial','target') 
@@ -253,13 +254,14 @@ k      = project(k0,V)
 
 # Optimization module
 [k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
-print('Elapsed time is ' + str((time()-t1)/60) + ' minutes')
+file_print.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')
 
-model_p = forward(initial_p,False, False) # run the forward model using the optimized k field
+model_p = forward(initial_p,'opt',False, False) # run the forward model using the optimized k field
 vis_obs(initial_p,target_p,'model','target', True) 
 
-print('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2)))
-print('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.)))
-print('D0 = '+str(D0.values()[0]))
+file_print.write('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2))+'\n')
+file_print.write('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.))+'\n')
+file_print.write('D0 = '+str(D0.values()[0])+'\n')
 
-xp('/output/rat05/he/he.xdmf')
+file_print.close()
+# xp('/output/rat05/he/he.xdmf')

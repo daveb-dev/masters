@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib import colors
 from xdmf_parser import xparse as xp
-import moola
 
 set_log_level(PROGRESS) 
 
@@ -53,13 +52,12 @@ def vis_obs(quantity1,quantity2,title1,title2,take_diff=False):
     plt.title(title2)
     plot(quantity2,cmap=cm1)
     
-    file_results.write(quantity1, 1)
-    file_results.write(quantity2, 2)
+    savefig(title1+'_and_'+title2+'.png')
     if take_diff:
         diff = Function(V,annotation=False)
         diff.rename('diff','diff tumor fraction')
         diff.vector()[:] = quantity1.vector()-quantity2.vector()
-        file_results.write(diff, 3)
+        file_results.write(diff)
     
 
 def forward(initial_p,record=False, annotate=False):
@@ -90,7 +88,7 @@ def forward(initial_p,record=False, annotate=False):
     def vonmises(u):
         s = sigma(u) - (1./2)*tr(sigma(u))*Identity(2)  # deviatoric stress
         von_Mises = sqrt(3./2*inner(s, s))
-        return project(von_Mises, V)
+        return project(von_Mises, V, annotate=annotate)
     def sigma_form(u, phi):
         I = Identity(2)             # Identity tensor
         F = I + grad(u)             # Deformation gradient
@@ -105,7 +103,7 @@ def forward(initial_p,record=False, annotate=False):
         return on_boundary
     bc          = DirichletBC(U, Constant((0.,0.)), boundary)
     du          = TrialFunction(U)
-    u           = Function(U) 
+    u           = Function(U, annotate=annotate) 
     v           = TestFunction(U)
     p_n         = interpolate(initial_p,V)
     F_HE        = inner(sigma_form(u, p_n), E(v))*dx
@@ -119,13 +117,13 @@ def forward(initial_p,record=False, annotate=False):
     solver_HE.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
 
     # First iteration solving for displacement, and using the von mises stress field for D
-    solver_HE.solve
+    solver_HE.solve(annotate=annotate)
     vm   = vonmises(u)
-    D    = project(D0*exp(-gammaD*vm),V)
+    D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
     
     # Set up reaction-diffusion problem
     dp          = TrialFunction(V)
-    p           = Function(V)
+    p           = Function(V,annotate=annotate)
     q           = TestFunction(V)
     F_RD        = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
     J_RD        = derivative(F_RD,p,dp)
@@ -158,13 +156,13 @@ def forward(initial_p,record=False, annotate=False):
                 file_results.write(D,t)
         
         # Update current time and Compute solution
-        solver_RD.solve()
+        solver_RD.solve(annotate=annotate)
         p_n.assign(p)
         
         # Update previous solution
-        solver_HE.solve()
+        solver_HE.solve(annotate=annotate)
         vm   = vonmises(u)
-        D    = project(D0*exp(-gammaD*vm),V)
+        D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
         
         t += dt
         
@@ -194,27 +192,17 @@ def optimize(dbg=False):
     rf = ReducedFunctional(J,m,eval_cb_post=eval_cb)
 
     # upper and lower bound for the parameter field
-#    k_lb, k_ub = Function(V), Function(V)
- #   k_lb.vector()[:] = 0.
-  #  k_ub.vector()[:] = 4.
-   # D_lb = 0.
-   # D_ub = 4.
-   # bnds = [[k_lb,D_lb],[k_ub,D_ub]]
+    k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)
+    k_lb.vector()[:] = 0.
+    k_ub.vector()[:] = 4.
+    D_lb = 0.
+    D_ub = 4.
+    bnds = [[k_lb,D_lb],[k_ub,D_ub]]
     
     # Run the optimization
-    # m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
+    m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-4,options={"disp":True,"gtol":1.0e-4})
     # m_opt = minimize(rf,method='L-BFGS-B', tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
         
-    problem = MoolaOptimizationProblem(rf)
-    f_moola = moola.DolfinPrimalVector(f)
-    solver = moola.BFGS(problem, f_moola, options={'jtol':0,
-                                                   'gtol': 1e-4,
-                                                   'Hinit': "default",
-                                                   'maxiter': 100,
-                                                   'mem_lim': 8})
-    sol = solver.solve()
-    m_opt = sol['control'].data
-    
     return m_opt
 
 #########################################################################
@@ -227,7 +215,7 @@ case       = 0
 r_coeff1   = 0.01
 r_coeff2   = 0.01
 input_dir  = "../rat-data/rat05/"
-output_dir = './output/rat05'
+output_dir = './output/rat05/he'
 
 # Prepare output file
 file_results = XDMFFile(osjoin(output_dir,'he.xdmf'))
@@ -261,6 +249,7 @@ initial_p.rename('initial','tumor at day 0')
 # target_p  = interp(input_dir+"tumor_t2.mat","tumor")  
 # target_p.rename('target','tumor at day 2')
 
+annotate=False
 target_p = forward(initial_p, False, False)
 
 # Visualize initial cellularity and target cellularity
@@ -273,12 +262,13 @@ k      = project(k0,V)
 
 # Optimization module
 [k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
+print('Elapsed time is ' + str((time()-t1)/60) + ' minutes')
+
 model_p = forward(initial_p,False, False) # run the forward model using the optimized k field
-vis_obs(initial_p,target_p,'initial','target', True) 
+vis_obs(initial_p,target_p,'model','target', True) 
 
 print('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2)))
 print('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.)))
 print('D0 = '+str(D0.values()[0]))
-print('Elapsed time is ' + str((time()-t1)/60) + ' minutes')
 
-xp('/output/rat05/he.xdmf')
+xp('/output/rat05/he/he.xdmf')

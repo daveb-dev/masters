@@ -35,24 +35,30 @@ def interp(file_loc,mat_name):
     mat_interp = InterpolatedParameter(linspace(1,x,x),linspace(1,y,y),mat,degree=1)
     return interpolate(mat_interp,V)
 
-def vis_obs(initial_p,target_p,title1,title2):
+def vis_obs(quantity1,quantity2,diff=False,title1,title2):
     '''
         Compare two quantity plots, for example initial vs. target cellularity
+        Calculates difference and writes that to file if requested
         Accepts titles for each plot
     '''
-    print("Plotting initial condition and target...")
-    target_p = interpolate(target_p,V)
-    cm1 = colors.ListedColormap([[0,1,0,1],[0,0,0,1],[1,0,0,1]])    
-    cm2 = cm.get_cmap('jet')
+    print("Plotting "+title1+" and "+title2)
+    cm = cm.get_cmap('jet')
     plt.figure()
     plt.subplot(1,2,1)
     plt.title(title1)
-    plot(initial_p,cmap=cm2)
+    plot(quantity1,cmap=cm)
  
     plt.subplot(1,2,2)
     plt.title(title2)
-    plot(target_p,cmap=cm2)
-    plt.show()
+    plot(quantity2,cmap=cm)
+
+    diff = Function(V,annotation=False)
+    diff.rename('diff','diff tumor fraction')
+    diff.vector()[:] = quantity1.vector()-quantity2.vector()
+ 
+    file_results.write(quantity1, 1)
+    file_results.write(quantity2, 2)
+    file_results.write(diff, 3)
 
 def forward(initial_p,record=False, annotate=False):
     print("Running the forward problem...")
@@ -125,7 +131,6 @@ def forward(initial_p,record=False, annotate=False):
     solver_RD   = NonlinearVariationalSolver(problem_RD)
     solver_RD.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
     
-    # Rename parameters for saving
     u.rename('u','displacement')
     p_n.rename('phi_T','tumor fraction')
     vm.rename("vm","Von Mises")
@@ -139,6 +144,11 @@ def forward(initial_p,record=False, annotate=False):
         if (n%rtime == 0):
             print("Solving reaction diffusion for time = "+str(t))
             if record:        # save the current solution, k field, displacement, and diffusion
+                u.rename('u','displacement')
+                p_n.rename('phi_T','tumor fraction')
+                vm.rename("vm","Von Mises")
+                D.rename("D","diffusion coefficient")
+                k.rename('k','k field')          
                 file_results.write(p_n,t)
                 file_results.write(u,t)
                 file_results.write(k,t)
@@ -182,18 +192,26 @@ def optimize(dbg=False):
     rf = ReducedFunctional(J,m,eval_cb_post=eval_cb)
 
     # upper and lower bound for the parameter field
-    k_lb, k_ub = Function(V), Function(V)
-    k_lb.vector()[:] = 0.
-    k_ub.vector()[:] = 4.
-    D_lb = 0.
-    D_ub = 4.
-    bnds = [[k_lb,D_lb],[k_ub,D_ub]]
+#    k_lb, k_ub = Function(V), Function(V)
+ #   k_lb.vector()[:] = 0.
+  #  k_ub.vector()[:] = 4.
+   # D_lb = 0.
+   # D_ub = 4.
+   # bnds = [[k_lb,D_lb],[k_ub,D_ub]]
     
     # Run the optimization
-    m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
-    
-    # Run the optimization
-    #m_opt = minimize(rf,method='L-BFGS-B', tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
+    # m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
+    # m_opt = minimize(rf,method='L-BFGS-B', tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
+        
+    problem = MoolaOptimizationProblem(rf)
+    f_moola = moola.DolfinPrimalVector(f)
+    solver = moola.BFGS(problem, f_moola, options={'jtol':0,
+                                                   'gtol': 1e-4,
+                                                   'Hinit': "default",
+                                                   'maxiter': 100,
+                                                   'mem_lim': 8})
+    sol = solver.solve()
+    m_opt = sol['control'].data
     
     return m_opt
 
@@ -207,7 +225,7 @@ case       = 0
 r_coeff1   = 0.01
 r_coeff2   = 0.01
 input_dir  = "../rat-data/rat05/"
-output_dir = './output/rat05'
+output_dir = '/output/rat05'
 
 # Prepare output file
 file_results = XDMFFile(osjoin(output_dir,'he.xdmf'))
@@ -244,7 +262,7 @@ initial_p.rename('initial','tumor at day 0')
 target_p = forward(initial_p, False, False)
 
 # Visualize initial cellularity and target cellularity
-#vis_obs(initial_p,target_p,'initial','target') 
+vis_obs(initial_p,target_p,False,'initial','target') 
 
 # Initial guesses
 D0     = Constant(2.)   # mobility or diffusion coefficient
@@ -254,6 +272,7 @@ k      = project(k0,V)
 # Optimization module
 [k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
 model_p = forward(initial_p,False, False) # run the forward model using the optimized k field
+vis_obs(initial_p,target_p,True,'initial','target') 
 
 print('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2)))
 print('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.)))

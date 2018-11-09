@@ -131,12 +131,6 @@ def forward(initial_p,record=False, annotate=False):
     solver_RD   = NonlinearVariationalSolver(problem_RD)
     solver_RD.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
     
-    u.rename('u','displacement')
-    p_n.rename('phi_T','tumor fraction')
-    vm.rename("vm","Von Mises")
-    D.rename("D","diffusion coefficient")
-    k.rename('k','k field')          
-
     # Prepare the solution
     t = dt
         
@@ -201,15 +195,12 @@ def optimize(dbg=False):
     
     # Run the optimization
     m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-4,options={"disp":True,"gtol":1.0e-4})
-    # m_opt = minimize(rf,method='L-BFGS-B', tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
         
     return m_opt
 
 #########################################################################
 # MAIN 
-#########################################################################
-#global D0, k, dt, theta, mu, nu, lmbda, beta, gammaD, initial_p, target_p, file_results, V, mesh, num_steps,\
-#    r_coeff1, r_coeff2, case, input_dir, output_dir, T
+########################################################################
 t1         = time()
 case       = 0
 r_coeff1   = 0.01

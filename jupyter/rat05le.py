@@ -8,6 +8,7 @@ from scipy.interpolate import RegularGridInterpolator
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib import colors
+from xdmf_parser import xparse as xp
 
 set_log_level(PROGRESS) 
 
@@ -39,19 +40,23 @@ def vis_obs(initial_p,target_p,title1,title2):
         Compare two quantity plots, for example initial vs. target cellularity
         Accepts titles for each plot
     '''
-    print("Plotting initial condition and target...")
-    target_p = interpolate(target_p,V)
-    cm1 = colors.ListedColormap([[0,1,0,1],[0,0,0,1],[1,0,0,1]])    
-    cm2 = cm.get_cmap('jet')
+    print("Plotting "+title1+" and "+title2)
+    cm1 = cm.get_cmap('jet')
     plt.figure()
     plt.subplot(1,2,1)
     plt.title(title1)
-    plot(initial_p,cmap=cm2)
+    plot(quantity1,cmap=cm1)
  
     plt.subplot(1,2,2)
     plt.title(title2)
-    plot(target_p,cmap=cm2)
-    plt.show()
+    plot(quantity2,cmap=cm1)
+    
+    savefig(title1+'_and_'+title2+'.png')
+    if take_diff:
+        diff = Function(V,annotation=False)
+        diff.rename('diff','diff tumor fraction')
+        diff.vector()[:] = quantity1.vector()-quantity2.vector()
+        file_results.write(diff)
 
 def forward(initial_p, record=False, annotate=False):
     """ 
@@ -70,7 +75,7 @@ def forward(initial_p, record=False, annotate=False):
     def vonmises(u):
         s         = sigma(u) - (1./2)*tr(sigma(u))*Identity(2)  # deviatoric stress
         von_Mises = sqrt(3./2*inner(s, s))
-        return project(von_Mises, V)
+        return project(von_Mises, V,annotate=annotate)
     def sigma_form(u,phi):
         return 2*mu*(E(u)-beta*phi*Identity(2))+lmbda*(tr(E(u))-2*beta*phi)*Identity(2)
     
@@ -83,20 +88,20 @@ def forward(initial_p, record=False, annotate=False):
     v           = TestFunction(U)
     F_LE        = inner(sigma_form(u, p_n), E(v))*dx 
     a, L        = lhs(F_LE), rhs(F_LE)
-    u           = Function(U)
+    u           = Function(U,annotate=annotate)
     parameters["form_compiler"]["quadrature_degree"] = 2
     parameters["form_compiler"]["cpp_optimize"] = True
     parameters['krylov_solver']['nonzero_initial_guess'] = True
     ffc_options = {"quadrature_degree": 2}
 
     # First iteration solving for displacement, and using the von mises stress field for D
-    solve(a == L, u, bc, form_compiler_parameters=ffc_options)
+    solve(a == L, u, bc, form_compiler_parameters=ffc_options,annotate=annotate)
     vm          = vonmises(u)
-    D           = project(D0*exp(-gammaD*vm),V)
+    D           = project(D0*exp(-gammaD*vm),V,annotate=annotate)
 
     # Set up reaction-diffusion problem
     dp          = TrialFunction(V)
-    p           = Function(V)
+    p           = Function(V,annotate=annotate)
     q           = TestFunction(V)
     F_RD        = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
     J_RD        = derivative(F_RD,p,dp)
@@ -104,13 +109,6 @@ def forward(initial_p, record=False, annotate=False):
     solver_RD   = NonlinearVariationalSolver(problem_RD)
     solver_RD.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
 
-    # Rename parameters for saving
-    u.rename('u','displacement')
-    p_n.rename('phi_T','tumor fraction')
-    vm.rename("vm","Von Mises")
-    D.rename("D","diffusion coefficient")
-    k.rename('k','k field')              
-    
     # Prepare the solution
     t = dt
         
@@ -118,19 +116,24 @@ def forward(initial_p, record=False, annotate=False):
         if (n%rtime == 0):
             print("Solved reaction diffusion for time = "+str(t))
             if record:        # save the current solution, k field, displacement, and diffusion
+                u.rename('u','displacement')
+                p_n.rename('phi_T','tumor fraction')
+                vm.rename("vm","Von Mises")
+                D.rename("D","diffusion coefficient")
+                k.rename('k','k field')          
                 file_results.write(p_n,t)
                 file_results.write(u,t)
                 file_results.write(k,t)
                 file_results.write(vm,t)
                 file_results.write(D,t)
         # Update current time
-        solver_RD.solve()
+        solver_RD.solve(annotate=annotate)
         p_n.assign(p)
         
         # Update previous solution
-        solve(a == L, u, bc, form_compiler_parameters=ffc_options)
+        solve(a == L, u, bc, form_compiler_parameters=ffc_options,annotate=annotate)
         vm   = vonmises(u)
-        D    = project(D0*exp(-gammaD*vm),V)
+        D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
 
         t += dt
     return p
@@ -160,7 +163,7 @@ def optimize(dbg=False):
     rf = ReducedFunctional(J,m,eval_cb_post=eval_cb)
     
     # upper and lower bound for the parameter field
-    k_lb, k_ub = Function(V), Function(V)
+    k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)
     k_lb.vector()[:] = 0.
     k_ub.vector()[:] = 4.
     D_lb = 0.
@@ -168,21 +171,19 @@ def optimize(dbg=False):
     bnds = [[k_lb,D_lb],[k_ub,D_ub]]
 
     # Run the optimization
-    m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
+    m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-4,options={"disp":True,"gtol":1.0e-4})
     
     return m_opt
 
 #########################################################################
 # MAIN 
-#########################################################################
-#global t1,case,r_coeff1, r_coeff2, input_dir, output_dir, file_results, mesh, V, T, num_steps,\
-#    dt, theta, mu, nu, lmbda, beta, gammaD, D0, k0, k, initial_p, target_p
+########################################################################
 t1         = time()
 case       = 0
 r_coeff1   = 0.01
 r_coeff2   = 0.01
 input_dir  = "../rat-data/rat05/"
-output_dir = './output/rat05'
+output_dir = './output/rat05/le'
 
 # Prepare output file
 file_results = XDMFFile(osjoin(output_dir,'le.xdmf'))
@@ -216,6 +217,7 @@ initial_p.rename('initial','tumor at day 0')
 # target_p  = interp(input_dir+"tumor_t2.mat","tumor")  
 # target_p.rename('target','tumor at day 2')
 
+annotate=False
 target_p = forward(initial_p,False,False)
 
 # Visualize initial cellularity and target cellularity
@@ -228,12 +230,13 @@ k      = project(k0,V)
 
 # Optimization module
 [k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
+print('Elapsed time is ' + str((time()-t1)/60) + ' minutes')
+
 model_p = forward(initial_p,False,False) # run the forward model using the optimized k field
+vis_obs(model_p,target_p,'model','actual')
 
 print('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2)))
 print('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.)))
 print('D0 = '+str(D0.values()[0]))
-print('Elapsed time is ' + str((time()-t1)/60) + ' minutes')
 
-vis_obs(model_p,target_p,'model','actual')
-plot(k)
+xp('/output/rat05/le/le.xdmf')

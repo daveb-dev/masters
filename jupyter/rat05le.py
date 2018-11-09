@@ -1,7 +1,7 @@
 from __future__ import print_function
 from dolfin import *
 from dolfin_adjoint import *
-from numpy import fliplr, linspace
+from numpy import fliplr, linspace, inf
 from os.path import join as osjoin
 from scipy.io import loadmat as sc_io_loadmat
 from scipy.interpolate import RegularGridInterpolator
@@ -47,21 +47,11 @@ def forward(initial_p, name, record=False,  annotate=False):
     '''
     def E(u):
         eps = 0.5*(nabla_grad(u) + nabla_grad(u).T)
-        if (n%rtime == 0):
-            if record:        # save the current solution, k field, displacement, and diffusion
-                eps = project(eps,U,annotate=False)
-                eps.rename('eps','strain')          
-                f_timeseries.write(eps,t)
         return eps
     def sigma(u):
         return 2*mu*E(u)+lmbda*tr(E(u))*Identity(2)
     def vonmises(u):
         s         = sigma(u) - (1./2)*tr(sigma(u))*Identity(2)  # deviatoric stress
-        if (n%rtime == 0):
-            if record:        # save the current solution, k field, displacement, and diffusion
-                s = project(s,U,annotate=False)
-                s.rename('sigma','stress')          
-                f_timeseries.write(s,t)
         von_Mises = sqrt(3./2*inner(s, s))
         return project(von_Mises, V,annotate=annotate)
     def sigma_form(u,phi):
@@ -168,7 +158,11 @@ def optimize(dbg=False):
     k_ub.vector()[:] = 4.
     D_lb = 0.
     D_ub = 4.
-    bnds = [[k_lb,D_lb],[k_ub,D_ub]]
+    gD_lb = -inf
+    gD_ub = inf
+    beta_lb = 1e-4
+    beta_ub = inf
+    bnds = [[k_lb,D_lb, gD_lb, beta_lb],[k_ub,D_ub, gD_ub, beta_ub]]
 
     # Run the optimization
     m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
@@ -221,8 +215,8 @@ annotate=False
 k0     = Constant(1.5)    # growth rate initial guess
 k      = project(k0,V)    # (constant over domain)
 D0     = Constant(2.)     # mobility or diffusion coefficient
-gammaD = 2.        
-beta   = 1. 
+gammaD = Constant(2.)
+beta   = Constant(1.)
 
 # Optimization module
 [k, D0, gammaD, beta] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin

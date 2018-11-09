@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib import colors
 from xdmf_parser import xparse as xp
+import moola
 
 set_log_level(PROGRESS) 
 
@@ -35,30 +36,31 @@ def interp(file_loc,mat_name):
     mat_interp = InterpolatedParameter(linspace(1,x,x),linspace(1,y,y),mat,degree=1)
     return interpolate(mat_interp,V)
 
-def vis_obs(quantity1,quantity2,diff=False,title1,title2):
+def vis_obs(quantity1,quantity2,title1,title2,take_diff=False):
     '''
         Compare two quantity plots, for example initial vs. target cellularity
         Calculates difference and writes that to file if requested
         Accepts titles for each plot
     '''
     print("Plotting "+title1+" and "+title2)
-    cm = cm.get_cmap('jet')
+    cm1 = cm.get_cmap('jet')
     plt.figure()
     plt.subplot(1,2,1)
     plt.title(title1)
-    plot(quantity1,cmap=cm)
+    plot(quantity1,cmap=cm1)
  
     plt.subplot(1,2,2)
     plt.title(title2)
-    plot(quantity2,cmap=cm)
-
-    diff = Function(V,annotation=False)
-    diff.rename('diff','diff tumor fraction')
-    diff.vector()[:] = quantity1.vector()-quantity2.vector()
- 
+    plot(quantity2,cmap=cm1)
+    
     file_results.write(quantity1, 1)
     file_results.write(quantity2, 2)
-    file_results.write(diff, 3)
+    if take_diff:
+        diff = Function(V,annotation=False)
+        diff.rename('diff','diff tumor fraction')
+        diff.vector()[:] = quantity1.vector()-quantity2.vector()
+        file_results.write(diff, 3)
+    
 
 def forward(initial_p,record=False, annotate=False):
     print("Running the forward problem...")
@@ -225,7 +227,7 @@ case       = 0
 r_coeff1   = 0.01
 r_coeff2   = 0.01
 input_dir  = "../rat-data/rat05/"
-output_dir = '/output/rat05'
+output_dir = './output/rat05'
 
 # Prepare output file
 file_results = XDMFFile(osjoin(output_dir,'he.xdmf'))
@@ -262,7 +264,7 @@ initial_p.rename('initial','tumor at day 0')
 target_p = forward(initial_p, False, False)
 
 # Visualize initial cellularity and target cellularity
-vis_obs(initial_p,target_p,False,'initial','target') 
+vis_obs(initial_p,target_p,'initial','target') 
 
 # Initial guesses
 D0     = Constant(2.)   # mobility or diffusion coefficient
@@ -272,11 +274,11 @@ k      = project(k0,V)
 # Optimization module
 [k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
 model_p = forward(initial_p,False, False) # run the forward model using the optimized k field
-vis_obs(initial_p,target_p,True,'initial','target') 
+vis_obs(initial_p,target_p,'initial','target', True) 
 
 print('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2)))
 print('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.)))
 print('D0 = '+str(D0.values()[0]))
 print('Elapsed time is ' + str((time()-t1)/60) + ' minutes')
 
-xp(osjoin(output_dir,'he.xdmf'))
+xp('/output/rat05/he.xdmf')

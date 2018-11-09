@@ -35,30 +35,6 @@ def interp(file_loc,mat_name):
     mat_interp = InterpolatedParameter(linspace(1,x,x),linspace(1,y,y),mat,degree=1)
     return interpolate(mat_interp,V)
 
-def vis_obs(quantity1,quantity2,title1,title2,take_diff=False):
-    '''
-        Compare two quantity plots, for example initial vs. target cellularity
-        Calculates difference and writes that to file if requested
-        Accepts titles for each plot
-    '''
-    f_log.write("Plotting "+title1+" and "+title2+"\n")
-    cm1 = cm.get_cmap('jet')
-    fig = plt.figure()
-    plt.subplot(1,2,1)
-    plt.title(title1)
-    plot(quantity1,cmap=cm1)
- 
-    plt.subplot(1,2,2)
-    plt.title(title2)
-    plot(quantity2,cmap=cm1)
-    
-    fig.savefig(osjoin(output_dir,title1+'_and_'+title2+'.png'))
-    if take_diff:
-        diff = Function(V,annotation=False)
-        diff.rename('diff','diff tumor fraction')
-        diff.vector()[:] = quantity1.vector()-quantity2.vector()
-        f_notime.write(diff)
-
 def forward(initial_p, name, record=False,  annotate=False):
     """ 
         Here, we define the forward problem. 
@@ -70,11 +46,22 @@ def forward(initial_p, name, record=False,  annotate=False):
         - vonmises(...) calculates the von Mises stress based on the actual stress tensor
     '''
     def E(u):
-        return 0.5*(nabla_grad(u) + nabla_grad(u).T)
+        eps = 0.5*(nabla_grad(u) + nabla_grad(u).T)
+        if (n%rtime == 0):
+            if record:        # save the current solution, k field, displacement, and diffusion
+                eps = project(eps,U,annotate=False)
+                eps.rename('eps','strain')          
+                f_timeseries.write(eps,t)
+        return eps
     def sigma(u):
         return 2*mu*E(u)+lmbda*tr(E(u))*Identity(2)
     def vonmises(u):
         s         = sigma(u) - (1./2)*tr(sigma(u))*Identity(2)  # deviatoric stress
+        if (n%rtime == 0):
+            if record:        # save the current solution, k field, displacement, and diffusion
+                s = project(s,U,annotate=False)
+                s.rename('sigma','stress')          
+                f_timeseries.write(s,t)
         von_Mises = sqrt(3./2*inner(s, s))
         return project(von_Mises, V,annotate=annotate)
     def sigma_form(u,phi):
@@ -111,9 +98,31 @@ def forward(initial_p, name, record=False,  annotate=False):
     solver_RD.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
 
     # Prepare the solution
-    t = dt
+    t = 0.
+    if record:        # save the current solution, k field, displacement, and diffusion
+        u.rename('u_'+name,'displacement')
+        p_n.rename('phi_T_'+name,'tumor fraction')
+        vm.rename('vm_'+name,'Von Mises')
+        D.rename('D_'+name,'diffusion coefficient')
+        k.rename('k_'+name,'k field')          
+        f_timeseries.write(p_n,t)
+        f_timeseries.write(u,t)
+        f_timeseries.write(k,t)
+        f_timeseries.write(vm,t)
+        f_timeseries.write(D,t)
+                
+    for n in range(num_steps+1):
+        t += dt
         
-    for n in range(num_steps):
+        # Solve reaction diffusion
+        solver_RD.solve(annotate=annotate)
+        p_n.assign(p)
+        
+        # Solve for displacement and vonmises stress
+        solve(a == L, u, bc, form_compiler_parameters=ffc_options,annotate=annotate)
+        vm   = vonmises(u)
+        D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
+        
         if (n%rtime == 0):
             print("Solved reaction diffusion for time = "+str(t))
             if record:        # save the current solution, k field, displacement, and diffusion
@@ -127,16 +136,6 @@ def forward(initial_p, name, record=False,  annotate=False):
                 f_timeseries.write(k,t)
                 f_timeseries.write(vm,t)
                 f_timeseries.write(D,t)
-        # Update current time
-        solver_RD.solve(annotate=annotate)
-        p_n.assign(p)
-        
-        # Update previous solution
-        solve(a == L, u, bc, form_compiler_parameters=ffc_options,annotate=annotate)
-        vm   = vonmises(u)
-        D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
-
-        t += dt
     return p
 
 # Callback function for the optimizer
@@ -156,7 +155,7 @@ def optimize(dbg=False):
     m = [Control(k), Control(D0), Control(gammaD), Control(beta)]
     
     # Execute first time to annotate and record the tape
-    p = forward(initial_p, 'true', True, True)
+    p = forward(initial_p, None, False, True)
 
     J = objective(p, target_p, r_coeff1, r_coeff2)
 
@@ -194,15 +193,15 @@ f_notime     = XDMFFile(osjoin(output_dir,'notime.xdmf'))
 f_notime.parameters["flush_output"] = True
 f_notime.parameters["functions_share_mesh"] = True
 f_log = open(osjoin(output_dir,'info.log'),'w+')
-rtime = 5 # How often to record results
+rtime = 4 # How often to record results
 
 # Prepare a mesh
 mesh = Mesh(input_dir+"gmsh.xml")
 V    = FunctionSpace(mesh, 'CG', 1)
 
 # Model parameters
-T             = 9.               # final time 
-num_steps     = 180              # number of time steps
+T             = 2. #9.               # final time 
+num_steps     = 40# 180              # number of time steps
 dt            = T/num_steps      # time step size
 theta         = 50970.           # carrying capacity - normalize cell data by this 
 mu            = .42              # kPa, bulk shear modulus
@@ -212,14 +211,11 @@ lmbda         = 2*mu*nu/(1-2*nu)
 # Load initial tumor condition data
 initial_p = interp(input_dir+"ic.mat","ic")
 initial_p.rename('initial','tumor at day 0')
-target_p  = interp(input_dir+"tumor_t9.mat","tumor")  
+target_p  = interp(input_dir+"tumor_t2.mat","tumor")  
 target_p.rename('target','tumor at day 2')
 f_notime.write(target_p)
 
 annotate=False
-
-# Visualize initial cellularity and target cellularity
-vis_obs(initial_p,target_p,'initial','target') 
 
 # Initial guesses
 k0     = Constant(1.5)    # growth rate initial guess
@@ -233,7 +229,6 @@ beta   = 1.
 f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')
 
 model_p = forward(initial_p,'opt',True,False) # run the forward model using the optimized k field
-vis_obs(model_p,target_p,'model','actual',True)
 
 f_log.write('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2))+'\n')
 f_log.write('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.))+'\n')

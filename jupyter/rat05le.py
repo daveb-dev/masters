@@ -8,9 +8,8 @@ from scipy.interpolate import RegularGridInterpolator
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib import colors
-from xdmf_parser import xparse as xp
 
-set_log_level(INFO) 
+set_log_level(ERROR) 
 
 class InterpolatedParameter(Expression):
     '''
@@ -155,9 +154,9 @@ def optimize(dbg=False):
     # upper and lower bound for the parameter field
     k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)
     k_lb.vector()[:] = 0.
-    k_ub.vector()[:] = 4.
+    k_ub.vector()[:] = inf
     D_lb = 0.
-    D_ub = 4.
+    D_ub = inf
     gD_lb = -inf
     gD_ub = inf
     beta_lb = 1e-4
@@ -187,15 +186,15 @@ f_notime     = XDMFFile(osjoin(output_dir,'notime.xdmf'))
 f_notime.parameters["flush_output"] = True
 f_notime.parameters["functions_share_mesh"] = True
 f_log = open(osjoin(output_dir,'info.log'),'w+')
-rtime = 4 # How often to record results
+rtime = 18 # How often to record results
 
 # Prepare a mesh
 mesh = Mesh(input_dir+"gmsh.xml")
 V    = FunctionSpace(mesh, 'CG', 1)
 
 # Model parameters
-T             = 2. #9.               # final time 
-num_steps     = 40# 180              # number of time steps
+T             = 9.               # final time 
+num_steps     = 180              # number of time steps
 dt            = T/num_steps      # time step size
 theta         = 50970.           # carrying capacity - normalize cell data by this 
 mu            = .42              # kPa, bulk shear modulus
@@ -205,8 +204,8 @@ lmbda         = 2*mu*nu/(1-2*nu)
 # Load initial tumor condition data
 initial_p = interp(input_dir+"ic.mat","ic")
 initial_p.rename('initial','tumor at day 0')
-target_p  = interp(input_dir+"tumor_t2.mat","tumor")  
-target_p.rename('target','tumor at day 2')
+target_p  = interp(input_dir+"tumor_t9.mat","tumor")  
+target_p.rename('target','tumor at day 9')
 f_notime.write(target_p)
 
 annotate=False

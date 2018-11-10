@@ -1,7 +1,7 @@
 from __future__ import print_function
 from dolfin import *
 from dolfin_adjoint import *
-from numpy import fliplr, linspace
+from numpy import fliplr, linspace, inf
 from os.path import join as osjoin
 from scipy.io import loadmat as sc_io_loadmat
 from scipy.interpolate import RegularGridInterpolator
@@ -171,12 +171,12 @@ def optimize(dbg=False):
     # upper and lower bound for the parameter field
     k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)
     k_lb.vector()[:] = 0.
-    k_ub.vector()[:] = 4.
+    k_ub.vector()[:] = inf
     D_lb = 0.
     D_ub = inf
-    gD_lb = -inf
+    gD_lb = 0
     gD_ub = inf
-    beta_lb = 1e-4
+    beta_lb = 0
     beta_ub = inf
     bnds = [[k_lb,D_lb, gD_lb, beta_lb],[k_ub,D_ub, gD_ub, beta_ub]]
     
@@ -228,10 +228,10 @@ f_notime.write(target_p)
 annotate=False
 
 # Parameters to be optimized
-D0     = Constant(2.)            # mobility or diffusion coefficient
-gammaD = Constant(2.)           # initial guess of gamma_D
-beta   = Constant(1.)               # force coefficient for HE
-k0     = Constant(1.5)            # growth rate initial guess
+D0     = Constant(1.)     # mobility or diffusion coefficient
+gammaD = Constant(10.)     # initial guess of gamma_D
+beta   = Constant(10.)     # force coefficient for HE
+k0     = Constant(2.)     # growth rate initial guess
 k      = project(k0,V)
 
 # Optimization module

@@ -5,9 +5,6 @@ from numpy import fliplr, linspace, inf
 from os.path import join as osjoin
 from scipy.io import loadmat as sc_io_loadmat
 from scipy.interpolate import RegularGridInterpolator
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-from matplotlib import colors
 
 set_log_level(ERROR) 
 
@@ -44,6 +41,7 @@ def forward(initial_p, name, record=False, annotate=False):
         - sigma_form(...) returns the stress tensor based on the cells (phi), elasticity coefficients, and a coefficient beta
         - vonmises(...) calculates the von Mises stress based on the actual stress tensor
     '''
+    global D
     
     ## Define functions
     def E(u):
@@ -151,7 +149,11 @@ def eval_cb(j, m):
     print("objective = %15.10e \n" % j)
 
 def objective(p, target_p, r_coeff1, r_coeff2):
-    return assemble(inner(p-target_p, p-target_p)*dx) + r_coeff1*assemble(k*k*dx) + r_coeff2*assemble(dot(grad(k),grad(k))*dx)
+    return assemble(inner(p-target_p, p-target_p)*dx) + \
+        r_coeff1*assemble(k*k*dx) + \
+        r_coeff2*assemble(dot(grad(k),grad(k))*dx) + \
+        r_coeff1*assemble(D*D*dx) + \
+        r_coeff2*assemble(dot(grad(D),grad(D))*dx)
 
 def optimize(dbg=False):
     """ The optimization routine """

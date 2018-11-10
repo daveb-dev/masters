@@ -137,12 +137,12 @@ def forward(initial_p, name, record=False, annotate=False):
                 vm.rename('vm_'+name,'Von Mises')
                 D.rename('D_'+name,'diffusion coefficient')
                 k.rename('k_'+name,'k field')  
-                file_results.write(u,t)
-                file_results.write(p_n,t)
-                file_results.write(k,t)
-                file_results.write(vm,t)
-                file_results.write(D,t)
-        
+                f_timeseries.write(p_n,t)
+                f_timeseries.write(u,t)
+                f_timeseries.write(k,t)
+                f_timeseries.write(vm,t)
+                f_timeseries.write(D,t)
+                
     return p
 
 # Callback function for the optimizer; Writes intermediate results to a logfile
@@ -161,7 +161,7 @@ def optimize(dbg=False):
     m = [Control(k), Control(D0), Control(gammaD), Control(beta)]
     
     # Execute first time to annotate and record the tape
-    p = forward(initial_p, None, False, True)
+    p = forward(initial_p, 'annt', True, True)
 
     J = objective(p, target_p, r_coeff1, r_coeff2)
 

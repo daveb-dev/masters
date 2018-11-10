@@ -181,7 +181,7 @@ def optimize(dbg=False):
     bnds = [[k_lb,D_lb, gD_lb, beta_lb],[k_ub,D_ub, gD_ub, beta_ub]]
     
     # Run the optimization
-    m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
+    m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-8,options={"disp":True,"gtol":1.0e-8})
         
     return m_opt
 
@@ -193,7 +193,7 @@ case       = 0
 r_coeff1   = 0.01
 r_coeff2   = 0.01
 input_dir  = "../rat-data/rat05/"
-output_dir = './output/rat05/he'
+output_dir = './output/rat05hecoarse'
 
 # Prepare output file
 f_timeseries = XDMFFile(osjoin(output_dir,'timeseries.xdmf'))
@@ -210,8 +210,8 @@ mesh = Mesh(input_dir+"gmsh.xml")
 V    = FunctionSpace(mesh, 'CG', 1)
 
 # Model parameters
-T             = 9.0              # final time 
-num_steps     = 180              # number of time steps
+T             = 2.0              # final time 
+num_steps     = 100              # number of time steps
 dt            = T/num_steps      # time step size
 theta         = 50970.           # carrying capacity - normalize data by this
 mu            = .42              # kPa, bulk shear modulus

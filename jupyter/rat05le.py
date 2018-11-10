@@ -165,7 +165,7 @@ def optimize(dbg=False):
     bnds = [[k_lb,D_lb, gD_lb, beta_lb],[k_ub,D_ub, gD_ub, beta_ub]]
 
     # Run the optimization
-    m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
+    m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-8,options={"disp":True,"gtol":1.0e-8})
     
     return m_opt
 
@@ -195,7 +195,7 @@ V    = FunctionSpace(mesh, 'CG', 1)
 
 # Model parameters
 T             = 2.               # final time 
-num_steps     = 40              # number of time steps
+num_steps     = 100              # number of time steps
 dt            = T/num_steps      # time step size
 theta         = 50970.           # carrying capacity - normalize cell data by this 
 mu            = .42              # kPa, bulk shear modulus

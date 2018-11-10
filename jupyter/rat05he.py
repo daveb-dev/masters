@@ -229,8 +229,8 @@ annotate=False
 
 # Parameters to be optimized
 D0     = Constant(1.)     # mobility or diffusion coefficient
-gammaD = Constant(10.)     # initial guess of gamma_D
-beta   = Constant(10.)     # force coefficient for HE
+gammaD = Constant(1.)     # initial guess of gamma_D
+beta   = Constant(1.)     # force coefficient for HE
 k0     = Constant(2.)     # growth rate initial guess
 k      = project(k0,V)
 

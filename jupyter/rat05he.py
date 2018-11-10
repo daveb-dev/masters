@@ -78,14 +78,13 @@ def forward(initial_p, name, record=False, annotate=False):
     p_n         = interpolate(initial_p,V)
     F_HE        = inner(sigma_form(u, p_n), E(v))*dx
     J_HE        = derivative(F_HE,u,du)
-    parameters["form_compiler"]["quadrature_degree"] = 2
-    parameters["form_compiler"]["cpp_optimize"] = True
-    parameters['krylov_solver']['nonzero_initial_guess'] = True
-    ffc_options = {"quadrature_degree": 2}
+    ffc_options = {"quadrature_degree":n 2, "cpp_optimize": True}
     problem_HE  = NonlinearVariationalProblem(F_HE, u, bc, J=J_HE,form_compiler_parameters=ffc_options)
     solver_HE   = NonlinearVariationalSolver(problem_HE)
+    solver_HE.parameters['krylov_solver'] = True
+    solver_HE.parameters['krylov_solver']['nonzero_initial_guess'] = True
+    solver_HE.parameters['newton_solver']['krylov_solver'] = True
     solver_HE.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
-
     # First iteration solving for displacement, and using the von mises stress field for D
     solver_HE.solve(annotate=annotate)
     vm   = vonmises(u)
@@ -99,6 +98,9 @@ def forward(initial_p, name, record=False, annotate=False):
     J_RD        = derivative(F_RD,p,dp)
     problem_RD  = NonlinearVariationalProblem(F_RD, p, J=J_RD,form_compiler_parameters=ffc_options)
     solver_RD   = NonlinearVariationalSolver(problem_RD)
+    solver_RD.parameters['krylov_solver'] = True
+    solver_RD.parameters['krylov_solver']['nonzero_initial_guess'] = True
+    solver_RD.parameters['newton_solver']['krylov_solver'] = True
     solver_RD.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
     
     # Prepare the solution
@@ -165,10 +167,10 @@ def optimize(dbg=False):
     # Execute first time to annotate and record the tape
     p = forward(initial_p, 'annt', True, True)
 
-    J = objective(p, target_p, r_coeff1, r_coeff2)
+    Obj = objective(p, target_p, r_coeff1, r_coeff2)
 
     # Prepare the reduced functional
-    rf = ReducedFunctional(J,m,eval_cb_post=eval_cb)
+    rf = ReducedFunctional(Obj,m,eval_cb_post=eval_cb)
 
     # upper and lower bound for the parameter field
     k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)

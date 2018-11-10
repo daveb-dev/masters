@@ -177,7 +177,7 @@ case       = 0
 r_coeff1   = 0.01
 r_coeff2   = 0.01
 input_dir  = "../rat-data/rat05/"
-output_dir = './output/rat05/le'
+output_dir = './output/rat05coarse'
 
 # Prepare output file
 f_timeseries = XDMFFile(osjoin(output_dir,'timeseries.xdmf'))

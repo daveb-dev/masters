@@ -55,7 +55,8 @@ def forward(initial_p, name, record=False,  annotate=False):
         return project(von_Mises, V,annotate=annotate)
     def sigma_form(u,phi):
         return 2*mu*(E(u)-beta*phi*Identity(2))+lmbda*(tr(E(u))-2*beta*phi)*Identity(2)
-    
+
+    #Set up linear elasticity problem
     U           = VectorFunctionSpace(mesh,'Lagrange',1)
     def boundary(x, on_boundary):
         return on_boundary
@@ -186,15 +187,15 @@ f_notime     = XDMFFile(osjoin(output_dir,'notime.xdmf'))
 f_notime.parameters["flush_output"] = True
 f_notime.parameters["functions_share_mesh"] = True
 f_log = open(osjoin(output_dir,'info.log'),'w+')
-rtime = 18 # How often to record results
+rtime = 5 # How often to record results
 
 # Prepare a mesh
 mesh = Mesh(input_dir+"gmsh.xml")
 V    = FunctionSpace(mesh, 'CG', 1)
 
 # Model parameters
-T             = 9.               # final time 
-num_steps     = 180              # number of time steps
+T             = 2.               # final time 
+num_steps     = 40              # number of time steps
 dt            = T/num_steps      # time step size
 theta         = 50970.           # carrying capacity - normalize cell data by this 
 mu            = .42              # kPa, bulk shear modulus
@@ -204,18 +205,18 @@ lmbda         = 2*mu*nu/(1-2*nu)
 # Load initial tumor condition data
 initial_p = interp(input_dir+"ic.mat","ic")
 initial_p.rename('initial','tumor at day 0')
-target_p  = interp(input_dir+"tumor_t9.mat","tumor")  
-target_p.rename('target','tumor at day 9')
+target_p  = interp(input_dir+"tumor_t2.mat","tumor")  
+target_p.rename('target','tumor at day 2')
 f_notime.write(target_p)
 
 annotate=False
 
 # Initial guesses
-k0     = Constant(1.5)    # growth rate initial guess
-k      = project(k0,V)    # (constant over domain)
 D0     = Constant(2.)     # mobility or diffusion coefficient
 gammaD = Constant(2.)
 beta   = Constant(1.)
+k0     = Constant(1.5)    # growth rate initial guess
+k      = project(k0,V)    # (constant over domain)
 
 # Optimization module
 [k, D0, gammaD, beta] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
@@ -226,5 +227,7 @@ model_p = forward(initial_p,'opt',True,False) # run the forward model using the 
 f_log.write('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2))+'\n')
 f_log.write('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.))+'\n')
 f_log.write('D0 = '+str(D0.values()[0])+'\n')
+f_log.write('gammaD = '+str(gammaD.values()[0])+'\n')
+f_log.write('beta = '+str(beta.values()[0])+'\n')
 f_log.close()
 

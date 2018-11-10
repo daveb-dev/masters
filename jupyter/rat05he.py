@@ -8,9 +8,8 @@ from scipy.interpolate import RegularGridInterpolator
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib import colors
-from xdmf_parser import xparse as xp
 
-set_log_level(INFO) 
+set_log_level(ERROR) 
 
 class InterpolatedParameter(Expression):
     '''
@@ -28,39 +27,12 @@ def interp(file_loc,mat_name):
     """
         Function to accept matlab .mat file with tumor data and interpolate values onto mesh
     """
-    file_print.write("Interpolating "+mat_name+"...\n")
+    f_log.write("Interpolating "+mat_name+"...\n")
     mat = sc_io_loadmat(file_loc)[mat_name]
     mat = fliplr(mat.T)/theta  # Needs to be adjusted to fit the mesh correctly; also scaled
     x,y = mat.shape[0], mat.shape[1]
     mat_interp = InterpolatedParameter(linspace(1,x,x),linspace(1,y,y),mat,degree=1)
     return interpolate(mat_interp,V)
-
-def vis_obs(quantity1,quantity2,title1,title2,take_diff=False):
-    '''
-        Compare two quantity plots, for example initial vs. target cellularity
-        Calculates difference and writes that to file if requested
-        Accepts titles for each plot
-    '''
-    file_print.write("Plotting "+title1+" and "+title2+"\n")
-    cm1 = cm.get_cmap('jet')
-    fig = plt.figure()
-    plt.subplot(1,2,1)
-    plt.title(title1)
-    plot(quantity1,cmap=cm1)
- 
-    plt.subplot(1,2,2)
-    plt.title(title2)
-    plot(quantity2,cmap=cm1)
-    
-    fig.savefig(osjoin(output_dir,title1+'_and_'+title2+'.png'))
-    if take_diff:
-        diff_results = XDMFFile(osjoin(output_dir,'diff.xdmf'))
-        diff_results.parameters["flush_output"] = True
-        diff_results.parameters["functions_share_mesh"] = True
-        diff = Function(V,annotation=False)
-        diff.rename('diff','diff tumor fraction')
-        diff.vector()[:] = quantity1.vector()-quantity2.vector()
-        diff_results.write(diff)
 
 def forward(initial_p, name, record=False, annotate=False):    
     """ 
@@ -97,7 +69,7 @@ def forward(initial_p, name, record=False, annotate=False):
         Js  = det(Fs)
         return 1/(1+beta*phi)*(mu/(Js**(5./3))*(Bs-1./2*tr(Bs)*I)+lmbda*(Js-1)*I)
 
-    # Set up linear elasticity problem
+    # Set up hyperelasticity problem
     U           = VectorFunctionSpace(mesh,'Lagrange',1)
     def boundary(x, on_boundary):
         return on_boundary
@@ -132,11 +104,33 @@ def forward(initial_p, name, record=False, annotate=False):
     solver_RD.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
     
     # Prepare the solution
-    t = dt
+    t = 0.
+    if record:        # save the current solution, k field, displacement, and diffusion
+        u.rename('u_'+name,'displacement')
+        p_n.rename('phi_T_'+name,'tumor fraction')
+        vm.rename('vm_'+name,'Von Mises')
+        D.rename('D_'+name,'diffusion coefficient')
+        k.rename('k_'+name,'k field')          
+        f_timeseries.write(p_n,t)
+        f_timeseries.write(u,t)
+        f_timeseries.write(k,t)
+        f_timeseries.write(vm,t)
+        f_timeseries.write(D,t)
         
-    for n in range(num_steps):
+    for n in range(num_steps+1):
+        t += dt
+        
+        # Update current time and Compute solution
+        solver_RD.solve(annotate=annotate)
+        p_n.assign(p)
+        
+        # Update previous solution
+        solver_HE.solve(annotate=annotate)
+        vm   = vonmises(u)
+        D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
+        
         if (n%rtime == 0):
-            print("Solving reaction diffusion for time = "+str(t))
+            print("Solved reaction diffusion for time = "+str(t))
             if record:        # save the current solution, k field, displacement, and diffusion
                 u.rename('u_'+name,'displacement')
                 p_n.rename('phi_T_'+name,'tumor fraction')
@@ -149,36 +143,25 @@ def forward(initial_p, name, record=False, annotate=False):
                 file_results.write(vm,t)
                 file_results.write(D,t)
         
-        # Update current time and Compute solution
-        solver_RD.solve(annotate=annotate)
-        p_n.assign(p)
-        
-        # Update previous solution
-        solver_HE.solve(annotate=annotate)
-        vm   = vonmises(u)
-        D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
-        
-        t += dt
-        
     return p
 
 # Callback function for the optimizer; Writes intermediate results to a logfile
 def eval_cb(j, m):
     """ The callback function keeping a log """
-    file_print.write("objective = %15.10e \n" % j)
+    print("objective = %15.10e \n" % j)
 
 def objective(p, target_p, r_coeff1, r_coeff2):
     return assemble(inner(p-target_p, p-target_p)*dx) + r_coeff1*assemble(k*k*dx) + r_coeff2*assemble(dot(grad(k),grad(k))*dx)
 
 def optimize(dbg=False):
     """ The optimization routine """
-    file_print.write("Optimizing...\n")
+    f_log.write("Optimizing...\n")
     
     # Define the control
-    m = [Control(k), Control(D0)]
+    m = [Control(k), Control(D0), Control(gammaD), Control(beta)]
     
     # Execute first time to annotate and record the tape
-    p = forward(initial_p,'true', True, True)
+    p = forward(initial_p, None, False, True)
 
     J = objective(p, target_p, r_coeff1, r_coeff2)
 
@@ -190,11 +173,15 @@ def optimize(dbg=False):
     k_lb.vector()[:] = 0.
     k_ub.vector()[:] = 4.
     D_lb = 0.
-    D_ub = 4.
-    bnds = [[k_lb,D_lb],[k_ub,D_ub]]
+    D_ub = inf
+    gD_lb = -inf
+    gD_ub = inf
+    beta_lb = 1e-4
+    beta_ub = inf
+    bnds = [[k_lb,D_lb, gD_lb, beta_lb],[k_ub,D_ub, gD_ub, beta_ub]]
     
     # Run the optimization
-    m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-4,options={"disp":True,"gtol":1.0e-4})
+    m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-6,options={"disp":True,"gtol":1.0e-6})
         
     return m_opt
 
@@ -209,59 +196,53 @@ input_dir  = "../rat-data/rat05/"
 output_dir = './output/rat05/he'
 
 # Prepare output file
-file_results = XDMFFile(osjoin(output_dir,'he.xdmf'))
-file_results.parameters["flush_output"] = True
-file_results.parameters["functions_share_mesh"] = True
-file_print = open(osjoin(output_dir,'info.log'),'w+')
-rtime = 5 # How often to record results
+f_timeseries = XDMFFile(osjoin(output_dir,'timeseries.xdmf'))
+f_timeseries.parameters["flush_output"] = True
+f_timeseries.parameters["functions_share_mesh"] = True
+f_notime     = XDMFFile(osjoin(output_dir,'notime.xdmf'))
+f_notime.parameters["flush_output"] = True
+f_notime.parameters["functions_share_mesh"] = True
+f_log = open(osjoin(output_dir,'info.log'),'w+')
+rtime = 5 # How often to record results 
 
 # Prepare a mesh
 mesh = Mesh(input_dir+"gmsh.xml")
 V    = FunctionSpace(mesh, 'CG', 1)
 
 # Model parameters
-T             = 2.0              # final time 
-num_steps     = 100              # number of time steps
+T             = 9.0              # final time 
+num_steps     = 180              # number of time steps
 dt            = T/num_steps      # time step size
 theta         = 50970.           # carrying capacity - normalize data by this
 mu            = .42              # kPa, bulk shear modulus
 nu            = .45              # poisson's ratio
 lmbda         = 2*mu*nu/(1-2*nu) # lame parameter
-beta          = 1.               # force coefficient for HE
-gammaD        = 2.           # initial guess of gamma_D
-
-# Parameters to be optimized
-D0     = Constant(1.)            # mobility or diffusion coefficient
-k0     = Constant(2.)            # growth rate initial guess
-k      = project(k0,V)
 
 # Load initial tumor condition data
 initial_p = interp(input_dir+"ic.mat","ic")
 initial_p.rename('initial','tumor at day 0')
-# target_p  = interp(input_dir+"tumor_t2.mat","tumor")  
-# target_p.rename('target','tumor at day 2')
+target_p  = interp(input_dir+"tumor_t2.mat","tumor")  
+target_p.rename('target','tumor at day 2')
+f_notime.write(target_p)
 
 annotate=False
-target_p = forward(initial_p, None, False, False)
 
-# Visualize initial cellularity and target cellularity
-vis_obs(initial_p,target_p,'initial','target') 
-
-# Initial guesses
-D0     = Constant(2.)   # mobility or diffusion coefficient
-k0     = Constant(1.5)    # growth rate initial guess
+# Parameters to be optimized
+D0     = Constant(2.)            # mobility or diffusion coefficient
+gammaD = Constant(2.)           # initial guess of gamma_D
+beta   = Constant(1.)               # force coefficient for HE
+k0     = Constant(1.5)            # growth rate initial guess
 k      = project(k0,V)
 
 # Optimization module
-[k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
-file_print.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')
+[k, D0, gammaD, beta] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
+f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')
 
-model_p = forward(initial_p,'opt',False, False) # run the forward model using the optimized k field
-vis_obs(initial_p,target_p,'model','target', True) 
+model_p = forward(initial_p,'opt',True, False) # run the forward model using the optimized k field
 
-file_print.write('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2))+'\n')
-file_print.write('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.))+'\n')
-file_print.write('D0 = '+str(D0.values()[0])+'\n')
-
-file_print.close()
-# xp('/output/rat05/he/he.xdmf')
+f_log.write('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2))+'\n')
+f_log.write('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.))+'\n')
+f_log.write('D0 = '+str(D0.values()[0])+'\n')
+f_log.write('gammaD = '+str(gammaD.values()[0])+'\n')
+f_log.write('beta = '+str(beta.values()[0])+'\n')
+f_log.close()

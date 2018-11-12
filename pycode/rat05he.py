@@ -171,11 +171,11 @@ def optimize(dbg=False):
     k_lb.vector()[:] = 0.
     k_ub.vector()[:] = 5.
     D_lb = 0.
-    D_ub = 10.
+    D_ub = 1.
     gD_lb = 0
-    gD_ub = 10.
+    gD_ub = 1.
     beta_lb = 0
-    beta_ub = 10.
+    beta_ub = 1.
     bnds = [[k_lb,D_lb, gD_lb, beta_lb],[k_ub,D_ub, gD_ub, beta_ub]]
     
     # Run the optimization
@@ -226,8 +226,8 @@ f_notime.write(target_p)
 annotate=False
 
 # Parameters to be optimized
-D0     = Constant(2.)     # mobility or diffusion coefficient
-gammaD = Constant(10.)     # initial guess of gamma_D
+D0     = Constant(1.)     # mobility or diffusion coefficient
+gammaD = Constant(1.)     # initial guess of gamma_D
 beta   = Constant(1.)     # force coefficient for HE
 k0     = Constant(2.)     # growth rate initial guess
 k      = project(k0,V)

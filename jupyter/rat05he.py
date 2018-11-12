@@ -6,7 +6,7 @@ from os.path import join as osjoin
 from scipy.io import loadmat as sc_io_loadmat
 from scipy.interpolate import RegularGridInterpolator
 
-set_log_level(ERROR) 
+set_log_level(DEBUG) 
 
 class InterpolatedParameter(Expression):
     '''
@@ -77,13 +77,10 @@ def forward(initial_p, name, record=False, annotate=False):
     v           = TestFunction(U)
     p_n         = interpolate(initial_p,V)
     F_HE        = inner(sigma_form(u, p_n), E(v))*dx
-    J_HE        = derivative(F_HE,u,du)
-    ffc_options = {"quadrature_degree":n 2, "cpp_optimize": True}
-    problem_HE  = NonlinearVariationalProblem(F_HE, u, bc, J=J_HE,form_compiler_parameters=ffc_options)
+    J_HE = derivative(F_HE,u)
+    ffc_options = {"quadrature_degree": 2, "cpp_optimize": True}
+    problem_HE  = NonlinearVariationalProblem(F_HE, u, bc,J=J_HE, form_compiler_parameters=ffc_options)
     solver_HE   = NonlinearVariationalSolver(problem_HE)
-    solver_HE.parameters['krylov_solver'] = True
-    solver_HE.parameters['krylov_solver']['nonzero_initial_guess'] = True
-    solver_HE.parameters['newton_solver']['krylov_solver'] = True
     solver_HE.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
     # First iteration solving for displacement, and using the von mises stress field for D
     solver_HE.solve(annotate=annotate)
@@ -95,12 +92,9 @@ def forward(initial_p, name, record=False, annotate=False):
     p           = Function(V,annotate=annotate)
     q           = TestFunction(V)
     F_RD        = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
-    J_RD        = derivative(F_RD,p,dp)
-    problem_RD  = NonlinearVariationalProblem(F_RD, p, J=J_RD,form_compiler_parameters=ffc_options)
+    J_RD = derivative(F_RD,p)
+    problem_RD  = NonlinearVariationalProblem(F_RD, p,J=J_RD,form_compiler_parameters=ffc_options)
     solver_RD   = NonlinearVariationalSolver(problem_RD)
-    solver_RD.parameters['krylov_solver'] = True
-    solver_RD.parameters['krylov_solver']['nonzero_initial_guess'] = True
-    solver_RD.parameters['newton_solver']['krylov_solver'] = True
     solver_RD.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
     
     # Prepare the solution
@@ -148,7 +142,7 @@ def forward(initial_p, name, record=False, annotate=False):
 # Callback function for the optimizer; Writes intermediate results to a logfile
 def eval_cb(j, m):
     """ The callback function keeping a log """
-    print("objective = %15.10e \n" % j)
+    f_log.write("objective = %15.10e \n" % j)
 
 def objective(p, target_p, r_coeff1, r_coeff2):
     return assemble(inner(p-target_p, p-target_p)*dx) + \
@@ -175,13 +169,13 @@ def optimize(dbg=False):
     # upper and lower bound for the parameter field
     k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)
     k_lb.vector()[:] = 0.
-    k_ub.vector()[:] = inf
+    k_ub.vector()[:] = 5.
     D_lb = 0.
-    D_ub = inf
+    D_ub = 10.
     gD_lb = 0
-    gD_ub = inf
+    gD_ub = 10.
     beta_lb = 0
-    beta_ub = inf
+    beta_ub = 10.
     bnds = [[k_lb,D_lb, gD_lb, beta_lb],[k_ub,D_ub, gD_ub, beta_ub]]
     
     # Run the optimization
@@ -232,8 +226,8 @@ f_notime.write(target_p)
 annotate=False
 
 # Parameters to be optimized
-D0     = Constant(1.)     # mobility or diffusion coefficient
-gammaD = Constant(1.)     # initial guess of gamma_D
+D0     = Constant(2.)     # mobility or diffusion coefficient
+gammaD = Constant(10.)     # initial guess of gamma_D
 beta   = Constant(1.)     # force coefficient for HE
 k0     = Constant(2.)     # growth rate initial guess
 k      = project(k0,V)

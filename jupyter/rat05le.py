@@ -5,9 +5,6 @@ from numpy import fliplr, linspace, inf
 from os.path import join as osjoin
 from scipy.io import loadmat as sc_io_loadmat
 from scipy.interpolate import RegularGridInterpolator
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-from matplotlib import colors
 
 set_log_level(ERROR) 
 
@@ -82,7 +79,6 @@ def forward(initial_p, name, record=False,  annotate=False):
     p           = Function(V,annotate=annotate)
     q           = TestFunction(V)
     F_RD        = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
-    J_RD        = derivative(F_RD,p,dp)
     problem_RD  = NonlinearVariationalProblem(F_RD, p, J=J_RD,form_compiler_parameters=ffc_options)
     solver_RD   = NonlinearVariationalSolver(problem_RD)
     solver_RD.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True

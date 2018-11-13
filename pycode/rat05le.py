@@ -138,7 +138,7 @@ def optimize(dbg=False):
     f_log.write("Optimizing...\n")
     
     # Define the control
-    m = [Control(k), Control(D0), Control(gammaD), Control(beta)]
+    m = [Control(k), Control(D0)]
     
     # Execute first time to annotate and record the tape
     p = forward(initial_p, None, False, True)
@@ -215,7 +215,7 @@ k0     = Constant(1.5)    # growth rate initial guess
 k      = project(k0,V)    # (constant over domain)
 
 # Optimization module
-[k, D0, gammaD, beta] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
+[k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
 f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')
 
 model_p = forward(initial_p,'opt',True,False) # run the forward model using the optimized k field

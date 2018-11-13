@@ -1,0 +1,9 @@
+Interpolating ic...
+Interpolating tumor...
+Optimizing...
+Elapsed time is 86.981799808 minutes
+J_opt = 12.5580522591
+J_opt (without regularization) = 10.1378140822
+D0 = 0.321124149439
+gammaD = 0.0
+beta = 0.323944064031

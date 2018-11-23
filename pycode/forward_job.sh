@@ -9,8 +9,9 @@ do
         do
             for k in .01 .1 1 10
             do
-                printf "Case number %i: \n" $case >> ./output/rat05hesense/info.log
-                /bin/time -f '%e' -a -o ./output/rat05hesense/info.log python forward_sensitivity.py $D $g $b $k $case 
+                printf "Case number %i: \n" $case >> ./output/rat05hesense/log.txt
+		printf "D0 = %f, gammaD = %f, beta = %f, k0 = %f \n" $D $g $b $k >> ./output/rat05hesense/log.txt 
+                /bin/time -f '%e' -a -o ./output/rat05hesense/log.txt python2.7 forward_sensitivity.py $D $g $b $k $case &>> ./output/rat05hesense/log.txt
                 case=$(($case + 1))
             done
         done

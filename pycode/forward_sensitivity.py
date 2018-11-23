@@ -141,11 +141,11 @@ def forward(initial_p, name):
             vm.rename('vm_'+name,"Von Mises")
             D.rename('D_'+name,"diffusion coefficient")
             k.rename('k_'+name,'k field') 
-            f_notime.write(p_n)
-            f_notime.write(u)
-            f_notime.write(k)
-            f_notime.write(vm)
-            f_notime.write(D)
+            f_notime.write(p_n,t)
+            f_notime.write(u,t)
+            f_notime.write(k,t)
+            f_notime.write(vm,t)
+            f_notime.write(D,t)
 
 #########################################################################
 # MAIN 

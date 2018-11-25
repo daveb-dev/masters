@@ -1,4 +1,3 @@
-from __future__ import print_function
 from dolfin import *
 from dolfin_adjoint import *
 from numpy import fliplr, linspace, inf
@@ -6,7 +5,7 @@ from os.path import join as osjoin
 from scipy.io import loadmat as sc_io_loadmat
 from scipy.interpolate import RegularGridInterpolator
 
-set_log_level(PROGRESS) 
+set_log_level(ERROR) 
 
 class InterpolatedParameter(Expression):
     '''
@@ -109,13 +108,12 @@ def forward(initial_p, name, record=False, annotate=False):
     p           = Function(V,annotate=annotate)
     q           = TestFunction(V)
     F_RD        = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
-    J_RD = derivative(F_RD,p) 
+    J_RD = derivative(F_RD,p,dp) 
     
     # Prepare the solution
     t = 0.
     for n in range(num_steps):
         if (n%rtime == 0):
-            print("Solving reaction diffusion for time = "+str(t))
             if record:        # save the current solution, k field, displacement, and diffusion
                 # Rename parameters for saving
                 u.rename('u','displacement')

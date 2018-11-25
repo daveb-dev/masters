@@ -1,4 +1,3 @@
-from __future__ import print_function
 from dolfin import *
 from dolfin_adjoint import *
 from numpy import fliplr, linspace, inf
@@ -70,8 +69,11 @@ def forward(initial_p, name, record=False,  annotate=False):
     ffc_options = {"quadrature_degree": 2}
 
     # First iteration solving for displacement, and using the von mises stress field for D
-    solve(a == L, u, bc, form_compiler_parameters=ffc_options,annotate=annotate)
-    vm          = vonmises(u)
+    def le():
+        solve(a == L, u, bc, form_compiler_parameters=ffc_options,annotate=annotate)
+        return u
+    disp = le()
+    vm          = vonmises(disp)
     D           = project(D0*exp(-gammaD*vm),V,annotate=annotate)
 
     # Set up reaction-diffusion problem
@@ -79,39 +81,14 @@ def forward(initial_p, name, record=False,  annotate=False):
     p           = Function(V,annotate=annotate)
     q           = TestFunction(V)
     F_RD        = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
-    problem_RD  = NonlinearVariationalProblem(F_RD, p, J=J_RD,form_compiler_parameters=ffc_options)
-    solver_RD   = NonlinearVariationalSolver(problem_RD)
-    solver_RD.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
+    J_RD = derivative(F_RD,p,dp) 
 
     # Prepare the solution
-    t = 0.
-    if record:        # save the current solution, k field, displacement, and diffusion
-        u.rename('u_'+name,'displacement')
-        p_n.rename('phi_T_'+name,'tumor fraction')
-        vm.rename('vm_'+name,'Von Mises')
-        D.rename('D_'+name,'diffusion coefficient')
-        k.rename('k_'+name,'k field')          
-        f_timeseries.write(p_n,t)
-        f_timeseries.write(u,t)
-        f_timeseries.write(k,t)
-        f_timeseries.write(vm,t)
-        f_timeseries.write(D,t)
-                
+    t = 0.                
     for n in range(num_steps+1):
-        t += dt
-        
-        # Solve reaction diffusion
-        solver_RD.solve(annotate=annotate)
-        p_n.assign(p)
-        
-        # Solve for displacement and vonmises stress
-        solve(a == L, u, bc, form_compiler_parameters=ffc_options,annotate=annotate)
-        vm   = vonmises(u)
-        D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
-        
         if (n%rtime == 0):
-            print("Solved reaction diffusion for time = "+str(t))
             if record:        # save the current solution, k field, displacement, and diffusion
+                # Rename parameters for saving
                 u.rename('u_'+name,'displacement')
                 p_n.rename('phi_T_'+name,'tumor fraction')
                 vm.rename('vm_'+name,'Von Mises')
@@ -122,16 +99,56 @@ def forward(initial_p, name, record=False,  annotate=False):
                 f_timeseries.write(k,t)
                 f_timeseries.write(vm,t)
                 f_timeseries.write(D,t)
+        
+        t += dt
+        # Solve reaction diffusion
+        problem_RD  = NonlinearVariationalProblem(F_RD, p, J=J_RD,form_compiler_parameters=ffc_options)
+        solver_RD   = NonlinearVariationalSolver(problem_RD)
+        prm = solver_RD.parameters
+        prm['newton_solver']['absolute_tolerance'] = 1E-7
+        prm['newton_solver']['relative_tolerance'] = 1E-6
+        prm['newton_solver']['maximum_iterations'] = 51
+        prm['newton_solver']['relaxation_parameter'] = 1.0
+        prm['newton_solver']['linear_solver'] = 'gmres'
+        prm['newton_solver']['preconditioner'] = 'ilu'
+        prm['newton_solver']['krylov_solver']['absolute_tolerance'] = 1E-8
+        prm['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-6
+        prm['newton_solver']['krylov_solver']['maximum_iterations'] = 1000
+        prm['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
+        solver_RD.solve(annotate=annotate)
+        p_n.assign(p)
+        
+        # Solve for displacement and vonmises stress
+        disp = le()
+        vm   = vonmises(disp)
+        D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
+        
+    if (n%rtime == 0):
+        if record:        # save the current solution, k field, displacement, and diffusion
+            u.rename('u_'+name,'displacement')
+            p_n.rename('phi_T_'+name,'tumor fraction')
+            vm.rename('vm_'+name,'Von Mises')
+            D.rename('D_'+name,'diffusion coefficient')
+            k.rename('k_'+name,'k field')          
+            f_timeseries.write(p_n,t)
+            f_timeseries.write(u,t)
+            f_timeseries.write(k,t)
+            f_timeseries.write(vm,t)
+            f_timeseries.write(D,t)
     return p
 
 # Callback function for the optimizer
 # Writes intermediate results to a logfile
 def eval_cb(j, m):
     """ The callback function keeping a log """
-    print("objective = %15.10e" % j)
+    f_log.write("objective = %15.10e \n" % j)
 
 def objective(p, target_p, r_coeff1, r_coeff2):
-    return assemble(inner(p-target_p, p-target_p)*dx) + r_coeff1*assemble(k*k*dx) + r_coeff2*assemble(dot(grad(k),grad(k))*dx)
+    return assemble(inner(p-target_p, p-target_p)*dx) + \
+        r_coeff1*assemble(k*k*dx) + \
+        r_coeff2*assemble(dot(grad(k),grad(k))*dx) + \
+        r_coeff3*assemble(sqrt(dot(grad(p),grad(p))+eps)*dx)
+        # assemble(inner(p-target_p, p-target_p)*dx) + r_coeff1*assemble(k*k*dx) + r_coeff2*assemble(dot(grad(k),grad(k))*dx)
 
 def optimize(dbg=False):
     """ The optimization routine """
@@ -141,23 +158,23 @@ def optimize(dbg=False):
     m = [Control(k), Control(D0)]
     
     # Execute first time to annotate and record the tape
-    p = forward(initial_p, None, False, True)
+    p = forward(initial_p, 'annt', True, True)
 
-    J = objective(p, target_p, r_coeff1, r_coeff2)
+    Obj = objective(p, target_p, r_coeff1, r_coeff2)
 
     # Prepare the reduced functional
-    rf = ReducedFunctional(J,m,eval_cb_post=eval_cb)
+    rf = ReducedFunctional(obj,m,eval_cb_post=eval_cb)
     
     # upper and lower bound for the parameter field
     k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)
     k_lb.vector()[:] = 0.
-    k_ub.vector()[:] = inf
+    k_ub.vector()[:] = 10.
     D_lb = 0.
-    D_ub = inf
-    gD_lb = -inf
-    gD_ub = inf
-    beta_lb = 1e-4
-    beta_ub = inf
+    D_ub = 5.
+    gD_lb = 0
+    gD_ub = 5.
+    beta_lb = 0.
+    beta_ub = 5.
     bnds = [[k_lb,D_lb, gD_lb, beta_lb],[k_ub,D_ub, gD_ub, beta_ub]]
 
     # Run the optimization
@@ -169,9 +186,10 @@ def optimize(dbg=False):
 # MAIN 
 ########################################################################
 t1         = time()
-case       = 0
 r_coeff1   = 0.01
 r_coeff2   = 0.01
+r_coeff3 = 1.
+eps = .01
 input_dir  = "../rat-data/rat05/"
 output_dir = './output/rat05coarse'
 
@@ -183,7 +201,7 @@ f_notime     = XDMFFile(osjoin(output_dir,'notime.xdmf'))
 f_notime.parameters["flush_output"] = True
 f_notime.parameters["functions_share_mesh"] = True
 f_log = open(osjoin(output_dir,'info.log'),'w+')
-rtime = 5 # How often to record results
+rtime = 1 # How often to record results
 
 # Prepare a mesh
 mesh = Mesh(input_dir+"gmsh.xml")
@@ -191,7 +209,7 @@ V    = FunctionSpace(mesh, 'CG', 1)
 
 # Model parameters
 T             = 2.               # final time 
-num_steps     = 100              # number of time steps
+num_steps     = 20              # number of time steps
 dt            = T/num_steps      # time step size
 theta         = 50970.           # carrying capacity - normalize cell data by this 
 mu            = .42              # kPa, bulk shear modulus
@@ -208,11 +226,11 @@ f_notime.write(target_p)
 annotate=False
 
 # Initial guesses
-D0     = Constant(2.)     # mobility or diffusion coefficient
-gammaD = Constant(2.)
+D0     = Constant(1.)     # mobility or diffusion coefficient
+gammaD = Constant(1.)
 beta   = Constant(1.)
-k0     = Constant(1.5)    # growth rate initial guess
-k      = project(k0,V)    # (constant over domain)
+k0     = Constant(2.)    # growth rate initial guess
+k      = project(k0,V,annotate=False)    # (constant over domain)
 
 # Optimization module
 [k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin

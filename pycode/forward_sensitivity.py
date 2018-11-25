@@ -43,7 +43,10 @@ def forward(initial_p, name):
     ## Define functions
     def E(u):
         return 0.5*(nabla_grad(u) + nabla_grad(u).T)
-    def sigma(u):
+    def sigma_le(u):
+        sigma = 2*mu*E(u)+lmbda*tr(E(u))*Identity(2)
+        return sigma
+    def sigma_he(u):
         I = Identity(2)             # Identity tensor
         F = I + grad(u)             # Deformation gradient
         B = F*F.T
@@ -56,7 +59,9 @@ def forward(initial_p, name):
         s = sigma(u) - (1./2)*tr(sigma(u))*Identity(2)  # deviatoric stress
         von_Mises = sqrt(3./2*inner(s, s))
         return project(von_Mises, V)
-    def sigma_form(u, phi):
+    def sigma_form_le(u,phi):
+        return 2*mu*(E(u)-beta*phi*Identity(2))+lmbda*(tr(E(u))-2*beta*phi)*Identity(2)
+    def sigma_form_he(u, phi):
         I = Identity(2)             # Identity tensor
         F = I + grad(u)             # Deformation gradient
         Fs = F/(1+beta*phi)
@@ -64,41 +69,53 @@ def forward(initial_p, name):
         Js  = det(Fs)
         return 1/(1+beta*phi)*(mu/(Js**(5./3))*(Bs-1./2*tr(Bs)*I)+lmbda*(Js-1)*I)
 
-    # Set up hyperelasticity problem
+    # Set up problem
     U           = VectorFunctionSpace(mesh,'Lagrange',1)
     def boundary(x, on_boundary):
         return on_boundary
     bc          = DirichletBC(U, Constant((0.,0.)), boundary)
     du          = TrialFunction(U)
-    u           = Function(U) 
     v           = TestFunction(U)
     p_n         = interpolate(initial_p,V)
-    F_HE        = inner(sigma_form(u, p_n), E(v))*dx
-    J_HE        = derivative(F_HE,u,du)
     
     ffc_options = {"quadrature_degree": 2, "cpp_optimize": True}
     parameters['form_compiler']['quadrature_degree'] = 2
+    parameters['form_compiler']['cpp_optimize'] = True
     parameters['krylov_solver']['nonzero_initial_guess'] = True
     
-    problem_HE  = NonlinearVariationalProblem(F_HE, u, bc, J=J_HE,form_compiler_parameters=ffc_options)
-    solver_HE   = NonlinearVariationalSolver(problem_HE)
-    prm1 = solver_HE.parameters
-    prm1['newton_solver']['absolute_tolerance'] = 1E-7
-    prm1['newton_solver']['relative_tolerance'] = 1E-6
-    prm1['newton_solver']['maximum_iterations'] = 51
-    prm1['newton_solver']['relaxation_parameter'] = 1.0
-    prm1['newton_solver']['linear_solver'] = 'gmres'
-    prm1['newton_solver']['preconditioner'] = 'ilu'
-    prm1['newton_solver']['krylov_solver']['absolute_tolerance'] = 1E-8
-    prm1['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-6
-    prm1['newton_solver']['krylov_solver']['maximum_iterations'] = 1000
-    prm1['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
-    def he():
-        solver_HE.solve()
+    if lin_hyp == 0:
+        u    = TrialFunction(U)
+        F_LE        = inner(sigma_form_le(u, p_n), E(v))*dx 
+        a, L        = lhs(F_LE), rhs(F_LE)
+        u           = Function(U)
+        def mech():
+        solve(a == L, u, bc, 
+              form_compiler_parameters=ffc_options,
+              annotate=annotate)
         return u
+    else
+        u           = Function(U)
+        F_HE        = inner(sigma_form_he(u, p_n), E(v))*dx
+        J_HE        = derivative(F_HE,u,du)
+        problem_HE  = NonlinearVariationalProblem(F_HE, u, bc, J=J_HE,form_compiler_parameters=ffc_options)
+        solver_HE   = NonlinearVariationalSolver(problem_HE)
+        prm1 = solver_HE.parameters
+        prm1['newton_solver']['absolute_tolerance'] = 1E-7
+        prm1['newton_solver']['relative_tolerance'] = 1E-6
+        prm1['newton_solver']['maximum_iterations'] = 51
+        prm1['newton_solver']['relaxation_parameter'] = 1.0
+        prm1['newton_solver']['linear_solver'] = 'gmres'
+        prm1['newton_solver']['preconditioner'] = 'ilu'
+        prm1['newton_solver']['krylov_solver']['absolute_tolerance'] = 1E-8
+        prm1['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-6
+        prm1['newton_solver']['krylov_solver']['maximum_iterations'] = 1000
+        prm1['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
+        def mech():
+            solver_HE.solve()
+            return u
     
     # First iteration solving for displacement, and using the von mises stress field for D
-    disp = he()
+    disp = mech()
     vm   = vonmises(disp)
     D    = project(D0*exp(-gammaD*vm),V)
     
@@ -131,7 +148,7 @@ def forward(initial_p, name):
         
         # Update previous solution
         p_n.assign(p)
-        disp = he()
+        disp = mech()
         vm   = vonmises(disp)
         D    = project(D0*exp(-gammaD*vm),V)
         
@@ -157,15 +174,19 @@ if __name__ == "__main__":
         print("wrong number of inputs, should be ")
         print("Syntax: python <this file's name> D0 gammaD beta k0 case ")
         quit()
-    D0       = float(sys.argv[1])
-    gammaD   = float(sys.argv[2])
-    beta     = float(sys.argv[3])
-    k0       = float(sys.argv[4])
-    case     = sys.argv[5]
+    lin_hyp  = int(sys.argv[1])
+    D0       = float(sys.argv[2])
+    gammaD   = float(sys.argv[3])
+    beta     = float(sys.argv[4])
+    k0       = float(sys.argv[5])
+    case     = sys.argv[6]
     
     t1         = time()
     input_dir  = "../rat-data/rat05/"
-    output_dir = './output/rat05hesense'
+    if lin_hyp == 0:
+        output_dir = './output/rat05lesense'
+    else
+        output_dir = './output/rat05hesense'
 
     # Prepare a mesh
     mesh = Mesh(input_dir+"gmsh.xml")
@@ -183,8 +204,6 @@ if __name__ == "__main__":
     # Load initial tumor condition data
     initial_p = interp(input_dir+"ic.mat","ic")
     initial_p.rename('initial','tumor at day 0')
-    target_p  = interp(input_dir+"tumor_t2.mat","tumor")  
-    target_p.rename('target','tumor at day 2')
 
     # Parameters to be optimized
     D0     = Constant(D0)     # mobility or diffusion coefficient

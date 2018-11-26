@@ -1,9 +1,11 @@
 #!/bin/bash
 
-logfile=./output/rat05lesense/log.txt
+lehe=1
+logfile=./output/sensitivity/he_log.txt
 > $logfile
 
 case=1
+# : <<'EOF'
 for D in .01 .1 1 10 
 do
     for g in .01 .1 1 10
@@ -14,9 +16,25 @@ do
             do
                 printf "Case number %i: \n" $case >> $logfile
 		printf "D0 = %f, gammaD = %f, beta = %f, k0 = %f \n" $D $g $b $k >> $logfile
-                /bin/time -f '%e' -a -o $logfile python2.7 forward_sensitivity.py 0 $D $g $b $k $case &>> $logfile
+                /bin/time -f '%e' -a -o $logfile python2.7 forward_sensitivity.py $lehe $D $g $b $k $case &>> $logfile
                 case=$(($case + 1))
             done
         done
     done
 done
+# EOF
+
+# Debugging reduced number of cases
+: <<'END'
+D=.01
+g=.01
+for b in .01 .1
+do
+    for k in .01 .1 
+    do
+	printf "Case number %i: \n" $case >> $logfile
+	printf "D0 = %f, gammaD = %f, beta = %f, k0 = %f \n" $D $g $b $k >> $logfile
+	/bin/time -f '%e' -a -o $logfile python2.7 forward_sensitivity.py $lehe $D $g $b $k $case &>> $logfile
+    done
+done
+END

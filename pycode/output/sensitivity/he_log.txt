@@ -1,530 +1,18 @@
-Case number 0: 
-15.77
 Case number 1: 
-8.66
-Case number 2: 
-9.21
-Case number 3: 
-6.09
-Case number 4: 
-10.21
-Case number 5: 
-9.45
-Case number 6: 
-9.67
-Case number 7: 
-6.25
-Case number 8: 
-9.39
-Case number 9: 
-9.68
-Case number 10: 
-9.75
-Case number 11: 
-6.10
-Case number 12: 
-9.40
-Case number 13: 
-9.83
-Case number 14: 
-11.29
-Case number 15: 
-6.00
-Case number 16: 
-7.97
-Case number 17: 
-8.13
-Case number 18: 
-8.96
-Case number 19: 
-6.02
-Case number 20: 
-9.14
-Case number 21: 
-9.65
-Case number 22: 
-10.06
-Case number 23: 
-5.87
-Case number 24: 
-9.43
-Case number 25: 
-9.70
-Case number 26: 
-9.72
-Case number 27: 
-5.96
-Case number 28: 
-9.44
-Case number 29: 
-10.15
-Case number 30: 
-10.81
-Case number 31: 
-6.04
-Case number 32: 
-7.92
-Case number 33: 
-8.23
-Case number 34: 
-9.20
-Case number 35: 
-5.91
-Case number 36: 
-8.96
-Case number 37: 
-9.74
-Case number 38: 
-9.42
-Case number 39: 
-5.94
-Case number 40: 
-9.26
-Case number 41: 
-9.65
-Case number 42: 
-9.63
-Case number 43: 
-6.23
-Case number 44: 
-9.49
-Case number 45: 
-10.04
-Case number 46: 
-10.88
-Case number 47: 
-6.09
-Case number 48: 
-7.93
-Case number 49: 
-8.31
-Case number 50: 
-9.11
-Case number 51: 
-6.00
-Case number 52: 
-8.36
-Case number 53: 
-9.80
-Case number 54: 
-9.55
-Case number 55: 
-6.08
-Case number 56: 
-9.16
-Case number 57: 
-9.45
-Case number 58: 
-9.51
-Case number 59: 
-6.11
-Case number 60: 
-9.41
-Case number 61: 
-10.11
-Case number 62: 
-10.69
-Case number 63: 
-5.97
-Case number 64: 
-8.38
-Case number 65: 
-8.31
-Case number 66: 
-9.24
-Case number 67: 
-6.12
-Case number 68: 
-9.28
-Case number 69: 
-9.95
-Case number 70: 
-9.69
-Case number 71: 
-5.93
-Case number 72: 
-9.51
-Case number 73: 
-9.65
-Case number 74: 
-9.95
-Case number 75: 
-5.92
-Case number 76: 
-10.09
-Case number 77: 
-9.92
-Case number 78: 
-10.77
-Case number 79: 
-6.12
-Case number 80: 
-8.21
-Case number 81: 
-8.61
-Case number 82: 
-9.05
-Case number 83: 
-6.33
-Case number 84: 
-9.19
-Case number 85: 
-9.39
-Case number 86: 
-9.66
-Case number 87: 
-5.87
-Case number 88: 
-9.65
-Case number 89: 
-9.75
-Case number 90: 
-9.84
-Case number 91: 
-6.40
-Case number 92: 
-10.01
-Case number 93: 
-10.22
-Case number 94: 
-10.91
-Case number 95: 
-6.03
-Case number 96: 
-8.20
-Case number 97: 
-8.04
-Case number 98: 
-9.01
-Case number 99: 
-6.25
-Case number 100: 
-9.28
-Case number 101: 
-9.49
-Case number 102: 
-9.49
-Case number 103: 
-6.13
-Case number 104: 
-9.75
-Case number 105: 
-9.73
-Case number 106: 
-10.25
-Case number 107: 
-5.91
-Case number 108: 
-9.86
-Case number 109: 
-9.90
-Case number 110: 
-10.70
-Case number 111: 
-6.24
-Case number 112: 
-8.46
-Case number 113: 
-8.62
-Case number 114: 
-9.25
-Case number 115: 
-5.96
-Case number 116: 
-9.14
-Case number 117: 
-9.34
-Case number 118: 
-9.51
-Case number 119: 
-6.01
-Case number 120: 
-9.34
-Case number 121: 
-9.98
-Case number 122: 
-9.80
-Case number 123: 
-6.04
-Case number 124: 
-9.64
-Case number 125: 
-9.75
-Case number 126: 
-10.98
-Case number 127: 
-5.52
-Case number 128: 
-9.09
-Case number 129: 
-8.39
-Case number 130: 
-9.27
-Case number 131: 
-5.95
-Case number 132: 
-9.29
-Case number 133: 
-9.42
-Case number 134: 
-9.58
-Case number 135: 
-6.25
-Case number 136: 
-9.55
-Case number 137: 
-9.62
-Case number 138: 
-9.82
-Case number 139: 
-5.80
-Case number 140: 
-10.32
-Case number 141: 
-10.68
-Case number 142: 
-11.36
-Case number 143: 
-5.87
-Case number 144: 
-8.48
-Case number 145: 
-8.71
-Case number 146: 
-9.44
-Case number 147: 
-5.85
-Case number 148: 
-9.50
-Case number 149: 
-9.40
-Case number 150: 
-10.10
-Case number 151: 
-5.96
-Case number 152: 
-9.66
-Case number 153: 
-9.75
-Case number 154: 
-9.95
-Case number 155: 
-6.01
-Case number 156: 
-10.00
-Case number 157: 
-10.71
-Case number 158: 
-10.66
-Case number 159: 
-6.00
-Case number 160: 
-8.55
-Case number 161: 
-8.73
-Case number 162: 
-9.45
-Case number 163: 
-5.85
-Case number 164: 
-9.34
-Case number 165: 
-9.96
-Case number 166: 
-9.60
-Case number 167: 
-5.82
-Case number 168: 
-9.62
-Case number 169: 
-9.72
-Case number 170: 
-9.86
-Case number 171: 
-6.03
-Case number 172: 
-10.74
-Case number 173: 
-10.48
-Case number 174: 
-10.93
-Case number 175: 
-6.03
-Case number 176: 
-8.43
-Case number 177: 
-8.66
-Case number 178: 
-9.27
-Case number 179: 
-6.26
-Case number 180: 
-9.49
-Case number 181: 
-9.54
-Case number 182: 
-9.51
-Case number 183: 
-6.25
-Case number 184: 
-9.73
-Case number 185: 
-9.95
-Case number 186: 
-10.31
-Case number 187: 
-5.97
-Case number 188: 
-10.90
-Case number 189: 
-10.49
-Case number 190: 
-7.45
-Case number 191: 
-5.54
-Case number 192: 
-8.98
-Case number 193: 
-9.02
-Case number 194: 
-9.56
-Case number 195: 
-5.87
-Case number 196: 
-9.37
-Case number 197: 
-9.33
-Case number 198: 
-9.51
-Case number 199: 
-6.25
-Case number 200: 
-9.76
-Case number 201: 
-9.81
-Case number 202: 
-10.27
-Case number 203: 
-5.93
-Case number 204: 
-10.22
-Case number 205: 
-10.45
-Case number 206: 
-11.25
-Case number 207: 
-5.88
-Case number 208: 
-8.62
-Case number 209: 
-9.14
-Case number 210: 
-9.30
-Case number 211: 
-5.93
-Case number 212: 
-9.54
-Case number 213: 
-9.57
-Case number 214: 
-9.84
-Case number 215: 
-5.95
-Case number 216: 
-9.73
-Case number 217: 
-10.02
-Case number 218: 
-9.91
-Case number 219: 
-6.06
-Case number 220: 
-10.23
-Case number 221: 
-10.73
-Case number 222: 
-11.05
-Case number 223: 
-6.05
-Case number 224: 
-9.05
-Case number 225: 
-8.90
-Case number 226: 
-9.23
-Case number 227: 
-5.79
-Case number 228: 
-9.53
-Case number 229: 
-9.43
-Case number 230: 
-9.72
-Case number 231: 
-6.02
-Case number 232: 
-9.83
-Case number 233: 
-9.99
-Case number 234: 
-9.93
-Case number 235: 
-6.09
-Case number 236: 
-10.03
-Case number 237: 
-10.26
-Case number 238: 
-11.20
-Case number 239: 
-5.95
-Case number 240: 
-8.77
-Case number 241: 
-8.71
-Case number 242: 
-9.60
-Case number 243: 
-5.91
-Case number 244: 
-9.47
-Case number 245: 
-9.65
-Case number 246: 
-9.94
-Case number 247: 
-5.99
-Case number 248: 
-9.63
-Case number 249: 
-9.94
-Case number 250: 
-9.84
-Case number 251: 
-6.18
-Case number 252: 
-5.83
-Case number 253: 
-6.03
-Case number 254: 
-6.16
-Case number 255: 
-6.10
-Case number 0: 
 D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k0 = 0.010000 
-10.26
-Case number 1: 
-D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k0 = 0.100000 
-8.22
+7.52
 Case number 2: 
-D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k0 = 1.000000 
-9.07
+D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k0 = 0.100000 
+5.58
 Case number 3: 
+D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k0 = 1.000000 
+6.72
+Case number 4: 
 D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -547,22 +35,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.85
-Case number 4: 
-D0 = 0.010000, gammaD = 0.010000, beta = 0.100000, k0 = 0.010000 
-9.04
+4.42
 Case number 5: 
-D0 = 0.010000, gammaD = 0.010000, beta = 0.100000, k0 = 0.100000 
-9.41
+D0 = 0.010000, gammaD = 0.010000, beta = 0.100000, k0 = 0.010000 
+6.67
 Case number 6: 
-D0 = 0.010000, gammaD = 0.010000, beta = 0.100000, k0 = 1.000000 
-9.72
+D0 = 0.010000, gammaD = 0.010000, beta = 0.100000, k0 = 0.100000 
+6.89
 Case number 7: 
+D0 = 0.010000, gammaD = 0.010000, beta = 0.100000, k0 = 1.000000 
+7.01
+Case number 8: 
 D0 = 0.010000, gammaD = 0.010000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -585,22 +73,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.27
-Case number 8: 
-D0 = 0.010000, gammaD = 0.010000, beta = 1.000000, k0 = 0.010000 
-9.41
+4.54
 Case number 9: 
-D0 = 0.010000, gammaD = 0.010000, beta = 1.000000, k0 = 0.100000 
-9.70
+D0 = 0.010000, gammaD = 0.010000, beta = 1.000000, k0 = 0.010000 
+6.71
 Case number 10: 
-D0 = 0.010000, gammaD = 0.010000, beta = 1.000000, k0 = 1.000000 
-9.89
+D0 = 0.010000, gammaD = 0.010000, beta = 1.000000, k0 = 0.100000 
+7.02
 Case number 11: 
+D0 = 0.010000, gammaD = 0.010000, beta = 1.000000, k0 = 1.000000 
+7.60
+Case number 12: 
 D0 = 0.010000, gammaD = 0.010000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -623,22 +111,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.88
-Case number 12: 
-D0 = 0.010000, gammaD = 0.010000, beta = 10.000000, k0 = 0.010000 
-9.53
+4.70
 Case number 13: 
-D0 = 0.010000, gammaD = 0.010000, beta = 10.000000, k0 = 0.100000 
-9.73
+D0 = 0.010000, gammaD = 0.010000, beta = 10.000000, k0 = 0.010000 
+6.84
 Case number 14: 
-D0 = 0.010000, gammaD = 0.010000, beta = 10.000000, k0 = 1.000000 
-11.03
+D0 = 0.010000, gammaD = 0.010000, beta = 10.000000, k0 = 0.100000 
+7.03
 Case number 15: 
+D0 = 0.010000, gammaD = 0.010000, beta = 10.000000, k0 = 1.000000 
+8.17
+Case number 16: 
 D0 = 0.010000, gammaD = 0.010000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -661,22 +149,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.17
-Case number 16: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.010000, k0 = 0.010000 
-8.11
+4.12
 Case number 17: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.010000, k0 = 0.100000 
-8.23
+D0 = 0.010000, gammaD = 0.100000, beta = 0.010000, k0 = 0.010000 
+5.34
 Case number 18: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.010000, k0 = 1.000000 
-9.25
+D0 = 0.010000, gammaD = 0.100000, beta = 0.010000, k0 = 0.100000 
+5.64
 Case number 19: 
+D0 = 0.010000, gammaD = 0.100000, beta = 0.010000, k0 = 1.000000 
+6.64
+Case number 20: 
 D0 = 0.010000, gammaD = 0.100000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -699,22 +187,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.92
-Case number 20: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.100000, k0 = 0.010000 
-9.21
+4.02
 Case number 21: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.100000, k0 = 0.100000 
-9.71
+D0 = 0.010000, gammaD = 0.100000, beta = 0.100000, k0 = 0.010000 
+7.00
 Case number 22: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.100000, k0 = 1.000000 
-9.96
+D0 = 0.010000, gammaD = 0.100000, beta = 0.100000, k0 = 0.100000 
+6.90
 Case number 23: 
+D0 = 0.010000, gammaD = 0.100000, beta = 0.100000, k0 = 1.000000 
+7.06
+Case number 24: 
 D0 = 0.010000, gammaD = 0.100000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -737,22 +225,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.95
-Case number 24: 
-D0 = 0.010000, gammaD = 0.100000, beta = 1.000000, k0 = 0.010000 
-9.22
+3.98
 Case number 25: 
-D0 = 0.010000, gammaD = 0.100000, beta = 1.000000, k0 = 0.100000 
-9.91
+D0 = 0.010000, gammaD = 0.100000, beta = 1.000000, k0 = 0.010000 
+6.62
 Case number 26: 
-D0 = 0.010000, gammaD = 0.100000, beta = 1.000000, k0 = 1.000000 
-9.94
+D0 = 0.010000, gammaD = 0.100000, beta = 1.000000, k0 = 0.100000 
+7.13
 Case number 27: 
+D0 = 0.010000, gammaD = 0.100000, beta = 1.000000, k0 = 1.000000 
+7.26
+Case number 28: 
 D0 = 0.010000, gammaD = 0.100000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -775,22 +263,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.09
-Case number 28: 
-D0 = 0.010000, gammaD = 0.100000, beta = 10.000000, k0 = 0.010000 
-9.70
+4.18
 Case number 29: 
-D0 = 0.010000, gammaD = 0.100000, beta = 10.000000, k0 = 0.100000 
-10.09
+D0 = 0.010000, gammaD = 0.100000, beta = 10.000000, k0 = 0.010000 
+6.89
 Case number 30: 
-D0 = 0.010000, gammaD = 0.100000, beta = 10.000000, k0 = 1.000000 
-11.21
+D0 = 0.010000, gammaD = 0.100000, beta = 10.000000, k0 = 0.100000 
+7.09
 Case number 31: 
+D0 = 0.010000, gammaD = 0.100000, beta = 10.000000, k0 = 1.000000 
+8.54
+Case number 32: 
 D0 = 0.010000, gammaD = 0.100000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -813,22 +301,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.33
-Case number 32: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.010000, k0 = 0.010000 
-8.15
+4.07
 Case number 33: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.010000, k0 = 0.100000 
-8.40
+D0 = 0.010000, gammaD = 1.000000, beta = 0.010000, k0 = 0.010000 
+5.46
 Case number 34: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.010000, k0 = 1.000000 
-9.41
+D0 = 0.010000, gammaD = 1.000000, beta = 0.010000, k0 = 0.100000 
+5.69
 Case number 35: 
+D0 = 0.010000, gammaD = 1.000000, beta = 0.010000, k0 = 1.000000 
+6.57
+Case number 36: 
 D0 = 0.010000, gammaD = 1.000000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -851,22 +339,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.90
-Case number 36: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.100000, k0 = 0.010000 
-9.20
+4.66
 Case number 37: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.100000, k0 = 0.100000 
-9.67
+D0 = 0.010000, gammaD = 1.000000, beta = 0.100000, k0 = 0.010000 
+6.46
 Case number 38: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.100000, k0 = 1.000000 
-9.71
+D0 = 0.010000, gammaD = 1.000000, beta = 0.100000, k0 = 0.100000 
+6.73
 Case number 39: 
+D0 = 0.010000, gammaD = 1.000000, beta = 0.100000, k0 = 1.000000 
+7.07
+Case number 40: 
 D0 = 0.010000, gammaD = 1.000000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -889,22 +377,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.17
-Case number 40: 
-D0 = 0.010000, gammaD = 1.000000, beta = 1.000000, k0 = 0.010000 
-9.20
+4.75
 Case number 41: 
-D0 = 0.010000, gammaD = 1.000000, beta = 1.000000, k0 = 0.100000 
-9.89
+D0 = 0.010000, gammaD = 1.000000, beta = 1.000000, k0 = 0.010000 
+7.18
 Case number 42: 
-D0 = 0.010000, gammaD = 1.000000, beta = 1.000000, k0 = 1.000000 
-9.84
+D0 = 0.010000, gammaD = 1.000000, beta = 1.000000, k0 = 0.100000 
+7.13
 Case number 43: 
+D0 = 0.010000, gammaD = 1.000000, beta = 1.000000, k0 = 1.000000 
+7.07
+Case number 44: 
 D0 = 0.010000, gammaD = 1.000000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -927,22 +415,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.15
-Case number 44: 
-D0 = 0.010000, gammaD = 1.000000, beta = 10.000000, k0 = 0.010000 
-9.81
+4.70
 Case number 45: 
-D0 = 0.010000, gammaD = 1.000000, beta = 10.000000, k0 = 0.100000 
-9.67
+D0 = 0.010000, gammaD = 1.000000, beta = 10.000000, k0 = 0.010000 
+6.82
 Case number 46: 
-D0 = 0.010000, gammaD = 1.000000, beta = 10.000000, k0 = 1.000000 
-10.99
+D0 = 0.010000, gammaD = 1.000000, beta = 10.000000, k0 = 0.100000 
+7.07
 Case number 47: 
+D0 = 0.010000, gammaD = 1.000000, beta = 10.000000, k0 = 1.000000 
+8.19
+Case number 48: 
 D0 = 0.010000, gammaD = 1.000000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -965,22 +453,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.01
-Case number 48: 
-D0 = 0.010000, gammaD = 10.000000, beta = 0.010000, k0 = 0.010000 
-8.34
+3.98
 Case number 49: 
-D0 = 0.010000, gammaD = 10.000000, beta = 0.010000, k0 = 0.100000 
-8.47
+D0 = 0.010000, gammaD = 10.000000, beta = 0.010000, k0 = 0.010000 
+5.33
 Case number 50: 
-D0 = 0.010000, gammaD = 10.000000, beta = 0.010000, k0 = 1.000000 
-9.48
+D0 = 0.010000, gammaD = 10.000000, beta = 0.010000, k0 = 0.100000 
+5.68
 Case number 51: 
+D0 = 0.010000, gammaD = 10.000000, beta = 0.010000, k0 = 1.000000 
+7.01
+Case number 52: 
 D0 = 0.010000, gammaD = 10.000000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1003,22 +491,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.12
-Case number 52: 
-D0 = 0.010000, gammaD = 10.000000, beta = 0.100000, k0 = 0.010000 
-8.44
+4.09
 Case number 53: 
-D0 = 0.010000, gammaD = 10.000000, beta = 0.100000, k0 = 0.100000 
-9.53
+D0 = 0.010000, gammaD = 10.000000, beta = 0.100000, k0 = 0.010000 
+5.88
 Case number 54: 
-D0 = 0.010000, gammaD = 10.000000, beta = 0.100000, k0 = 1.000000 
-9.86
+D0 = 0.010000, gammaD = 10.000000, beta = 0.100000, k0 = 0.100000 
+6.76
 Case number 55: 
+D0 = 0.010000, gammaD = 10.000000, beta = 0.100000, k0 = 1.000000 
+7.04
+Case number 56: 
 D0 = 0.010000, gammaD = 10.000000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1041,22 +529,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.03
-Case number 56: 
-D0 = 0.010000, gammaD = 10.000000, beta = 1.000000, k0 = 0.010000 
-9.25
+4.83
 Case number 57: 
-D0 = 0.010000, gammaD = 10.000000, beta = 1.000000, k0 = 0.100000 
-9.91
+D0 = 0.010000, gammaD = 10.000000, beta = 1.000000, k0 = 0.010000 
+6.72
 Case number 58: 
-D0 = 0.010000, gammaD = 10.000000, beta = 1.000000, k0 = 1.000000 
-10.35
+D0 = 0.010000, gammaD = 10.000000, beta = 1.000000, k0 = 0.100000 
+6.85
 Case number 59: 
+D0 = 0.010000, gammaD = 10.000000, beta = 1.000000, k0 = 1.000000 
+7.18
+Case number 60: 
 D0 = 0.010000, gammaD = 10.000000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1079,22 +567,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.40
-Case number 60: 
-D0 = 0.010000, gammaD = 10.000000, beta = 10.000000, k0 = 0.010000 
-9.56
+4.83
 Case number 61: 
-D0 = 0.010000, gammaD = 10.000000, beta = 10.000000, k0 = 0.100000 
-9.63
+D0 = 0.010000, gammaD = 10.000000, beta = 10.000000, k0 = 0.010000 
+7.45
 Case number 62: 
-D0 = 0.010000, gammaD = 10.000000, beta = 10.000000, k0 = 1.000000 
-10.91
+D0 = 0.010000, gammaD = 10.000000, beta = 10.000000, k0 = 0.100000 
+7.11
 Case number 63: 
+D0 = 0.010000, gammaD = 10.000000, beta = 10.000000, k0 = 1.000000 
+8.36
+Case number 64: 
 D0 = 0.010000, gammaD = 10.000000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1117,22 +605,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.05
-Case number 64: 
-D0 = 0.100000, gammaD = 0.010000, beta = 0.010000, k0 = 0.010000 
-8.22
+4.12
 Case number 65: 
-D0 = 0.100000, gammaD = 0.010000, beta = 0.010000, k0 = 0.100000 
-8.52
+D0 = 0.100000, gammaD = 0.010000, beta = 0.010000, k0 = 0.010000 
+6.00
 Case number 66: 
-D0 = 0.100000, gammaD = 0.010000, beta = 0.010000, k0 = 1.000000 
-9.44
+D0 = 0.100000, gammaD = 0.010000, beta = 0.010000, k0 = 0.100000 
+5.72
 Case number 67: 
+D0 = 0.100000, gammaD = 0.010000, beta = 0.010000, k0 = 1.000000 
+6.65
+Case number 68: 
 D0 = 0.100000, gammaD = 0.010000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1155,22 +643,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.15
-Case number 68: 
-D0 = 0.100000, gammaD = 0.010000, beta = 0.100000, k0 = 0.010000 
-9.47
+4.55
 Case number 69: 
-D0 = 0.100000, gammaD = 0.010000, beta = 0.100000, k0 = 0.100000 
-9.51
+D0 = 0.100000, gammaD = 0.010000, beta = 0.100000, k0 = 0.010000 
+6.59
 Case number 70: 
-D0 = 0.100000, gammaD = 0.010000, beta = 0.100000, k0 = 1.000000 
-9.65
+D0 = 0.100000, gammaD = 0.010000, beta = 0.100000, k0 = 0.100000 
+6.84
 Case number 71: 
+D0 = 0.100000, gammaD = 0.010000, beta = 0.100000, k0 = 1.000000 
+7.45
+Case number 72: 
 D0 = 0.100000, gammaD = 0.010000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1193,22 +681,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.95
-Case number 72: 
-D0 = 0.100000, gammaD = 0.010000, beta = 1.000000, k0 = 0.010000 
-9.74
+4.11
 Case number 73: 
-D0 = 0.100000, gammaD = 0.010000, beta = 1.000000, k0 = 0.100000 
-9.81
+D0 = 0.100000, gammaD = 0.010000, beta = 1.000000, k0 = 0.010000 
+7.41
 Case number 74: 
-D0 = 0.100000, gammaD = 0.010000, beta = 1.000000, k0 = 1.000000 
-10.29
+D0 = 0.100000, gammaD = 0.010000, beta = 1.000000, k0 = 0.100000 
+7.07
 Case number 75: 
+D0 = 0.100000, gammaD = 0.010000, beta = 1.000000, k0 = 1.000000 
+7.36
+Case number 76: 
 D0 = 0.100000, gammaD = 0.010000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1231,22 +719,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.34
-Case number 76: 
-D0 = 0.100000, gammaD = 0.010000, beta = 10.000000, k0 = 0.010000 
-9.99
+4.29
 Case number 77: 
-D0 = 0.100000, gammaD = 0.010000, beta = 10.000000, k0 = 0.100000 
-10.18
+D0 = 0.100000, gammaD = 0.010000, beta = 10.000000, k0 = 0.010000 
+7.42
 Case number 78: 
-D0 = 0.100000, gammaD = 0.010000, beta = 10.000000, k0 = 1.000000 
-10.87
+D0 = 0.100000, gammaD = 0.010000, beta = 10.000000, k0 = 0.100000 
+7.63
 Case number 79: 
+D0 = 0.100000, gammaD = 0.010000, beta = 10.000000, k0 = 1.000000 
+8.27
+Case number 80: 
 D0 = 0.100000, gammaD = 0.010000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1269,22 +757,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.04
-Case number 80: 
-D0 = 0.100000, gammaD = 0.100000, beta = 0.010000, k0 = 0.010000 
-8.38
+4.46
 Case number 81: 
-D0 = 0.100000, gammaD = 0.100000, beta = 0.010000, k0 = 0.100000 
-8.62
+D0 = 0.100000, gammaD = 0.100000, beta = 0.010000, k0 = 0.010000 
+5.77
 Case number 82: 
-D0 = 0.100000, gammaD = 0.100000, beta = 0.010000, k0 = 1.000000 
-9.09
+D0 = 0.100000, gammaD = 0.100000, beta = 0.010000, k0 = 0.100000 
+6.02
 Case number 83: 
+D0 = 0.100000, gammaD = 0.100000, beta = 0.010000, k0 = 1.000000 
+6.55
+Case number 84: 
 D0 = 0.100000, gammaD = 0.100000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1307,22 +795,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.92
-Case number 84: 
-D0 = 0.100000, gammaD = 0.100000, beta = 0.100000, k0 = 0.010000 
-9.28
+4.85
 Case number 85: 
-D0 = 0.100000, gammaD = 0.100000, beta = 0.100000, k0 = 0.100000 
-9.36
+D0 = 0.100000, gammaD = 0.100000, beta = 0.100000, k0 = 0.010000 
+6.66
 Case number 86: 
-D0 = 0.100000, gammaD = 0.100000, beta = 0.100000, k0 = 1.000000 
-9.68
+D0 = 0.100000, gammaD = 0.100000, beta = 0.100000, k0 = 0.100000 
+6.89
 Case number 87: 
+D0 = 0.100000, gammaD = 0.100000, beta = 0.100000, k0 = 1.000000 
+7.02
+Case number 88: 
 D0 = 0.100000, gammaD = 0.100000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1345,22 +833,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.15
-Case number 88: 
-D0 = 0.100000, gammaD = 0.100000, beta = 1.000000, k0 = 0.010000 
-9.70
+4.12
 Case number 89: 
-D0 = 0.100000, gammaD = 0.100000, beta = 1.000000, k0 = 0.100000 
-9.80
+D0 = 0.100000, gammaD = 0.100000, beta = 1.000000, k0 = 0.010000 
+7.34
 Case number 90: 
-D0 = 0.100000, gammaD = 0.100000, beta = 1.000000, k0 = 1.000000 
-9.98
+D0 = 0.100000, gammaD = 0.100000, beta = 1.000000, k0 = 0.100000 
+7.17
 Case number 91: 
+D0 = 0.100000, gammaD = 0.100000, beta = 1.000000, k0 = 1.000000 
+7.70
+Case number 92: 
 D0 = 0.100000, gammaD = 0.100000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1383,22 +871,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.96
-Case number 92: 
-D0 = 0.100000, gammaD = 0.100000, beta = 10.000000, k0 = 0.010000 
-10.02
+4.69
 Case number 93: 
-D0 = 0.100000, gammaD = 0.100000, beta = 10.000000, k0 = 0.100000 
-10.05
+D0 = 0.100000, gammaD = 0.100000, beta = 10.000000, k0 = 0.010000 
+7.57
 Case number 94: 
-D0 = 0.100000, gammaD = 0.100000, beta = 10.000000, k0 = 1.000000 
-11.03
+D0 = 0.100000, gammaD = 0.100000, beta = 10.000000, k0 = 0.100000 
+7.80
 Case number 95: 
+D0 = 0.100000, gammaD = 0.100000, beta = 10.000000, k0 = 1.000000 
+8.21
+Case number 96: 
 D0 = 0.100000, gammaD = 0.100000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1421,22 +909,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.31
-Case number 96: 
-D0 = 0.100000, gammaD = 1.000000, beta = 0.010000, k0 = 0.010000 
-8.62
+4.11
 Case number 97: 
-D0 = 0.100000, gammaD = 1.000000, beta = 0.010000, k0 = 0.100000 
-8.40
+D0 = 0.100000, gammaD = 1.000000, beta = 0.010000, k0 = 0.010000 
+5.73
 Case number 98: 
-D0 = 0.100000, gammaD = 1.000000, beta = 0.010000, k0 = 1.000000 
-9.23
+D0 = 0.100000, gammaD = 1.000000, beta = 0.010000, k0 = 0.100000 
+5.91
 Case number 99: 
+D0 = 0.100000, gammaD = 1.000000, beta = 0.010000, k0 = 1.000000 
+6.60
+Case number 100: 
 D0 = 0.100000, gammaD = 1.000000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1459,22 +947,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.13
-Case number 100: 
-D0 = 0.100000, gammaD = 1.000000, beta = 0.100000, k0 = 0.010000 
-9.37
+4.05
 Case number 101: 
-D0 = 0.100000, gammaD = 1.000000, beta = 0.100000, k0 = 0.100000 
-9.52
+D0 = 0.100000, gammaD = 1.000000, beta = 0.100000, k0 = 0.010000 
+7.22
 Case number 102: 
-D0 = 0.100000, gammaD = 1.000000, beta = 0.100000, k0 = 1.000000 
-9.51
+D0 = 0.100000, gammaD = 1.000000, beta = 0.100000, k0 = 0.100000 
+6.96
 Case number 103: 
+D0 = 0.100000, gammaD = 1.000000, beta = 0.100000, k0 = 1.000000 
+7.09
+Case number 104: 
 D0 = 0.100000, gammaD = 1.000000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1497,22 +985,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.36
-Case number 104: 
-D0 = 0.100000, gammaD = 1.000000, beta = 1.000000, k0 = 0.010000 
-9.54
+4.20
 Case number 105: 
-D0 = 0.100000, gammaD = 1.000000, beta = 1.000000, k0 = 0.100000 
-10.06
+D0 = 0.100000, gammaD = 1.000000, beta = 1.000000, k0 = 0.010000 
+6.98
 Case number 106: 
-D0 = 0.100000, gammaD = 1.000000, beta = 1.000000, k0 = 1.000000 
-9.87
+D0 = 0.100000, gammaD = 1.000000, beta = 1.000000, k0 = 0.100000 
+7.07
 Case number 107: 
+D0 = 0.100000, gammaD = 1.000000, beta = 1.000000, k0 = 1.000000 
+7.18
+Case number 108: 
 D0 = 0.100000, gammaD = 1.000000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1535,22 +1023,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.15
-Case number 108: 
-D0 = 0.100000, gammaD = 1.000000, beta = 10.000000, k0 = 0.010000 
-10.05
+4.74
 Case number 109: 
-D0 = 0.100000, gammaD = 1.000000, beta = 10.000000, k0 = 0.100000 
-10.22
+D0 = 0.100000, gammaD = 1.000000, beta = 10.000000, k0 = 0.010000 
+7.36
 Case number 110: 
-D0 = 0.100000, gammaD = 1.000000, beta = 10.000000, k0 = 1.000000 
-11.07
+D0 = 0.100000, gammaD = 1.000000, beta = 10.000000, k0 = 0.100000 
+7.68
 Case number 111: 
+D0 = 0.100000, gammaD = 1.000000, beta = 10.000000, k0 = 1.000000 
+8.72
+Case number 112: 
 D0 = 0.100000, gammaD = 1.000000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1573,22 +1061,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.20
-Case number 112: 
-D0 = 0.100000, gammaD = 10.000000, beta = 0.010000, k0 = 0.010000 
-8.26
+4.33
 Case number 113: 
-D0 = 0.100000, gammaD = 10.000000, beta = 0.010000, k0 = 0.100000 
-8.34
+D0 = 0.100000, gammaD = 10.000000, beta = 0.010000, k0 = 0.010000 
+5.67
 Case number 114: 
-D0 = 0.100000, gammaD = 10.000000, beta = 0.010000, k0 = 1.000000 
-9.39
+D0 = 0.100000, gammaD = 10.000000, beta = 0.010000, k0 = 0.100000 
+5.75
 Case number 115: 
+D0 = 0.100000, gammaD = 10.000000, beta = 0.010000, k0 = 1.000000 
+6.53
+Case number 116: 
 D0 = 0.100000, gammaD = 10.000000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1611,22 +1099,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.17
-Case number 116: 
-D0 = 0.100000, gammaD = 10.000000, beta = 0.100000, k0 = 0.010000 
-9.39
+4.69
 Case number 117: 
-D0 = 0.100000, gammaD = 10.000000, beta = 0.100000, k0 = 0.100000 
-9.67
+D0 = 0.100000, gammaD = 10.000000, beta = 0.100000, k0 = 0.010000 
+6.73
 Case number 118: 
-D0 = 0.100000, gammaD = 10.000000, beta = 0.100000, k0 = 1.000000 
-10.07
+D0 = 0.100000, gammaD = 10.000000, beta = 0.100000, k0 = 0.100000 
+6.98
 Case number 119: 
+D0 = 0.100000, gammaD = 10.000000, beta = 0.100000, k0 = 1.000000 
+7.02
+Case number 120: 
 D0 = 0.100000, gammaD = 10.000000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1649,22 +1137,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.09
-Case number 120: 
-D0 = 0.100000, gammaD = 10.000000, beta = 1.000000, k0 = 0.010000 
-9.50
+4.76
 Case number 121: 
-D0 = 0.100000, gammaD = 10.000000, beta = 1.000000, k0 = 0.100000 
-9.67
+D0 = 0.100000, gammaD = 10.000000, beta = 1.000000, k0 = 0.010000 
+7.34
 Case number 122: 
-D0 = 0.100000, gammaD = 10.000000, beta = 1.000000, k0 = 1.000000 
-9.75
+D0 = 0.100000, gammaD = 10.000000, beta = 1.000000, k0 = 0.100000 
+7.09
 Case number 123: 
+D0 = 0.100000, gammaD = 10.000000, beta = 1.000000, k0 = 1.000000 
+7.32
+Case number 124: 
 D0 = 0.100000, gammaD = 10.000000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1687,21 +1175,21 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.14
-Case number 124: 
-D0 = 0.100000, gammaD = 10.000000, beta = 10.000000, k0 = 0.010000 
-9.64
+4.09
 Case number 125: 
-D0 = 0.100000, gammaD = 10.000000, beta = 10.000000, k0 = 0.100000 
-10.09
+D0 = 0.100000, gammaD = 10.000000, beta = 10.000000, k0 = 0.010000 
+7.02
 Case number 126: 
+D0 = 0.100000, gammaD = 10.000000, beta = 10.000000, k0 = 0.100000 
+7.10
+Case number 127: 
 D0 = 0.100000, gammaD = 10.000000, beta = 10.000000, k0 = 1.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 134, in forward
-    disp = he()
-  File "forward_sensitivity.py", line 97, in he
+  File "forward_sensitivity.py", line 160, in forward
+    disp = mech()
+  File "forward_sensitivity.py", line 110, in mech
     solver_HE.solve()
 RuntimeError: 
 
@@ -1724,13 +1212,13 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-10.92
-Case number 127: 
+8.46
+Case number 128: 
 D0 = 0.100000, gammaD = 10.000000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1753,22 +1241,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.56
-Case number 128: 
-D0 = 1.000000, gammaD = 0.010000, beta = 0.010000, k0 = 0.010000 
-8.63
+3.29
 Case number 129: 
-D0 = 1.000000, gammaD = 0.010000, beta = 0.010000, k0 = 0.100000 
-8.59
+D0 = 1.000000, gammaD = 0.010000, beta = 0.010000, k0 = 0.010000 
+6.08
 Case number 130: 
-D0 = 1.000000, gammaD = 0.010000, beta = 0.010000, k0 = 1.000000 
-9.40
+D0 = 1.000000, gammaD = 0.010000, beta = 0.010000, k0 = 0.100000 
+6.15
 Case number 131: 
+D0 = 1.000000, gammaD = 0.010000, beta = 0.010000, k0 = 1.000000 
+7.03
+Case number 132: 
 D0 = 1.000000, gammaD = 0.010000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1791,22 +1279,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.94
-Case number 132: 
-D0 = 1.000000, gammaD = 0.010000, beta = 0.100000, k0 = 0.010000 
-9.45
+4.11
 Case number 133: 
-D0 = 1.000000, gammaD = 0.010000, beta = 0.100000, k0 = 0.100000 
-9.93
+D0 = 1.000000, gammaD = 0.010000, beta = 0.100000, k0 = 0.010000 
+6.79
 Case number 134: 
-D0 = 1.000000, gammaD = 0.010000, beta = 0.100000, k0 = 1.000000 
-9.71
+D0 = 1.000000, gammaD = 0.010000, beta = 0.100000, k0 = 0.100000 
+6.89
 Case number 135: 
+D0 = 1.000000, gammaD = 0.010000, beta = 0.100000, k0 = 1.000000 
+6.94
+Case number 136: 
 D0 = 1.000000, gammaD = 0.010000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1829,22 +1317,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.91
-Case number 136: 
-D0 = 1.000000, gammaD = 0.010000, beta = 1.000000, k0 = 0.010000 
-9.82
+4.14
 Case number 137: 
-D0 = 1.000000, gammaD = 0.010000, beta = 1.000000, k0 = 0.100000 
-9.77
+D0 = 1.000000, gammaD = 0.010000, beta = 1.000000, k0 = 0.010000 
+7.16
 Case number 138: 
-D0 = 1.000000, gammaD = 0.010000, beta = 1.000000, k0 = 1.000000 
-10.12
+D0 = 1.000000, gammaD = 0.010000, beta = 1.000000, k0 = 0.100000 
+7.19
 Case number 139: 
+D0 = 1.000000, gammaD = 0.010000, beta = 1.000000, k0 = 1.000000 
+7.43
+Case number 140: 
 D0 = 1.000000, gammaD = 0.010000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1867,22 +1355,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.19
-Case number 140: 
-D0 = 1.000000, gammaD = 0.010000, beta = 10.000000, k0 = 0.010000 
-10.65
+4.34
 Case number 141: 
-D0 = 1.000000, gammaD = 0.010000, beta = 10.000000, k0 = 0.100000 
-10.51
+D0 = 1.000000, gammaD = 0.010000, beta = 10.000000, k0 = 0.010000 
+8.19
 Case number 142: 
-D0 = 1.000000, gammaD = 0.010000, beta = 10.000000, k0 = 1.000000 
-10.90
+D0 = 1.000000, gammaD = 0.010000, beta = 10.000000, k0 = 0.100000 
+8.01
 Case number 143: 
+D0 = 1.000000, gammaD = 0.010000, beta = 10.000000, k0 = 1.000000 
+8.31
+Case number 144: 
 D0 = 1.000000, gammaD = 0.010000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1905,22 +1393,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.00
-Case number 144: 
-D0 = 1.000000, gammaD = 0.100000, beta = 0.010000, k0 = 0.010000 
-8.76
+4.84
 Case number 145: 
-D0 = 1.000000, gammaD = 0.100000, beta = 0.010000, k0 = 0.100000 
-8.71
+D0 = 1.000000, gammaD = 0.100000, beta = 0.010000, k0 = 0.010000 
+5.86
 Case number 146: 
-D0 = 1.000000, gammaD = 0.100000, beta = 0.010000, k0 = 1.000000 
-9.23
+D0 = 1.000000, gammaD = 0.100000, beta = 0.010000, k0 = 0.100000 
+6.01
 Case number 147: 
+D0 = 1.000000, gammaD = 0.100000, beta = 0.010000, k0 = 1.000000 
+6.75
+Case number 148: 
 D0 = 1.000000, gammaD = 0.100000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1943,22 +1431,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.16
-Case number 148: 
-D0 = 1.000000, gammaD = 0.100000, beta = 0.100000, k0 = 0.010000 
-9.42
+5.18
 Case number 149: 
-D0 = 1.000000, gammaD = 0.100000, beta = 0.100000, k0 = 0.100000 
-9.63
+D0 = 1.000000, gammaD = 0.100000, beta = 0.100000, k0 = 0.010000 
+6.95
 Case number 150: 
-D0 = 1.000000, gammaD = 0.100000, beta = 0.100000, k0 = 1.000000 
-9.73
+D0 = 1.000000, gammaD = 0.100000, beta = 0.100000, k0 = 0.100000 
+7.46
 Case number 151: 
+D0 = 1.000000, gammaD = 0.100000, beta = 0.100000, k0 = 1.000000 
+7.02
+Case number 152: 
 D0 = 1.000000, gammaD = 0.100000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -1981,22 +1469,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.06
-Case number 152: 
-D0 = 1.000000, gammaD = 0.100000, beta = 1.000000, k0 = 0.010000 
-10.14
+3.92
 Case number 153: 
-D0 = 1.000000, gammaD = 0.100000, beta = 1.000000, k0 = 0.100000 
-9.82
+D0 = 1.000000, gammaD = 0.100000, beta = 1.000000, k0 = 0.010000 
+7.00
 Case number 154: 
-D0 = 1.000000, gammaD = 0.100000, beta = 1.000000, k0 = 1.000000 
-10.50
+D0 = 1.000000, gammaD = 0.100000, beta = 1.000000, k0 = 0.100000 
+7.27
 Case number 155: 
+D0 = 1.000000, gammaD = 0.100000, beta = 1.000000, k0 = 1.000000 
+7.26
+Case number 156: 
 D0 = 1.000000, gammaD = 0.100000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2019,22 +1507,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.06
-Case number 156: 
-D0 = 1.000000, gammaD = 0.100000, beta = 10.000000, k0 = 0.010000 
-10.52
+4.06
 Case number 157: 
-D0 = 1.000000, gammaD = 0.100000, beta = 10.000000, k0 = 0.100000 
-10.51
+D0 = 1.000000, gammaD = 0.100000, beta = 10.000000, k0 = 0.010000 
+7.75
 Case number 158: 
-D0 = 1.000000, gammaD = 0.100000, beta = 10.000000, k0 = 1.000000 
-10.88
+D0 = 1.000000, gammaD = 0.100000, beta = 10.000000, k0 = 0.100000 
+8.04
 Case number 159: 
+D0 = 1.000000, gammaD = 0.100000, beta = 10.000000, k0 = 1.000000 
+8.30
+Case number 160: 
 D0 = 1.000000, gammaD = 0.100000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2057,22 +1545,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.03
-Case number 160: 
-D0 = 1.000000, gammaD = 1.000000, beta = 0.010000, k0 = 0.010000 
-8.50
+4.60
 Case number 161: 
-D0 = 1.000000, gammaD = 1.000000, beta = 0.010000, k0 = 0.100000 
-9.10
+D0 = 1.000000, gammaD = 1.000000, beta = 0.010000, k0 = 0.010000 
+5.94
 Case number 162: 
-D0 = 1.000000, gammaD = 1.000000, beta = 0.010000, k0 = 1.000000 
-9.55
+D0 = 1.000000, gammaD = 1.000000, beta = 0.010000, k0 = 0.100000 
+6.12
 Case number 163: 
+D0 = 1.000000, gammaD = 1.000000, beta = 0.010000, k0 = 1.000000 
+6.49
+Case number 164: 
 D0 = 1.000000, gammaD = 1.000000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2095,22 +1583,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.94
-Case number 164: 
-D0 = 1.000000, gammaD = 1.000000, beta = 0.100000, k0 = 0.010000 
-9.53
+4.65
 Case number 165: 
-D0 = 1.000000, gammaD = 1.000000, beta = 0.100000, k0 = 0.100000 
-9.64
+D0 = 1.000000, gammaD = 1.000000, beta = 0.100000, k0 = 0.010000 
+6.84
 Case number 166: 
-D0 = 1.000000, gammaD = 1.000000, beta = 0.100000, k0 = 1.000000 
-9.78
+D0 = 1.000000, gammaD = 1.000000, beta = 0.100000, k0 = 0.100000 
+6.81
 Case number 167: 
+D0 = 1.000000, gammaD = 1.000000, beta = 0.100000, k0 = 1.000000 
+7.07
+Case number 168: 
 D0 = 1.000000, gammaD = 1.000000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2133,22 +1621,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.05
-Case number 168: 
-D0 = 1.000000, gammaD = 1.000000, beta = 1.000000, k0 = 0.010000 
-10.04
+4.67
 Case number 169: 
-D0 = 1.000000, gammaD = 1.000000, beta = 1.000000, k0 = 0.100000 
-10.16
+D0 = 1.000000, gammaD = 1.000000, beta = 1.000000, k0 = 0.010000 
+7.12
 Case number 170: 
-D0 = 1.000000, gammaD = 1.000000, beta = 1.000000, k0 = 1.000000 
-10.05
+D0 = 1.000000, gammaD = 1.000000, beta = 1.000000, k0 = 0.100000 
+7.80
 Case number 171: 
+D0 = 1.000000, gammaD = 1.000000, beta = 1.000000, k0 = 1.000000 
+7.25
+Case number 172: 
 D0 = 1.000000, gammaD = 1.000000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2171,22 +1659,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.08
-Case number 172: 
-D0 = 1.000000, gammaD = 1.000000, beta = 10.000000, k0 = 0.010000 
-10.44
+4.72
 Case number 173: 
-D0 = 1.000000, gammaD = 1.000000, beta = 10.000000, k0 = 0.100000 
-10.59
+D0 = 1.000000, gammaD = 1.000000, beta = 10.000000, k0 = 0.010000 
+7.64
 Case number 174: 
-D0 = 1.000000, gammaD = 1.000000, beta = 10.000000, k0 = 1.000000 
-11.19
+D0 = 1.000000, gammaD = 1.000000, beta = 10.000000, k0 = 0.100000 
+7.90
 Case number 175: 
+D0 = 1.000000, gammaD = 1.000000, beta = 10.000000, k0 = 1.000000 
+8.28
+Case number 176: 
 D0 = 1.000000, gammaD = 1.000000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2209,22 +1697,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.15
-Case number 176: 
-D0 = 1.000000, gammaD = 10.000000, beta = 0.010000, k0 = 0.010000 
-8.89
+4.98
 Case number 177: 
-D0 = 1.000000, gammaD = 10.000000, beta = 0.010000, k0 = 0.100000 
-8.73
+D0 = 1.000000, gammaD = 10.000000, beta = 0.010000, k0 = 0.010000 
+5.94
 Case number 178: 
-D0 = 1.000000, gammaD = 10.000000, beta = 0.010000, k0 = 1.000000 
-9.14
+D0 = 1.000000, gammaD = 10.000000, beta = 0.010000, k0 = 0.100000 
+6.01
 Case number 179: 
+D0 = 1.000000, gammaD = 10.000000, beta = 0.010000, k0 = 1.000000 
+7.09
+Case number 180: 
 D0 = 1.000000, gammaD = 10.000000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2247,22 +1735,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.93
-Case number 180: 
-D0 = 1.000000, gammaD = 10.000000, beta = 0.100000, k0 = 0.010000 
-9.44
+3.94
 Case number 181: 
-D0 = 1.000000, gammaD = 10.000000, beta = 0.100000, k0 = 0.100000 
-9.47
+D0 = 1.000000, gammaD = 10.000000, beta = 0.100000, k0 = 0.010000 
+6.66
 Case number 182: 
-D0 = 1.000000, gammaD = 10.000000, beta = 0.100000, k0 = 1.000000 
-9.73
+D0 = 1.000000, gammaD = 10.000000, beta = 0.100000, k0 = 0.100000 
+6.93
 Case number 183: 
+D0 = 1.000000, gammaD = 10.000000, beta = 0.100000, k0 = 1.000000 
+7.09
+Case number 184: 
 D0 = 1.000000, gammaD = 10.000000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2285,22 +1773,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.10
-Case number 184: 
-D0 = 1.000000, gammaD = 10.000000, beta = 1.000000, k0 = 0.010000 
-9.63
+4.13
 Case number 185: 
-D0 = 1.000000, gammaD = 10.000000, beta = 1.000000, k0 = 0.100000 
-9.87
+D0 = 1.000000, gammaD = 10.000000, beta = 1.000000, k0 = 0.010000 
+7.00
 Case number 186: 
-D0 = 1.000000, gammaD = 10.000000, beta = 1.000000, k0 = 1.000000 
-10.08
+D0 = 1.000000, gammaD = 10.000000, beta = 1.000000, k0 = 0.100000 
+7.03
 Case number 187: 
+D0 = 1.000000, gammaD = 10.000000, beta = 1.000000, k0 = 1.000000 
+7.17
+Case number 188: 
 D0 = 1.000000, gammaD = 10.000000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2323,15 +1811,15 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.24
-Case number 188: 
+4.43
+Case number 189: 
 D0 = 1.000000, gammaD = 10.000000, beta = 10.000000, k0 = 0.010000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 134, in forward
-    disp = he()
-  File "forward_sensitivity.py", line 97, in he
+  File "forward_sensitivity.py", line 160, in forward
+    disp = mech()
+  File "forward_sensitivity.py", line 110, in mech
     solver_HE.solve()
 RuntimeError: 
 
@@ -2354,15 +1842,15 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-10.83
-Case number 189: 
+8.76
+Case number 190: 
 D0 = 1.000000, gammaD = 10.000000, beta = 10.000000, k0 = 0.100000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 134, in forward
-    disp = he()
-  File "forward_sensitivity.py", line 97, in he
+  File "forward_sensitivity.py", line 160, in forward
+    disp = mech()
+  File "forward_sensitivity.py", line 110, in mech
     solver_HE.solve()
 RuntimeError: 
 
@@ -2385,15 +1873,15 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-10.87
-Case number 190: 
+7.67
+Case number 191: 
 D0 = 1.000000, gammaD = 10.000000, beta = 10.000000, k0 = 1.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 134, in forward
-    disp = he()
-  File "forward_sensitivity.py", line 97, in he
+  File "forward_sensitivity.py", line 160, in forward
+    disp = mech()
+  File "forward_sensitivity.py", line 110, in mech
     solver_HE.solve()
 RuntimeError: 
 
@@ -2416,13 +1904,13 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-7.86
-Case number 191: 
+6.69
+Case number 192: 
 D0 = 1.000000, gammaD = 10.000000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2445,22 +1933,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.63
-Case number 192: 
-D0 = 10.000000, gammaD = 0.010000, beta = 0.010000, k0 = 0.010000 
-8.76
+3.38
 Case number 193: 
-D0 = 10.000000, gammaD = 0.010000, beta = 0.010000, k0 = 0.100000 
-9.06
+D0 = 10.000000, gammaD = 0.010000, beta = 0.010000, k0 = 0.010000 
+6.12
 Case number 194: 
-D0 = 10.000000, gammaD = 0.010000, beta = 0.010000, k0 = 1.000000 
-9.17
+D0 = 10.000000, gammaD = 0.010000, beta = 0.010000, k0 = 0.100000 
+6.22
 Case number 195: 
+D0 = 10.000000, gammaD = 0.010000, beta = 0.010000, k0 = 1.000000 
+6.68
+Case number 196: 
 D0 = 10.000000, gammaD = 0.010000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2483,22 +1971,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.97
-Case number 196: 
-D0 = 10.000000, gammaD = 0.010000, beta = 0.100000, k0 = 0.010000 
-9.60
+4.69
 Case number 197: 
-D0 = 10.000000, gammaD = 0.010000, beta = 0.100000, k0 = 0.100000 
-9.46
+D0 = 10.000000, gammaD = 0.010000, beta = 0.100000, k0 = 0.010000 
+6.98
 Case number 198: 
-D0 = 10.000000, gammaD = 0.010000, beta = 0.100000, k0 = 1.000000 
-10.01
+D0 = 10.000000, gammaD = 0.010000, beta = 0.100000, k0 = 0.100000 
+7.00
 Case number 199: 
+D0 = 10.000000, gammaD = 0.010000, beta = 0.100000, k0 = 1.000000 
+7.48
+Case number 200: 
 D0 = 10.000000, gammaD = 0.010000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2521,22 +2009,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.08
-Case number 200: 
-D0 = 10.000000, gammaD = 0.010000, beta = 1.000000, k0 = 0.010000 
-9.89
+4.69
 Case number 201: 
-D0 = 10.000000, gammaD = 0.010000, beta = 1.000000, k0 = 0.100000 
-10.00
+D0 = 10.000000, gammaD = 0.010000, beta = 1.000000, k0 = 0.010000 
+7.24
 Case number 202: 
-D0 = 10.000000, gammaD = 0.010000, beta = 1.000000, k0 = 1.000000 
-10.12
+D0 = 10.000000, gammaD = 0.010000, beta = 1.000000, k0 = 0.100000 
+7.42
 Case number 203: 
+D0 = 10.000000, gammaD = 0.010000, beta = 1.000000, k0 = 1.000000 
+7.30
+Case number 204: 
 D0 = 10.000000, gammaD = 0.010000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2559,22 +2047,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.09
-Case number 204: 
-D0 = 10.000000, gammaD = 0.010000, beta = 10.000000, k0 = 0.010000 
-10.34
+4.93
 Case number 205: 
-D0 = 10.000000, gammaD = 0.010000, beta = 10.000000, k0 = 0.100000 
-10.72
+D0 = 10.000000, gammaD = 0.010000, beta = 10.000000, k0 = 0.010000 
+7.60
 Case number 206: 
-D0 = 10.000000, gammaD = 0.010000, beta = 10.000000, k0 = 1.000000 
-10.82
+D0 = 10.000000, gammaD = 0.010000, beta = 10.000000, k0 = 0.100000 
+7.80
 Case number 207: 
+D0 = 10.000000, gammaD = 0.010000, beta = 10.000000, k0 = 1.000000 
+8.35
+Case number 208: 
 D0 = 10.000000, gammaD = 0.010000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2597,22 +2085,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.25
-Case number 208: 
-D0 = 10.000000, gammaD = 0.100000, beta = 0.010000, k0 = 0.010000 
-8.76
+5.05
 Case number 209: 
-D0 = 10.000000, gammaD = 0.100000, beta = 0.010000, k0 = 0.100000 
-8.83
+D0 = 10.000000, gammaD = 0.100000, beta = 0.010000, k0 = 0.010000 
+6.05
 Case number 210: 
-D0 = 10.000000, gammaD = 0.100000, beta = 0.010000, k0 = 1.000000 
-9.55
+D0 = 10.000000, gammaD = 0.100000, beta = 0.010000, k0 = 0.100000 
+6.22
 Case number 211: 
+D0 = 10.000000, gammaD = 0.100000, beta = 0.010000, k0 = 1.000000 
+6.76
+Case number 212: 
 D0 = 10.000000, gammaD = 0.100000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2635,22 +2123,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.80
-Case number 212: 
-D0 = 10.000000, gammaD = 0.100000, beta = 0.100000, k0 = 0.010000 
-9.96
+3.95
 Case number 213: 
-D0 = 10.000000, gammaD = 0.100000, beta = 0.100000, k0 = 0.100000 
-9.63
+D0 = 10.000000, gammaD = 0.100000, beta = 0.100000, k0 = 0.010000 
+6.99
 Case number 214: 
-D0 = 10.000000, gammaD = 0.100000, beta = 0.100000, k0 = 1.000000 
-9.56
+D0 = 10.000000, gammaD = 0.100000, beta = 0.100000, k0 = 0.100000 
+6.93
 Case number 215: 
+D0 = 10.000000, gammaD = 0.100000, beta = 0.100000, k0 = 1.000000 
+7.20
+Case number 216: 
 D0 = 10.000000, gammaD = 0.100000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2673,22 +2161,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.19
-Case number 216: 
-D0 = 10.000000, gammaD = 0.100000, beta = 1.000000, k0 = 0.010000 
-9.98
+3.90
 Case number 217: 
-D0 = 10.000000, gammaD = 0.100000, beta = 1.000000, k0 = 0.100000 
-9.73
+D0 = 10.000000, gammaD = 0.100000, beta = 1.000000, k0 = 0.010000 
+7.28
 Case number 218: 
-D0 = 10.000000, gammaD = 0.100000, beta = 1.000000, k0 = 1.000000 
-9.86
+D0 = 10.000000, gammaD = 0.100000, beta = 1.000000, k0 = 0.100000 
+7.74
 Case number 219: 
+D0 = 10.000000, gammaD = 0.100000, beta = 1.000000, k0 = 1.000000 
+7.32
+Case number 220: 
 D0 = 10.000000, gammaD = 0.100000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2711,22 +2199,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.29
-Case number 220: 
-D0 = 10.000000, gammaD = 0.100000, beta = 10.000000, k0 = 0.010000 
-10.51
+4.27
 Case number 221: 
-D0 = 10.000000, gammaD = 0.100000, beta = 10.000000, k0 = 0.100000 
-10.40
+D0 = 10.000000, gammaD = 0.100000, beta = 10.000000, k0 = 0.010000 
+7.68
 Case number 222: 
-D0 = 10.000000, gammaD = 0.100000, beta = 10.000000, k0 = 1.000000 
-10.93
+D0 = 10.000000, gammaD = 0.100000, beta = 10.000000, k0 = 0.100000 
+7.93
 Case number 223: 
+D0 = 10.000000, gammaD = 0.100000, beta = 10.000000, k0 = 1.000000 
+8.34
+Case number 224: 
 D0 = 10.000000, gammaD = 0.100000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2749,22 +2237,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.12
-Case number 224: 
-D0 = 10.000000, gammaD = 1.000000, beta = 0.010000, k0 = 0.010000 
-8.87
+4.71
 Case number 225: 
-D0 = 10.000000, gammaD = 1.000000, beta = 0.010000, k0 = 0.100000 
-9.20
+D0 = 10.000000, gammaD = 1.000000, beta = 0.010000, k0 = 0.010000 
+6.33
 Case number 226: 
-D0 = 10.000000, gammaD = 1.000000, beta = 0.010000, k0 = 1.000000 
-9.87
+D0 = 10.000000, gammaD = 1.000000, beta = 0.010000, k0 = 0.100000 
+6.22
 Case number 227: 
+D0 = 10.000000, gammaD = 1.000000, beta = 0.010000, k0 = 1.000000 
+7.30
+Case number 228: 
 D0 = 10.000000, gammaD = 1.000000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2787,22 +2275,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.14
-Case number 228: 
-D0 = 10.000000, gammaD = 1.000000, beta = 0.100000, k0 = 0.010000 
-9.64
+4.13
 Case number 229: 
-D0 = 10.000000, gammaD = 1.000000, beta = 0.100000, k0 = 0.100000 
-9.66
+D0 = 10.000000, gammaD = 1.000000, beta = 0.100000, k0 = 0.010000 
+7.34
 Case number 230: 
-D0 = 10.000000, gammaD = 1.000000, beta = 0.100000, k0 = 1.000000 
-9.70
+D0 = 10.000000, gammaD = 1.000000, beta = 0.100000, k0 = 0.100000 
+7.24
 Case number 231: 
+D0 = 10.000000, gammaD = 1.000000, beta = 0.100000, k0 = 1.000000 
+7.34
+Case number 232: 
 D0 = 10.000000, gammaD = 1.000000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2825,22 +2313,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.17
-Case number 232: 
-D0 = 10.000000, gammaD = 1.000000, beta = 1.000000, k0 = 0.010000 
-10.13
+4.38
 Case number 233: 
-D0 = 10.000000, gammaD = 1.000000, beta = 1.000000, k0 = 0.100000 
-10.18
+D0 = 10.000000, gammaD = 1.000000, beta = 1.000000, k0 = 0.010000 
+7.62
 Case number 234: 
-D0 = 10.000000, gammaD = 1.000000, beta = 1.000000, k0 = 1.000000 
-10.20
+D0 = 10.000000, gammaD = 1.000000, beta = 1.000000, k0 = 0.100000 
+7.20
 Case number 235: 
+D0 = 10.000000, gammaD = 1.000000, beta = 1.000000, k0 = 1.000000 
+7.39
+Case number 236: 
 D0 = 10.000000, gammaD = 1.000000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2863,22 +2351,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.13
-Case number 236: 
-D0 = 10.000000, gammaD = 1.000000, beta = 10.000000, k0 = 0.010000 
-10.33
+4.63
 Case number 237: 
-D0 = 10.000000, gammaD = 1.000000, beta = 10.000000, k0 = 0.100000 
-10.39
+D0 = 10.000000, gammaD = 1.000000, beta = 10.000000, k0 = 0.010000 
+7.73
 Case number 238: 
-D0 = 10.000000, gammaD = 1.000000, beta = 10.000000, k0 = 1.000000 
-11.03
+D0 = 10.000000, gammaD = 1.000000, beta = 10.000000, k0 = 0.100000 
+7.88
 Case number 239: 
+D0 = 10.000000, gammaD = 1.000000, beta = 10.000000, k0 = 1.000000 
+8.37
+Case number 240: 
 D0 = 10.000000, gammaD = 1.000000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2901,22 +2389,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.11
-Case number 240: 
-D0 = 10.000000, gammaD = 10.000000, beta = 0.010000, k0 = 0.010000 
-9.34
+4.25
 Case number 241: 
-D0 = 10.000000, gammaD = 10.000000, beta = 0.010000, k0 = 0.100000 
-8.97
+D0 = 10.000000, gammaD = 10.000000, beta = 0.010000, k0 = 0.010000 
+6.18
 Case number 242: 
-D0 = 10.000000, gammaD = 10.000000, beta = 0.010000, k0 = 1.000000 
-9.32
+D0 = 10.000000, gammaD = 10.000000, beta = 0.010000, k0 = 0.100000 
+6.19
 Case number 243: 
+D0 = 10.000000, gammaD = 10.000000, beta = 0.010000, k0 = 1.000000 
+6.78
+Case number 244: 
 D0 = 10.000000, gammaD = 10.000000, beta = 0.010000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2939,22 +2427,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.83
-Case number 244: 
-D0 = 10.000000, gammaD = 10.000000, beta = 0.100000, k0 = 0.010000 
-9.53
+3.95
 Case number 245: 
-D0 = 10.000000, gammaD = 10.000000, beta = 0.100000, k0 = 0.100000 
-9.75
+D0 = 10.000000, gammaD = 10.000000, beta = 0.100000, k0 = 0.010000 
+6.97
 Case number 246: 
-D0 = 10.000000, gammaD = 10.000000, beta = 0.100000, k0 = 1.000000 
-9.59
+D0 = 10.000000, gammaD = 10.000000, beta = 0.100000, k0 = 0.100000 
+7.48
 Case number 247: 
+D0 = 10.000000, gammaD = 10.000000, beta = 0.100000, k0 = 1.000000 
+6.96
+Case number 248: 
 D0 = 10.000000, gammaD = 10.000000, beta = 0.100000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -2977,22 +2465,22 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.14
-Case number 248: 
-D0 = 10.000000, gammaD = 10.000000, beta = 1.000000, k0 = 0.010000 
-9.76
+4.68
 Case number 249: 
-D0 = 10.000000, gammaD = 10.000000, beta = 1.000000, k0 = 0.100000 
-9.85
+D0 = 10.000000, gammaD = 10.000000, beta = 1.000000, k0 = 0.010000 
+7.15
 Case number 250: 
-D0 = 10.000000, gammaD = 10.000000, beta = 1.000000, k0 = 1.000000 
-10.06
+D0 = 10.000000, gammaD = 10.000000, beta = 1.000000, k0 = 0.100000 
+7.36
 Case number 251: 
+D0 = 10.000000, gammaD = 10.000000, beta = 1.000000, k0 = 1.000000 
+7.44
+Case number 252: 
 D0 = 10.000000, gammaD = 10.000000, beta = 1.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -3015,15 +2503,15 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.00
-Case number 252: 
+4.74
+Case number 253: 
 D0 = 10.000000, gammaD = 10.000000, beta = 10.000000, k0 = 0.010000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 134, in forward
-    disp = he()
-  File "forward_sensitivity.py", line 97, in he
+  File "forward_sensitivity.py", line 160, in forward
+    disp = mech()
+  File "forward_sensitivity.py", line 110, in mech
     solver_HE.solve()
 RuntimeError: 
 
@@ -3046,15 +2534,15 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-5.88
-Case number 253: 
+3.69
+Case number 254: 
 D0 = 10.000000, gammaD = 10.000000, beta = 10.000000, k0 = 0.100000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 134, in forward
-    disp = he()
-  File "forward_sensitivity.py", line 97, in he
+  File "forward_sensitivity.py", line 160, in forward
+    disp = mech()
+  File "forward_sensitivity.py", line 110, in mech
     solver_HE.solve()
 RuntimeError: 
 
@@ -3077,15 +2565,15 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.12
-Case number 254: 
+4.04
+Case number 255: 
 D0 = 10.000000, gammaD = 10.000000, beta = 10.000000, k0 = 1.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 134, in forward
-    disp = he()
-  File "forward_sensitivity.py", line 97, in he
+  File "forward_sensitivity.py", line 160, in forward
+    disp = mech()
+  File "forward_sensitivity.py", line 110, in mech
     solver_HE.solve()
 RuntimeError: 
 
@@ -3108,13 +2596,13 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.19
-Case number 255: 
+4.03
+Case number 256: 
 D0 = 10.000000, gammaD = 10.000000, beta = 10.000000, k0 = 10.000000 
 Traceback (most recent call last):
-  File "forward_sensitivity.py", line 202, in <module>
+  File "forward_sensitivity.py", line 231, in <module>
     forward(initial_p, str(case)) 
-  File "forward_sensitivity.py", line 130, in forward
+  File "forward_sensitivity.py", line 156, in forward
     solver_RD.solve()
 RuntimeError: 
 
@@ -3137,4 +2625,4 @@ RuntimeError:
 *** Git changeset:  
 *** -------------------------------------------------------------------------
 
-6.41
+3.40

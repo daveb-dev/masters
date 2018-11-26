@@ -41,40 +41,19 @@ def forward(initial_p, name):
     '''
     
     ## Define functions
+    I = Identity(2)  # Identity tensor
     def E(u):
         return 0.5*(nabla_grad(u) + nabla_grad(u).T)
-    def sigma_le(u):
-        sigma = 2*mu*E(u)+lmbda*tr(E(u))*Identity(2)
-        return sigma
-    def sigma_he(u):
-        I = Identity(2)             # Identity tensor
-        F = I + grad(u)             # Deformation gradient
-        B = F*F.T
-        C = F.T*F
-        J = det(F)
-        I1 = tr(C)
-        sigma = lmbda*(J-1)*I+mu*(B-1./2*I1*I)/(J**(5./3))
-        return sigma
     def vonmises(u):
-        s = sigma(u) - (1./2)*tr(sigma(u))*Identity(2)  # deviatoric stress
+        s = sigma(u) - (1./2)*tr(sigma(u))*I  # deviatoric stress
         von_Mises = sqrt(3./2*inner(s, s))
         return project(von_Mises, V)
-    def sigma_form_le(u,phi):
-        return 2*mu*(E(u)-beta*phi*Identity(2))+lmbda*(tr(E(u))-2*beta*phi)*Identity(2)
-    def sigma_form_he(u, phi):
-        I = Identity(2)             # Identity tensor
-        F = I + grad(u)             # Deformation gradient
-        Fs = F/(1+beta*phi)
-        Bs = Fs*Fs.T
-        Js  = det(Fs)
-        return 1/(1+beta*phi)*(mu/(Js**(5./3))*(Bs-1./2*tr(Bs)*I)+lmbda*(Js-1)*I)
 
     # Set up problem
     U           = VectorFunctionSpace(mesh,'Lagrange',1)
     def boundary(x, on_boundary):
         return on_boundary
     bc          = DirichletBC(U, Constant((0.,0.)), boundary)
-    du          = TrialFunction(U)
     v           = TestFunction(U)
     p_n         = interpolate(initial_p,V)
     
@@ -84,18 +63,35 @@ def forward(initial_p, name):
     parameters['krylov_solver']['nonzero_initial_guess'] = True
     
     if lin_hyp == 0:
+        def sigma(u):
+            sigma = 2*mu*E(u)+lmbda*tr(E(u))*I
+            return sigma
         u    = TrialFunction(U)
-        F_LE        = inner(sigma_form_le(u, p_n), E(v))*dx 
-        a, L        = lhs(F_LE), rhs(F_LE)
-        u           = Function(U)
+        a = inner(2*mu*E(u)+lmbda*tr(E(u))*I,E(v))*dx
+        L = inner(2*beta*p_n*I*(mu+lmbda),E(v))*dx
+        u    = Function(U)
         def mech():
             solve(a == L, u, bc, 
-                      form_compiler_parameters=ffc_options,
-                      annotate=annotate)
+                      form_compiler_parameters=ffc_options)
         return u
     else:
+        def sigma(u):
+            F = I + grad(u)             # Deformation gradient
+            B = F*F.T
+            C = F.T*F
+            J = det(F)
+            I1 = tr(C)
+            sigma = lmbda*(J-1)*I+mu*(B-1./2*I1*I)/(J**(5./3))
+            return sigma
+        def sigma_form(u, phi):
+            F = I + grad(u)             # Deformation gradient
+            Fs = F/(1+beta*phi)
+            Bs = Fs*Fs.T
+            Js  = det(Fs)
+            return 1/(1+beta*phi)*(mu/(Js**(5./3))*(Bs-1./2*tr(Bs)*I)+lmbda*(Js-1)*I)
         u           = Function(U)
-        F_HE        = inner(sigma_form_he(u, p_n), E(v))*dx
+        du          = TrialFunction(U)
+        F_HE        = inner(sigma_form(u, p_n), E(v))*dx
         J_HE        = derivative(F_HE,u,du)
         problem_HE  = NonlinearVariationalProblem(F_HE, u, bc, J=J_HE,form_compiler_parameters=ffc_options)
         solver_HE   = NonlinearVariationalSolver(problem_HE)
@@ -129,6 +125,19 @@ def forward(initial_p, name):
     # Prepare the solution
     t = 0.
     for n in range(num_steps):        
+        '''
+        if (n%2 == 0):
+            u.rename('u_'+name,'displacement')
+            p_n.rename('phi_T_'+name,'tumor fraction')
+            vm.rename('vm_'+name,"Von Mises")
+            D.rename('D_'+name,"diffusion coefficient")
+            k.rename('k_'+name,'k field') 
+            f_notime.write(p_n,t)
+            f_notime.write(u,t)
+            f_notime.write(k,t)
+            f_notime.write(vm,t)
+            f_notime.write(D,t)
+        '''
         # Update current time and Compute solution
         t += dt
         problem_RD  = NonlinearVariationalProblem(F_RD, p, J=J_RD,form_compiler_parameters=ffc_options)
@@ -151,19 +160,20 @@ def forward(initial_p, name):
         disp = mech()
         vm   = vonmises(disp)
         D    = project(D0*exp(-gammaD*vm),V)
-        
-        if (n%2 == 0):
-            u.rename('u_'+name,'displacement')
-            p_n.rename('phi_T_'+name,'tumor fraction')
-            vm.rename('vm_'+name,"Von Mises")
-            D.rename('D_'+name,"diffusion coefficient")
-            k.rename('k_'+name,'k field') 
-            f_notime.write(p_n,t)
-            f_notime.write(u,t)
-            f_notime.write(k,t)
-            f_notime.write(vm,t)
-            f_notime.write(D,t)
-
+    '''    
+    if (n%2 == 0):
+        u.rename('u_'+name,'displacement')
+        p_n.rename('phi_T_'+name,'tumor fraction')
+        vm.rename('vm_'+name,"Von Mises")
+        D.rename('D_'+name,"diffusion coefficient")
+        k.rename('k_'+name,'k field') 
+        f_notime.write(p_n,t)
+        f_notime.write(u,t)
+        f_notime.write(k,t)
+        f_notime.write(vm,t)
+        f_notime.write(D,t)
+    '''
+    
 #########################################################################
 # MAIN 
 ########################################################################
@@ -184,9 +194,9 @@ if __name__ == "__main__":
     t1         = time()
     input_dir  = "../rat-data/rat05/"
     if lin_hyp == 0:
-        output_dir = './output/rat05lesense'
+        output_dir = './output/sensitivity'
     else:
-        output_dir = './output/rat05hesense'
+        output_dir = './output/sensitivity'
 
     # Prepare a mesh
     mesh = Mesh(input_dir+"gmsh.xml")
@@ -212,7 +222,7 @@ if __name__ == "__main__":
     k0     = Constant(k0)     # growth rate initial guess
     k      = project(k0,V)
 
-    # Prepare output file
+    # Prepare output file - NEED TO FIX, IT'S ONLY SAVING ONE
     f_notime     = XDMFFile(osjoin(output_dir,'notime.xdmf'))
     f_notime.parameters["flush_output"] = True
     f_notime.parameters["functions_share_mesh"] = True

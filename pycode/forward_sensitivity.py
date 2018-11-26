@@ -89,11 +89,11 @@ def forward(initial_p, name):
         a, L        = lhs(F_LE), rhs(F_LE)
         u           = Function(U)
         def mech():
-        solve(a == L, u, bc, 
-              form_compiler_parameters=ffc_options,
-              annotate=annotate)
+            solve(a == L, u, bc, 
+                      form_compiler_parameters=ffc_options,
+                      annotate=annotate)
         return u
-    else
+    else:
         u           = Function(U)
         F_HE        = inner(sigma_form_he(u, p_n), E(v))*dx
         J_HE        = derivative(F_HE,u,du)
@@ -170,9 +170,9 @@ def forward(initial_p, name):
 if __name__ == "__main__":
     # call the function with:
     # python <this file> case r_coeff1 r_coeff2
-    if(len(sys.argv) != 6):
-        print("wrong number of inputs, should be ")
-        print("Syntax: python <this file's name> D0 gammaD beta k0 case ")
+    if(len(sys.argv) != 7):
+        print("wrong number of inputs, should be:\n ")
+        print("Syntax: python <this file's name> [0=LE/1=HE] D0 gammaD beta k0 case ")
         quit()
     lin_hyp  = int(sys.argv[1])
     D0       = float(sys.argv[2])
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     input_dir  = "../rat-data/rat05/"
     if lin_hyp == 0:
         output_dir = './output/rat05lesense'
-    else
+    else:
         output_dir = './output/rat05hesense'
 
     # Prepare a mesh

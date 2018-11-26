@@ -163,7 +163,7 @@ def optimize(dbg=False):
     Obj = objective(p, target_p, r_coeff1, r_coeff2)
 
     # Prepare the reduced functional
-    rf = ReducedFunctional(obj,m,eval_cb_post=eval_cb)
+    rf = ReducedFunctional(Obj,m,eval_cb_post=eval_cb)
     
     # upper and lower bound for the parameter field
     k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)
@@ -175,7 +175,8 @@ def optimize(dbg=False):
     gD_ub = 5.
     beta_lb = 0.
     beta_ub = 5.
-    bnds = [[k_lb,D_lb, gD_lb, beta_lb],[k_ub,D_ub, gD_ub, beta_ub]]
+    #bnds = [[k_lb,D_lb, gD_lb, beta_lb],[k_ub,D_ub, gD_ub, beta_ub]]
+    bnds = [[k_lb,D_lb],[k_ub,D_ub]]
 
     # Run the optimization
     m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-8,options={"disp":True,"gtol":1.0e-8})
@@ -191,7 +192,7 @@ r_coeff2   = 0.01
 r_coeff3 = 1.
 eps = .01
 input_dir  = "../rat-data/rat05/"
-output_dir = './output/rat05coarse'
+output_dir = './output/rat05le'
 
 # Prepare output file
 f_timeseries = XDMFFile(osjoin(output_dir,'timeseries.xdmf'))
@@ -200,8 +201,8 @@ f_timeseries.parameters["functions_share_mesh"] = True
 f_notime     = XDMFFile(osjoin(output_dir,'notime.xdmf'))
 f_notime.parameters["flush_output"] = True
 f_notime.parameters["functions_share_mesh"] = True
-f_log = open(osjoin(output_dir,'info.log'),'w+')
-rtime = 1 # How often to record results
+f_log = open(osjoin(output_dir,'log.txt'),'w+')
+rtime = 2 # How often to record results
 
 # Prepare a mesh
 mesh = Mesh(input_dir+"gmsh.xml")
@@ -236,6 +237,9 @@ k      = project(k0,V,annotate=False)    # (constant over domain)
 [k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
 f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')
 
+T             = 9.               # final time 
+num_steps     = 90              # number of time steps
+dt            = T/num_steps      # time step size
 model_p = forward(initial_p,'opt',True,False) # run the forward model using the optimized k field
 
 f_log.write('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2))+'\n')

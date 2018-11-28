@@ -92,7 +92,7 @@
 	\begin{figure}
     	\centering
     	\includegraphics[width=\textwidth]{opt_day6.jpg}    	
-    	\caption{Running the forward models to day 6 using parameter estimation results from forward model with day 2. LE performs better now.}
+    	\caption{Running the forward models to day 6 using parameter estimation results from forward model with day 2. LE performs better now and HE begins to show significant diffusion.}
     	\end{figure}	
 \end{frame}
 
@@ -100,17 +100,18 @@
 	\begin{figure}
     	\centering
     	\includegraphics[width=\textwidth]{opt_day9.jpg}    	
-    	\caption{Running the forward models to day 9 using parameter estimation results from forward model with day 2. LE performs better now.}
+    	\caption{Running the forward models to day 9 using parameter estimation results from forward model with day 2. LE is still not too different in general shape, while HE shows extreme growth.}
     	\end{figure}	
 \end{frame}
 
-There are some interesting differences here. It will be interesting to see what happens with varying $\beta$ values set for both of them. 
-\begin{frame}{To do/try}
+\begin{frame}{Conclusions/thoughts going forward}
 	\begin{minipage}[T][.7\textheight][t]{\textwidth}
 		\begin{itemize}
+			\item LE has larger values for $\gamma_D$ and $\gamma_k$, which would mean higher effect from stress causing a reduction in diffusion/growth. Need to save $D-$ and $k-$fields to observe whether there's a large difference causing the significant diffusion for HE, or if large von Mises stresses are responsible and the $\gamma$'s 
+			\item I believe David used $\beta$ = 1 so I will try this or varying values but set the same for both. The large difference is interesting - more "body forces" in HE will cause larger stresses, which should have a reduction in D/k.
 			\item I am looking to add regularization to k next, 
 			\[ r_1||k||^2 + r_2||\nabla k||^2\]
-			\item I believe David used $\beta$ = 1 so I will try this as well. 
+			\item Optimizing using day 4, 5, or 6 could prove helpful, but in reality optimizing as early as possible is best so using day 2 makes sense for applications. Maybe days 2 and 4 could be used though?
 		\end{itemize}
 	\end{minipage}
 \end{frame}

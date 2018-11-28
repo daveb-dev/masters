@@ -1,14 +1,9 @@
-Elapsed time is 14.7529419885 minutes
-D0 = 5.0
-gammaD = 0.1
-beta = 1.0
-J_opt day 2 = 378.957311389
-J_opt day 2 (no regularization) = 42.6953243856
-J_opt day 4 = 1492.93941172
-J_opt day 4 (no regularization) = 1141.95242534
-J_opt day 5 = 1708.5655839
-J_opt day 5 (no regularization) = 1365.99382269
-J_opt day 6 = 1758.4763566
-J_opt day 6 (no regularization) = 1418.73634856
-J_opt day 9 = 1731.55845452
-J_opt day 9 (no regularization) = 1395.04653678
+Elapsed time is 14.4518888165 minutes
+gammaD = 0.558735731246
+gammaK = 4.67373069841
+beta = 0.957641655091
+J_opt day 2 = 0.897926367575
+J_opt day 4 = 13.8501281291
+J_opt day 5 = 17.4641712468
+J_opt day 6 = 24.6950458271
+J_opt day 9 = 44.2287104338

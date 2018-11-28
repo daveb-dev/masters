@@ -1,11 +1,13 @@
 #!/bin/bash
 
-lehe=1
+lehe=0
+python2.7 forward_sensitivity.py $lehe .1 .1 .1 1 1
+
+# Run full number of cases and time
+: <<'EOF'
 logfile=./output/sensitivity/he_log.txt
 > $logfile
-
 case=1
-# : <<'EOF'
 for D in .01 .1 1 10 
 do
     for g in .01 .1 1 10
@@ -22,7 +24,7 @@ do
         done
     done
 done
-# EOF
+EOF
 
 # Debugging reduced number of cases
 : <<'END'

@@ -1,0 +1,9 @@
+Elapsed time is 28.1539390429 minutes
+gammaD = 0.0477665784252
+gammaK = 2.34603539786
+beta = 4.02729495695
+J_opt day 2 = 0.107786362903
+J_opt day 4 = 17.347639067
+J_opt day 5 = 23.0616608305
+J_opt day 6 = 50.146574349
+J_opt day 9 = 287.550823074

@@ -42,7 +42,6 @@ def set_nonlinear_params(param):
     param['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-6
     param['newton_solver']['krylov_solver']['maximum_iterations'] = 1000
     param['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
-    
 
 def forward(initial_p, name, record=False,  annotate=False):
     """ 
@@ -56,6 +55,7 @@ def forward(initial_p, name, record=False,  annotate=False):
         -vonmises(...) calculates the von Mises stress based 
           on the actual stress tensor
     """
+    global t
     I = Identity(2)  # Identity tensor
     def E(u):
         return 0.5*(nabla_grad(u) + nabla_grad(u).T)
@@ -72,10 +72,10 @@ def forward(initial_p, name, record=False,  annotate=False):
     p_n = interpolate(initial_p,V)
     v   = TestFunction(U)
     
-    parameters["form_compiler"]["quadrature_degree"] = 2
-    parameters["form_compiler"]["cpp_optimize"] = True
+    parameters['form_compiler']['quadrature_degree'] = 2
+    parameters['form_compiler']['cpp_optimize'] = True
     parameters['krylov_solver']['nonzero_initial_guess'] = True
-    ffc_options = {"quadrature_degree": 2}
+    ffc_options = {"quadrature_degree": 2, 'cpp_optimize': True}
     
     if lin_hyp == 0:
         def sigma(u):
@@ -108,7 +108,7 @@ def forward(initial_p, name, record=False,  annotate=False):
         
         u           = Function(U, annotate=annotate)
         du          = TrialFunction(U)
-        F_HE        = inner(sigma_form_he(u, p_n), E(v))*dx
+        F_HE        = inner(sigma_form(u, p_n), E(v))*dx
         J_HE        = derivative(F_HE,u,du)
         problem_HE  = NonlinearVariationalProblem(F_HE, u, bc,
                                       J=J_HE,
@@ -125,7 +125,8 @@ def forward(initial_p, name, record=False,  annotate=False):
     disp = mech()
     vm   = vonmises(disp)
     D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
-
+    k    = project(k0*exp(-gammaK*vm),V,annotate=annotate)
+    
     # Set up reaction-diffusion problem
     dp   = TrialFunction(V)
     p    = Function(V,annotate=annotate)
@@ -133,8 +134,7 @@ def forward(initial_p, name, record=False,  annotate=False):
     F_RD = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
     J_RD = derivative(F_RD,p,dp) 
     
-    # Prepare the solution
-    t = 0.                
+    # Prepare the solution               
     for n in range(num_steps+1):
         if record and (n%rtime == 0): 
             # Rename parameters for saving
@@ -164,6 +164,7 @@ def forward(initial_p, name, record=False,  annotate=False):
         disp = mech()
         vm   = vonmises(disp)
         D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
+        k    = project(k0*exp(-gammaK*vm),V,annotate=annotate)
         
     if record and (n%rtime == 0): 
         # Rename parameters for saving
@@ -186,15 +187,15 @@ def eval_cb(j, m):
     f_log.write("objective = %15.10e \n" % j)
 
 def objective(p, target_p, r_coeff1, r_coeff2, r_coeff3):
-    return assemble(inner(p-target_p, p-target_p)*dx,annotate=False) \
-        + r_coeff1*assemble(k*k*dx,annotate=False) \
-        + r_coeff2*assemble(dot(grad(k),grad(k))*dx,annotate=False) \
-        + r_coeff3*assemble(sqrt(dot(grad(p),grad(p))+eps)*dx)
+    return assemble(inner(p-target_p, p-target_p)*dx) \
+        #+ r_coeff1*assemble(k*k*dx) \
+        #+ r_coeff2*assemble(dot(grad(k),grad(k))*dx) \
+        #+ r_coeff3*assemble(sqrt(dot(grad(p),grad(p))+eps)*dx)
         # assemble(inner(p-target_p, p-target_p)*dx) + r_coeff1*assemble(k*k*dx) + r_coeff2*assemble(dot(grad(k),grad(k))*dx)
 
 def optimize(dbg=False):
     # Define the control
-    m = [Control(k), Control(D0)]
+    m = [Control(D0), Control(gammaD), Control(k0), Control(gammaK), Control(beta) ]
     
     # Execute first time to annotate and record the tape
     p = forward(initial_p, 'annt', True, True)
@@ -205,21 +206,31 @@ def optimize(dbg=False):
     rf = ReducedFunctional(Obj,m,eval_cb_post=eval_cb)
     
     # upper and lower bound for the parameter field
+    #D_lb = 0.
+    #D_ub = 5.
+    #k_lb = 0.
+    #k_ub = 10.
     k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)
     k_lb.vector()[:] = 0.
     k_ub.vector()[:] = 10.
-    D_lb = 0.
-    D_ub = 5.
-    gD_lb = 0
+    D_lb, D_ub = Function(V,annotate=False), Function(V,annotate=False)
+    D_lb.vector()[:] = 0.
+    D_ub.vector()[:] = 5.
+    gD_lb = .01
     gD_ub = 5.
-    beta_lb = 0.
+    gK_lb = 0.01
+    gK_ub = 5.
+    beta_lb = 0.1
     beta_ub = 5.
-    #bnds = [[k_lb,D_lb, gD_lb, beta_lb],[k_ub,D_ub, gD_ub, beta_ub]]
-    bnds = [[k_lb,D_lb],[k_ub,D_ub]]
+    bnds = [[D_lb, gD_lb, k_lb, gK_lb, beta_lb],[D_ub, gD_ub, k_ub, gK_ub, beta_ub]]
 
     # Run the optimization
     m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, 
-                     options={"disp":True,"gtol":2.0e-4,"ftol":2.0e-6})
+                     options={"disp":True,
+                              "gtol":2.0e-5,
+                              "ftol":2.0e-7,
+                              "maxiter":100,
+                              "maxls": 15})
     
     return m_opt
 
@@ -229,15 +240,16 @@ def optimize(dbg=False):
 if __name__ == "__main__":
     # call the function with:
     # python <this file> case r_coeff1 r_coeff2
-    if(len(sys.argv) != 6):
+    if(len(sys.argv) != 7):
         print("wrong number of inputs, should be:\n ")
-        print("Syntax: python <this file's name> [0=LE/1=HE] D0 gammaD beta k0 ")
+        print("Syntax: python <this file's name> [0=LE/1=HE] D0 gammaD k0 gammaK beta")
         quit()
     lin_hyp  = int(sys.argv[1])
     D0       = float(sys.argv[2])
     gammaD   = float(sys.argv[3])
-    beta     = float(sys.argv[4])
-    k0       = float(sys.argv[5])
+    k0       = float(sys.argv[4])
+    gammaK   = float(sys.argv[5])
+    beta     = float(sys.argv[6])
     
     t1         = time()
     r_coeff1   = 0.01
@@ -266,13 +278,14 @@ if __name__ == "__main__":
     V    = FunctionSpace(mesh, 'CG', 1)
 
     # Model parameters
-    T             = 2.               # final time 
-    num_steps     = 20              # number of time steps
-    dt            = T/num_steps      # time step size
-    theta         = 50970.           # carrying capacity - normalize cell data by this 
-    mu            = .42              # kPa, bulk shear modulus
-    nu            = .45
-    lmbda         = 2*mu*nu/(1-2*nu)
+    t         = 0.           # initial time 
+    T         = 2.           # final time 
+    num_steps = 20           # number of time steps
+    dt        = T/num_steps  # time step size
+    theta     = 50970.       # carrying capacity - normalize cell data by this 
+    mu        = .42          # kPa, bulk shear modulus
+    nu        = .45
+    lmbda     = 2*mu*nu/(1-2*nu)
 
     # Load initial tumor condition data
     initial_p = interp(input_dir+"ic.mat","ic")
@@ -283,24 +296,35 @@ if __name__ == "__main__":
     annotate=False
 
     # Initial guesses
-    D0     = Constant(D0)     # mobility or diffusion coefficient
+    D0     = project(Constant(D0),V,annotate=False) # diffusion coefficient
     gammaD = Constant(gammaD)     # initial guess of gamma_D
-    beta   = Constant(beta)     # force coefficient for HE
-    k0     = Constant(k0)     # growth rate initial guess
-    k      = project(k0,V, annotate=False)
+    k0     = project(Constant(k0),V,annotate=False)     # growth rate initial guess
+    gammaK = Constant(gammaK)
+    beta   = Constant(beta)     # force coefficient 
 
     # Optimization module
-    [k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
+    [D0, gammaD, k0, gammaK, beta] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
     
     # Record time and optimized values
     f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')
-    f_log.write('D0 = '+str(D0.values()[0])+'\n')
+    #f_log.write('D0 = '+str(D0.values()[0])+'\n')
     f_log.write('gammaD = '+str(gammaD.values()[0])+'\n')
+    #f_log.write('k0 = '+str(k0.values()[0])+'\n')
+    f_log.write('gammaK = '+str(gammaK.values()[0])+'\n')
     f_log.write('beta = '+str(beta.values()[0])+'\n')
     
     # Compare optimized tumor growth to actual at several time points
-    model_p = initial_p  # Initialize
+    t   = 0.
     day = 0
+    
+    model_p = initial_p  # Initialize
+    model_p.rename('opt_p','optimized tumor')
+    f_nosteps.write(model_p,float(day))
+    
+    target_p = initial_p  # Initialize
+    target_p.rename('true_p','optimized tumor')
+    f_nosteps.write(target_p,float(day))
+    
     for T in [2,2,1,1,3]:
         day      += T
         num_steps = T*10              # number of time steps
@@ -309,20 +333,19 @@ if __name__ == "__main__":
         # Run forward model using optimized values
         model_p = forward(model_p,'opt',True,False) 
         model_p.rename('opt_p','optimized tumor')
-        f_nosteps.write(model_p,day)
+        f_nosteps.write(model_p,float(day))
         
         # Save actual tumor for comparison
         target_p = interp(input_dir+"tumor_t"+str(day)+".mat","tumor")
         target_p.rename('true_p','actual tumor')
-        f_nosteps.write(target_p,day)
+        f_nosteps.write(target_p,float(day))
         
         # Save J_opt
         f_log.write('J_opt day '+str(day)+' = '+str(objective(model_p, target_p,
                                                               r_coeff1, r_coeff2,
                                                               r_coeff3))+'\n')
-        f_log.write('J_opt day '+str(day)+' (no regularization) = ' 
-                    +str(objective(model_p, target_p, 0., 0.,0.))+'\n')
+        #f_log.write('J_opt day '+str(day)+' (no regularization) = ' 
+        #            +str(objective(model_p, target_p, 0., 0.,0.))+'\n')
         
     f_log.close()
-    
     

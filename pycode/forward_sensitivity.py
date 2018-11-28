@@ -4,6 +4,9 @@ from os.path import join as osjoin
 from scipy.io import loadmat as sc_io_loadmat
 from scipy.interpolate import RegularGridInterpolator
 import sys
+import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+from matplotlib import colors
 
 set_log_level(ERROR) 
 
@@ -29,7 +32,7 @@ def interp(file_loc,mat_name):
     mat_interp = InterpolatedParameter(linspace(1,x,x),linspace(1,y,y),mat,degree=1)
     return interpolate(mat_interp,V)
 
-def forward(initial_p, name):    
+def forward(initial_p, name=None):    
     """ 
         Here, we define the forward problem. 
     """
@@ -50,12 +53,12 @@ def forward(initial_p, name):
         return project(von_Mises, V)
 
     # Set up problem
-    U           = VectorFunctionSpace(mesh,'Lagrange',1)
+    U    = VectorFunctionSpace(mesh,'Lagrange',1)
     def boundary(x, on_boundary):
         return on_boundary
-    bc          = DirichletBC(U, Constant((0.,0.)), boundary)
-    v           = TestFunction(U)
-    p_n         = interpolate(initial_p,V)
+    bc   = DirichletBC(U, Constant((0.,0.)), boundary)
+    p_n = interpolate(initial_p,V)
+    v    = TestFunction(U)
     
     ffc_options = {"quadrature_degree": 2, "cpp_optimize": True}
     parameters['form_compiler']['quadrature_degree'] = 2
@@ -73,7 +76,7 @@ def forward(initial_p, name):
         def mech():
             solve(a == L, u, bc, 
                       form_compiler_parameters=ffc_options)
-        return u
+            return u
     else:
         def sigma(u):
             F = I + grad(u)             # Deformation gradient
@@ -116,10 +119,10 @@ def forward(initial_p, name):
     D    = project(D0*exp(-gammaD*vm),V)
     
     # Set up reaction-diffusion problem
-    dp          = TrialFunction(V)
-    p           = Function(V)
-    q           = TestFunction(V)
-    F_RD        = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
+    dp   = TrialFunction(V)
+    p    = Function(V)
+    q    = TestFunction(V)
+    F_RD = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
     J_RD = derivative(F_RD,p) 
     
     # Prepare the solution
@@ -128,7 +131,8 @@ def forward(initial_p, name):
         '''
         if (n%2 == 0):
             u.rename('u_'+name,'displacement')
-            p_n.rename('phi_T_'+name,'tumor fraction')
+            p_n.rename('phi_T_'+name,'tumorstr(case)) 
+ fraction')
             vm.rename('vm_'+name,"Von Mises")
             D.rename('D_'+name,"diffusion coefficient")
             k.rename('k_'+name,'k field') 
@@ -173,6 +177,7 @@ def forward(initial_p, name):
         f_notime.write(vm,t)
         f_notime.write(D,t)
     '''
+    return p
     
 #########################################################################
 # MAIN 
@@ -201,7 +206,7 @@ if __name__ == "__main__":
     # Prepare a mesh
     mesh = Mesh(input_dir+"gmsh.xml")
     V    = FunctionSpace(mesh, 'CG', 1)
-
+    
     # Model parameters
     T             = 2.0              # final time 
     num_steps     = 20              # number of time steps
@@ -214,7 +219,7 @@ if __name__ == "__main__":
     # Load initial tumor condition data
     initial_p = interp(input_dir+"ic.mat","ic")
     initial_p.rename('initial','tumor at day 0')
-
+    
     # Parameters to be optimized
     D0     = Constant(D0)     # mobility or diffusion coefficient
     gammaD = Constant(gammaD)     # initial guess of gamma_D
@@ -223,10 +228,36 @@ if __name__ == "__main__":
     k      = project(k0,V)
 
     # Prepare output file - NEED TO FIX, IT'S ONLY SAVING ONE
-    f_notime     = XDMFFile(osjoin(output_dir,'notime.xdmf'))
-    f_notime.parameters["flush_output"] = True
-    f_notime.parameters["functions_share_mesh"] = True
-    
+    f_nosteps     = XDMFFile(osjoin(output_dir,'nosteps.xdmf'))
+    f_nosteps.parameters["flush_output"] = True
+    f_nosteps.parameters["functions_share_mesh"] = True
     # run the forward model
     forward(initial_p, str(case)) 
-
+    
+    '''
+    day = 0
+    model_p = initial_p    
+    model_p.rename('opt_p','optimized tumor')
+    f_nosteps.write(model_p,float(day))
+    target_p = initial_p    
+    target_p.rename('true_p','optimized tumor')
+    f_nosteps.write(target_p,float(day))
+    for T in [2,2,1,1,3]:
+        day      += T
+        num_steps = T*10              # number of time steps
+        dt        = T/float(num_steps)      # time step size
+        
+        # Run forward model using optimized values
+        model_p = forward(model_p)
+        model_p.rename('opt_p','optimized tumor')
+        f_nosteps.write(model_p,float(day))
+        
+        target_p = interp(input_dir+"tumor_t"+str(day)+".mat","tumor")
+        target_p.rename('true_p','actual tumor')
+        f_nosteps.write(target_p,float(day))
+    '''
+        
+            
+    
+    
+    

@@ -127,6 +127,19 @@ def forward(initial_p, name, record=False,  annotate=False):
     D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
     k    = project(k0*exp(-gammaK*vm),V,annotate=annotate)
     
+    if record: 
+        # Rename parameters for saving
+        u.rename('u_'+name,'displacement')
+        p_n.rename('phi_T_'+name,'tumor fraction')
+        vm.rename('vm_'+name,'Von Mises')
+        D.rename('D_'+name,'diffusion coefficient')
+        k.rename('k_'+name,'k field')
+        f_timeseries.write(u,t)          
+        f_timeseries.write(p_n,t)
+        f_timeseries.write(vm,t)
+        f_timeseries.write(D,t)
+        f_timeseries.write(k,t)    
+            
     # Set up reaction-diffusion problem
     dp   = TrialFunction(V)
     p    = Function(V,annotate=annotate)
@@ -134,8 +147,24 @@ def forward(initial_p, name, record=False,  annotate=False):
     F_RD = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
     J_RD = derivative(F_RD,p,dp) 
     
-    # Prepare the solution               
-    for n in range(num_steps+1):
+    for n in range(num_steps):
+        # Solve reaction diffusion
+        t += dt
+        problem_RD  = NonlinearVariationalProblem(F_RD, p,
+                                                  J=J_RD,
+                                                  form_compiler_parameters=ffc_options)
+        solver_RD   = NonlinearVariationalSolver(problem_RD)
+        param_RD = solver_RD.parameters
+        set_nonlinear_params(param_RD)
+        solver_RD.solve(annotate=annotate)
+        p_n.assign(p)
+   
+        # Solve for displacement and vonmises stress
+        disp = mech()
+        vm   = vonmises(disp)
+        D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
+        k    = project(k0*exp(-gammaK*vm),V,annotate=annotate)
+        
         if record and (n%rtime == 0): 
             # Rename parameters for saving
             u.rename('u_'+name,'displacement')
@@ -147,37 +176,8 @@ def forward(initial_p, name, record=False,  annotate=False):
             f_timeseries.write(p_n,t)
             f_timeseries.write(vm,t)
             f_timeseries.write(D,t)
-            f_timeseries.write(k,t)
+            f_timeseries.write(k,t)   
         
-        # Solve reaction diffusion
-        t += dt
-        problem_RD  = NonlinearVariationalProblem(F_RD, p,
-                                                  J=J_RD,
-                                                  form_compiler_parameters=ffc_options)
-        solver_RD   = NonlinearVariationalSolver(problem_RD)
-        param_RD = solver_RD.parameters
-        set_nonlinear_params(param_RD)
-        solver_RD.solve(annotate=annotate)
-        p_n.assign(p)
-        
-        # Solve for displacement and vonmises stress
-        disp = mech()
-        vm   = vonmises(disp)
-        D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
-        k    = project(k0*exp(-gammaK*vm),V,annotate=annotate)
-        
-    if record and (n%rtime == 0): 
-        # Rename parameters for saving
-        u.rename('u_'+name,'displacement')
-        p_n.rename('phi_T_'+name,'tumor fraction')
-        vm.rename('vm_'+name,'Von Mises')
-        D.rename('D_'+name,'diffusion coefficient')
-        k.rename('k_'+name,'k field')
-        f_timeseries.write(u,t)          
-        f_timeseries.write(p_n,t)
-        f_timeseries.write(vm,t)
-        f_timeseries.write(D,t)
-        f_timeseries.write(k,t)
     return p
 
 # Callback function for the optimizer
@@ -270,8 +270,11 @@ if __name__ == "__main__":
     f_nosteps    = XDMFFile(osjoin(output_dir,'nosteps.xdmf'))
     f_nosteps.parameters["flush_output"] = True
     f_nosteps.parameters["functions_share_mesh"] = True
+    f_notime    = XDMFFile(osjoin(output_dir,'notime.xdmf'))
+    f_notime.parameters["flush_output"] = True
+    f_notime.parameters["functions_share_mesh"] = True
     f_log = open(osjoin(output_dir,'log.txt'),'w+')
-    rtime = 2 # How often to record results
+    rtime = 1 # How often to record results
 
     # Prepare a mesh
     mesh = Mesh(input_dir+"gmsh.xml")
@@ -306,12 +309,15 @@ if __name__ == "__main__":
     [D0, gammaD, k0, gammaK, beta] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
     
     # Record time and optimized values
-    f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')
-    #f_log.write('D0 = '+str(D0.values()[0])+'\n')
+    f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')   
     f_log.write('gammaD = '+str(gammaD.values()[0])+'\n')
-    #f_log.write('k0 = '+str(k0.values()[0])+'\n')
     f_log.write('gammaK = '+str(gammaK.values()[0])+'\n')
     f_log.write('beta = '+str(beta.values()[0])+'\n')
+    
+    D0.rename('D0','diffusion field')
+    f_notime.write(D0,0.)
+    k0.rename('k0','diffusion field')
+    f_notime.write(k0,0.)
     
     # Compare optimized tumor growth to actual at several time points
     t   = 0.

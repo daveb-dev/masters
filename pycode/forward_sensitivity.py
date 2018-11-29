@@ -67,8 +67,8 @@ def forward(initial_p, name=None):
     
     if lin_hyp == 0:
         def sigma(u):
-            sigma = 2*mu*E(u)+lmbda*tr(E(u))*I
-            return sigma
+            s = 2*mu*E(u)+lmbda*tr(E(u))*I
+            return s
         u    = TrialFunction(U)
         a = inner(2*mu*E(u)+lmbda*tr(E(u))*I,E(v))*dx
         L = inner(2*beta*p_n*I*(mu+lmbda),E(v))*dx
@@ -84,8 +84,8 @@ def forward(initial_p, name=None):
             C = F.T*F
             J = det(F)
             I1 = tr(C)
-            sigma = lmbda*(J-1)*I+mu*(B-1./2*I1*I)/(J**(5./3))
-            return sigma
+            s = lmbda*(J-1)*I+mu*(B-1./2*I1*I)/(J**(5./3))
+            return s
         def sigma_form(u, phi):
             F = I + grad(u)             # Deformation gradient
             Fs = F/(1+beta*phi)
@@ -117,6 +117,7 @@ def forward(initial_p, name=None):
     disp = mech()
     vm   = vonmises(disp)
     D    = project(D0*exp(-gammaD*vm),V)
+    k    = project(k0*exp(-gammaK*vm),V)
     
     # Set up reaction-diffusion problem
     dp   = TrialFunction(V)
@@ -128,7 +129,7 @@ def forward(initial_p, name=None):
     # Prepare the solution
     t = 0.
     for n in range(num_steps):        
-        '''
+        
         if (n%2 == 0):
             u.rename('u_'+name,'displacement')
             p_n.rename('phi_T_'+name,'tumorstr(case)) 
@@ -141,7 +142,7 @@ def forward(initial_p, name=None):
             f_notime.write(k,t)
             f_notime.write(vm,t)
             f_notime.write(D,t)
-        '''
+        
         # Update current time and Compute solution
         t += dt
         problem_RD  = NonlinearVariationalProblem(F_RD, p, J=J_RD,form_compiler_parameters=ffc_options)
@@ -164,7 +165,8 @@ def forward(initial_p, name=None):
         disp = mech()
         vm   = vonmises(disp)
         D    = project(D0*exp(-gammaD*vm),V)
-    '''    
+        k    = project(k0*exp(-gammak*vm),V)
+      
     if (n%2 == 0):
         u.rename('u_'+name,'displacement')
         p_n.rename('phi_T_'+name,'tumor fraction')
@@ -176,7 +178,7 @@ def forward(initial_p, name=None):
         f_notime.write(k,t)
         f_notime.write(vm,t)
         f_notime.write(D,t)
-    '''
+    
     return p
     
 #########################################################################
@@ -226,6 +228,7 @@ if __name__ == "__main__":
     beta   = Constant(beta)     # force coefficient for HE
     k0     = Constant(k0)     # growth rate initial guess
     k      = project(k0,V)
+    
 
     # Prepare output file - NEED TO FIX, IT'S ONLY SAVING ONE
     f_nosteps     = XDMFFile(osjoin(output_dir,'nosteps.xdmf'))

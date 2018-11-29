@@ -18,33 +18,33 @@ for n = 1
     days = [0 2 4 5 6 9]; %size(cells,4);
     imds = {};
     for t = 1:length(days)
-        imds{t} = imread(strcat('./output/rat05_day',num2str(days(t)),'.png'));
+        imds{t} = imread(strcat('./output/lehe_day',num2str(days(t)),'.png'));
     end
     montage(imds,'Size',[NaN 3]); hold on
     cbar = colorbar('eastoutside','FontSize',15); hold on
     ylabel(cbar,'Fraction of Cancerous Cells','FontSize',20)
     caxis([0 1]); colormap jet;
-    saveas(gcf,'./output/Montage_true','png');
+    saveas(gcf,'./output/Montage_lehe','png');
     
-    imds = {};
-    for t = 1:length(days)
-        imds{t} = imread(strcat('./output/le_day',num2str(days(t)),'.png'));
-    end
-    montage(imds,'Size',[NaN 3]); hold on
-    cbar = colorbar('eastoutside','FontSize',15); hold on
-    ylabel(cbar,'Fraction of Cancerous Cells','FontSize',20)
-    caxis([0 1]); colormap jet;
-    saveas(gcf,'./output/Montage_le','png');
-    
-    imds = {};
-    for t = 1:length(days)
-        imds{t} = imread(strcat('./output/he_day',num2str(days(t)),'.png'));
-    end
-    montage(imds,'Size',[NaN 3]); hold on
-    cbar = colorbar('eastoutside','FontSize',15); hold on
-    ylabel(cbar,'Fraction of Cancerous Cells','FontSize',20)
-    caxis([0 1]); colormap jet;
-    saveas(gcf,'./output/Montage_he','png');
+%     imds = {};
+%     for t = 1:length(days)
+%         imds{t} = imread(strcat('./output/le_day',num2str(days(t)),'.png'));
+%     end
+%     montage(imds,'Size',[NaN 3]); hold on
+%     cbar = colorbar('eastoutside','FontSize',15); hold on
+%     ylabel(cbar,'Fraction of Cancerous Cells','FontSize',20)
+%     caxis([0 1]); colormap jet;
+%     saveas(gcf,'./output/Montage_le','png');
+%     
+%     imds = {};
+%     for t = 1:length(days)
+%         imds{t} = imread(strcat('./output/he_day',num2str(days(t)),'.png'));
+%     end
+%     montage(imds,'Size',[NaN 3]); hold on
+%     cbar = colorbar('eastoutside','FontSize',15); hold on
+%     ylabel(cbar,'Fraction of Cancerous Cells','FontSize',20)
+%     caxis([0 1]); colormap jet;
+%     saveas(gcf,'./output/Montage_he','png');
 end
 
 

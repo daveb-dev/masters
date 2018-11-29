@@ -7,6 +7,7 @@ import sys
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib import colors
+import h5py
 
 set_log_level(ERROR) 
 
@@ -42,6 +43,7 @@ def forward(initial_p, name=None):
         - sigma_form(...) returns the stress tensor based on the cells (phi), elasticity coefficients, and a coefficient beta
         - vonmises(...) calculates the von Mises stress based on the actual stress tensor
     '''
+    global t
     
     ## Define functions
     I = Identity(2)  # Identity tensor
@@ -118,6 +120,17 @@ def forward(initial_p, name=None):
     vm   = vonmises(disp)
     D    = project(D0*exp(-gammaD*vm),V)
     k    = project(k0*exp(-gammaK*vm),V)
+
+    u.rename('u_'+name,'displacement')
+    p_n.rename('phi_T_'+name,'tumor fraction')
+    vm.rename('vm_'+name,"Von Mises")
+    D.rename('D_'+name,"diffusion coefficient")
+    k.rename('k_'+name,'k field') 
+    f_notime.write(p_n,t)
+    f_notime.write(u,t)
+    f_notime.write(k,t)
+    f_notime.write(vm,t)
+    f_notime.write(D,t)
     
     # Set up reaction-diffusion problem
     dp   = TrialFunction(V)
@@ -127,21 +140,7 @@ def forward(initial_p, name=None):
     J_RD = derivative(F_RD,p) 
     
     # Prepare the solution
-    t = 0.
     for n in range(num_steps):        
-        
-        if (n%2 == 0):
-            u.rename('u_'+name,'displacement')
-            p_n.rename('phi_T_'+name,'tumorstr(case)) 
- fraction')
-            vm.rename('vm_'+name,"Von Mises")
-            D.rename('D_'+name,"diffusion coefficient")
-            k.rename('k_'+name,'k field') 
-            f_notime.write(p_n,t)
-            f_notime.write(u,t)
-            f_notime.write(k,t)
-            f_notime.write(vm,t)
-            f_notime.write(D,t)
         
         # Update current time and Compute solution
         t += dt
@@ -165,9 +164,8 @@ def forward(initial_p, name=None):
         disp = mech()
         vm   = vonmises(disp)
         D    = project(D0*exp(-gammaD*vm),V)
-        k    = project(k0*exp(-gammak*vm),V)
+        k    = project(k0*exp(-gammaK*vm),V)
       
-    if (n%2 == 0):
         u.rename('u_'+name,'displacement')
         p_n.rename('phi_T_'+name,'tumor fraction')
         vm.rename('vm_'+name,"Von Mises")
@@ -189,27 +187,39 @@ if __name__ == "__main__":
     # python <this file> case r_coeff1 r_coeff2
     if(len(sys.argv) != 7):
         print("wrong number of inputs, should be:\n ")
-        print("Syntax: python <this file's name> [0=LE/1=HE] D0 gammaD beta k0 case ")
+        print("Syntax: python <this file's name> [0=LE/1=HE] D0 gammaD k0 gammaK beta")
         quit()
     lin_hyp  = int(sys.argv[1])
     D0       = float(sys.argv[2])
     gammaD   = float(sys.argv[3])
-    beta     = float(sys.argv[4])
-    k0       = float(sys.argv[5])
-    case     = sys.argv[6]
+    k0       = float(sys.argv[4])
+    gammaK   = float(sys.argv[5])
+    beta     = float(sys.argv[6])
+                       
+#     if(len(sys.argv) != 7):
+#         print("wrong number of inputs, should be:\n ")
+#         print("Syntax: python <this file's name> [0=LE/1=HE] D0 gammaD beta k0 case ")
+#         quit()
+#     lin_hyp  = int(sys.argv[1])
+#     D0       = float(sys.argv[2])
+#     gammaD   = float(sys.argv[3])
+#     beta     = float(sys.argv[4])
+#     k0       = float(sys.argv[5])
+#     case     = sys.argv[6]
     
     t1         = time()
     input_dir  = "../rat-data/rat05/"
     if lin_hyp == 0:
-        output_dir = './output/sensitivity'
+        output_dir = './output/lehe'
     else:
-        output_dir = './output/sensitivity'
+        output_dir = './output/lehe'
 
     # Prepare a mesh
     mesh = Mesh(input_dir+"gmsh.xml")
     V    = FunctionSpace(mesh, 'CG', 1)
     
     # Model parameters
+    t = 0.
     T             = 2.0              # final time 
     num_steps     = 20              # number of time steps
     dt            = T/num_steps      # time step size
@@ -223,42 +233,52 @@ if __name__ == "__main__":
     initial_p.rename('initial','tumor at day 0')
     
     # Parameters to be optimized
-    D0     = Constant(D0)     # mobility or diffusion coefficient
+#     D0     = Constant(D0)     # mobility or diffusion coefficient
     gammaD = Constant(gammaD)     # initial guess of gamma_D
+    gammaK = Constant(gammaK)
     beta   = Constant(beta)     # force coefficient for HE
-    k0     = Constant(k0)     # growth rate initial guess
-    k      = project(k0,V)
-    
-
+#     k0     = Constant(k0)     # growth rate initial guess
+#     k      = project(k0,V)
+                       
+    D0  = Function(V)
+    k0  = Function(V)
+    # Open the result file for reading
+    fl = h5py.File("./output/rat05le/notime.h5", "r")
+    # Choose the first time step
+    vecD = fl["/VisualisationVector/0"]
+    veck = fl["/VisualisationVector/1"]
+    # Scalar FunctionSpace Q is required for mapping vertices to dofs 
+    Q = FunctionSpace(mesh, 'CG', 1)
+    v2d = vertex_to_dof_map(Q)
+    # Now map vertexfunction to the V function space
+    D0.vector()[v2d] = vecD[:]
+    k0.vector()[v2d] = veck[:]
+                       
     # Prepare output file - NEED TO FIX, IT'S ONLY SAVING ONE
     f_nosteps     = XDMFFile(osjoin(output_dir,'nosteps.xdmf'))
     f_nosteps.parameters["flush_output"] = True
     f_nosteps.parameters["functions_share_mesh"] = True
+    f_notime     = XDMFFile(osjoin(output_dir,'notime.xdmf'))
+    f_notime.parameters["flush_output"] = True
+    f_notime.parameters["functions_share_mesh"] = True
     # run the forward model
-    forward(initial_p, str(case)) 
+    #forward(initial_p, str(case)) 
     
-    '''
+    t = 0.
     day = 0
     model_p = initial_p    
     model_p.rename('opt_p','optimized tumor')
     f_nosteps.write(model_p,float(day))
-    target_p = initial_p    
-    target_p.rename('true_p','optimized tumor')
-    f_nosteps.write(target_p,float(day))
     for T in [2,2,1,1,3]:
         day      += T
         num_steps = T*10              # number of time steps
         dt        = T/float(num_steps)      # time step size
         
         # Run forward model using optimized values
-        model_p = forward(model_p)
+        model_p = forward(model_p,'test')
         model_p.rename('opt_p','optimized tumor')
         f_nosteps.write(model_p,float(day))
-        
-        target_p = interp(input_dir+"tumor_t"+str(day)+".mat","tumor")
-        target_p.rename('true_p','actual tumor')
-        f_nosteps.write(target_p,float(day))
-    '''
+    
         
             
     

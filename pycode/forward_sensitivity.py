@@ -7,7 +7,6 @@ import sys
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib import colors
-import h5py
 
 set_log_level(ERROR) 
 
@@ -119,7 +118,7 @@ def forward(initial_p, name=None):
     disp = mech()
     vm   = vonmises(disp)
     D    = project(D0*exp(-gammaD*vm),V)
-    k    = project(k0*exp(-gammaK*vm),V)
+    #k    = project(k0*exp(-gammaK*vm),V)
 
     u.rename('u_'+name,'displacement')
     p_n.rename('phi_T_'+name,'tumor fraction')
@@ -164,7 +163,7 @@ def forward(initial_p, name=None):
         disp = mech()
         vm   = vonmises(disp)
         D    = project(D0*exp(-gammaD*vm),V)
-        k    = project(k0*exp(-gammaK*vm),V)
+        #k    = project(k0*exp(-gammaK*vm),V)
       
         u.rename('u_'+name,'displacement')
         p_n.rename('phi_T_'+name,'tumor fraction')
@@ -187,14 +186,14 @@ if __name__ == "__main__":
     # python <this file> case r_coeff1 r_coeff2
     if(len(sys.argv) != 7):
         print("wrong number of inputs, should be:\n ")
-        print("Syntax: python <this file's name> [0=LE/1=HE] D0 gammaD k0 gammaK beta")
+        print("Syntax: python <this file's name> [0=LE/1=HE] D0 gammaD k0 beta case")
         quit()
     lin_hyp  = int(sys.argv[1])
     D0       = float(sys.argv[2])
     gammaD   = float(sys.argv[3])
     k0       = float(sys.argv[4])
-    gammaK   = float(sys.argv[5])
-    beta     = float(sys.argv[6])
+    beta     = float(sys.argv[5])
+    case     = sys.argv[6]
                        
 #     if(len(sys.argv) != 7):
 #         print("wrong number of inputs, should be:\n ")
@@ -233,13 +232,16 @@ if __name__ == "__main__":
     initial_p.rename('initial','tumor at day 0')
     
     # Parameters to be optimized
-#     D0     = Constant(D0)     # mobility or diffusion coefficient
+    D0     = Constant(D0)     # mobility or diffusion coefficient
     gammaD = Constant(gammaD)     # initial guess of gamma_D
-    gammaK = Constant(gammaK)
+    # gammaK = Constant(gammaK)
     beta   = Constant(beta)     # force coefficient for HE
-#     k0     = Constant(k0)     # growth rate initial guess
-#     k      = project(k0,V)
-                       
+    k0     = Constant(k0)     # growth rate initial guess
+    k      = project(k0,V)
+    
+
+    '''
+    import h5py
     D0  = Function(V)
     k0  = Function(V)
     # Open the result file for reading
@@ -253,7 +255,7 @@ if __name__ == "__main__":
     # Now map vertexfunction to the V function space
     D0.vector()[v2d] = vecD[:]
     k0.vector()[v2d] = veck[:]
-                       
+    '''
     # Prepare output file - NEED TO FIX, IT'S ONLY SAVING ONE
     f_nosteps     = XDMFFile(osjoin(output_dir,'nosteps.xdmf'))
     f_nosteps.parameters["flush_output"] = True
@@ -262,8 +264,9 @@ if __name__ == "__main__":
     f_notime.parameters["flush_output"] = True
     f_notime.parameters["functions_share_mesh"] = True
     # run the forward model
-    #forward(initial_p, str(case)) 
+    forward(initial_p, str(case)) 
     
+'''    
     t = 0.
     day = 0
     model_p = initial_p    
@@ -278,8 +281,7 @@ if __name__ == "__main__":
         model_p = forward(model_p,'test')
         model_p.rename('opt_p','optimized tumor')
         f_nosteps.write(model_p,float(day))
-    
-        
+'''     
             
     
     

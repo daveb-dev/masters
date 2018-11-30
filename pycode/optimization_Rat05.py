@@ -125,7 +125,7 @@ def forward(initial_p, name, record=False,  annotate=False):
     disp = mech()
     vm   = vonmises(disp)
     D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
-    k    = project(k0*exp(-gammaK*vm),V,annotate=annotate)
+    #k    = project(k0*exp(-gammaK*vm),V,annotate=annotate)
     
     if record: 
         # Rename parameters for saving
@@ -163,7 +163,7 @@ def forward(initial_p, name, record=False,  annotate=False):
         disp = mech()
         vm   = vonmises(disp)
         D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
-        k    = project(k0*exp(-gammaK*vm),V,annotate=annotate)
+        #k    = project(k0*exp(-gammaK*vm),V,annotate=annotate)
         
         if record and (n%rtime == 0): 
             # Rename parameters for saving
@@ -195,7 +195,7 @@ def objective(p, target_p, r_coeff1, r_coeff2, r_coeff3):
 
 def optimize(dbg=False):
     # Define the control
-    m = [Control(D0), Control(gammaD), Control(k0), Control(gammaK), Control(beta) ]
+    m = [Control(D0), Control(gammaD), Control(k), Control(beta)]
     
     # Execute first time to annotate and record the tape
     p = forward(initial_p, 'annt', True, True)
@@ -206,23 +206,16 @@ def optimize(dbg=False):
     rf = ReducedFunctional(Obj,m,eval_cb_post=eval_cb)
     
     # upper and lower bound for the parameter field
-    #D_lb = 0.
-    #D_ub = 5.
-    #k_lb = 0.
-    #k_ub = 10.
+    D_lb = 0.
+    D_ub = 5.
     k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)
     k_lb.vector()[:] = 0.
-    k_ub.vector()[:] = 10.
-    D_lb, D_ub = Function(V,annotate=False), Function(V,annotate=False)
-    D_lb.vector()[:] = 0.
-    D_ub.vector()[:] = 5.
+    k_ub.vector()[:] = 5.
     gD_lb = .01
-    gD_ub = 5.
-    gK_lb = 0.01
-    gK_ub = 5.
-    beta_lb = 0.1
-    beta_ub = 5.
-    bnds = [[D_lb, gD_lb, k_lb, gK_lb, beta_lb],[D_ub, gD_ub, k_ub, gK_ub, beta_ub]]
+    gD_ub = 2.
+    beta_lb = 0.01
+    beta_ub = 1.
+    bnds = [[D_lb, gD_lb, k_lb, beta_lb],[D_ub, gD_ub, k_ub, beta_ub]]
 
     # Run the optimization
     m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, 
@@ -242,14 +235,14 @@ if __name__ == "__main__":
     # python <this file> case r_coeff1 r_coeff2
     if(len(sys.argv) != 7):
         print("wrong number of inputs, should be:\n ")
-        print("Syntax: python <this file's name> [0=LE/1=HE] D0 gammaD k0 gammaK beta")
+        print("Syntax: python <this file's name> [0=LE/1=HE] D0 gammaD k0 beta day")
         quit()
     lin_hyp  = int(sys.argv[1])
     D0       = float(sys.argv[2])
     gammaD   = float(sys.argv[3])
     k0       = float(sys.argv[4])
-    gammaK   = float(sys.argv[5])
-    beta     = float(sys.argv[6])
+    beta     = float(sys.argv[5])
+    day      = int(sys.argv[6])
     
     t1         = time()
     r_coeff1   = 0.01
@@ -259,9 +252,9 @@ if __name__ == "__main__":
     
     input_dir  = "../rat-data/rat05/"
     if lin_hyp == 0:
-        output_dir = './output/rat05le'
+        output_dir = './output/rat05le_day'+str(day)
     else:
-        output_dir = './output/rat05he'
+        output_dir = './output/rat05he_day'+str(day)
 
     # Prepare output file
     f_timeseries = XDMFFile(osjoin(output_dir,'timeseries.xdmf'))
@@ -276,15 +269,23 @@ if __name__ == "__main__":
     f_log = open(osjoin(output_dir,'log.txt'),'w+')
     rtime = 1 # How often to record results
 
+    f_log.write('LE(0)/HE(1): '+str(lin_hyp)+'\n')
+    f_log.write('D0 = '+str(D0)+'\n')
+    f_log.write('gammaD = '+str(gammaD)+'\n')
+    f_log.write('k0 = '+str(k0)+'\n')
+    f_log.write('beta = '+str(beta)+'\n')
+    f_log.write('day = '+str(day)+'\n')
+    f_log.write('output dirctory = '+output_dir+'\n')
+    
     # Prepare a mesh
     mesh = Mesh(input_dir+"gmsh.xml")
     V    = FunctionSpace(mesh, 'CG', 1)
 
     # Model parameters
     t         = 0.           # initial time 
-    T         = 2.           # final time 
-    num_steps = 20           # number of time steps
-    dt        = T/num_steps  # time step size
+    T         = day           # final time 
+    num_steps = T*10           # number of time steps
+    dt        = T/float(num_steps)  # time step size
     theta     = 50970.       # carrying capacity - normalize cell data by this 
     mu        = .42          # kPa, bulk shear modulus
     nu        = .45
@@ -293,10 +294,13 @@ if __name__ == "__main__":
     # Load initial tumor condition data
     initial_p = interp(input_dir+"ic.mat","ic")
     initial_p.rename('initial','tumor at day 0')
-    target_p  = interp(input_dir+"tumor_t2.mat","tumor")  
-    target_p.rename('p_day2','tumor at day 2')
+    target_p  = interp(input_dir+"tumor_t"+str(day)+".mat","tumor")  
+    target_p.rename('p_day'+str(day),'tumor at day '+str(day))
 
     annotate=False
+
+    '''
+    ####################### D0 as a field and gammaK ##########################
 
     # Initial guesses
     D0     = project(Constant(D0),V,annotate=False) # diffusion coefficient
@@ -318,6 +322,26 @@ if __name__ == "__main__":
     f_notime.write(D0,0.)
     k0.rename('k0','diffusion field')
     f_notime.write(k0,0.)
+    '''
+    
+    ####################### D0 as a field and gammaK ##########################
+    # Initial guesses
+    D0     = Constant(D0)
+    gammaD = Constant(gammaD)     # initial guess of gamma_D
+    k      = project(Constant(k0),V,annotate=False)     # growth rate initial guess
+    beta   = Constant(beta)
+    
+    # Optimization module
+    [D0, gammaD, k, beta] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
+    
+    # Record time and optimized values
+    f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')   
+    f_log.write('gammaD = '+str(gammaD.values()[0])+'\n')
+    f_log.write('D0 = '+str(D0.values()[0])+'\n')
+    f_log.write('beta = '+str(beta.values()[0])+'\n')
+    
+    k.rename('k0','diffusion field')
+    f_notime.write(k,0.)
     
     # Compare optimized tumor growth to actual at several time points
     t   = 0.

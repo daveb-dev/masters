@@ -207,7 +207,7 @@ def optimize(dbg=False):
     
     # upper and lower bound for the parameter field
     D_lb = 0.
-    D_ub = 5.
+    D_ub = 3.
     k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)
     k_lb.vector()[:] = 0.
     k_ub.vector()[:] = 5.

@@ -427,3 +427,2006 @@ RuntimeError:
 3.55
 Case number 48: 
 D0 = 0.010000, gammaD = 1.000000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 5.692087e+03).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.81
+Case number 49: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 0.010000, beta = 0.010000 
+6.23
+Case number 50: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 0.010000, beta = 0.100000 
+6.29
+Case number 51: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 0.010000, beta = 1.000000 
+6.31
+Case number 52: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 0.010000, beta = 10.000000 
+6.40
+Case number 53: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 0.100000, beta = 0.010000 
+6.47
+Case number 54: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 0.100000, beta = 0.100000 
+6.45
+Case number 55: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 0.100000, beta = 1.000000 
+6.19
+Case number 56: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 0.100000, beta = 10.000000 
+6.21
+Case number 57: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 1.000000, beta = 0.010000 
+6.77
+Case number 58: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 1.000000, beta = 0.100000 
+6.38
+Case number 59: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 1.000000, beta = 1.000000 
+6.34
+Case number 60: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 1.000000, beta = 10.000000 
+6.35
+Case number 61: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+03).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.31
+Case number 62: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.415880e+03).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.44
+Case number 63: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 5.692087e+03).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.48
+Case number 64: 
+D0 = 0.010000, gammaD = 10.000000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.272384e+07).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.55
+Case number 65: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 0.010000, beta = 0.010000 
+6.22
+Case number 66: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 0.010000, beta = 0.100000 
+6.19
+Case number 67: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 0.010000, beta = 1.000000 
+6.07
+Case number 68: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 0.010000, beta = 10.000000 
+5.99
+Case number 69: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 0.100000, beta = 0.010000 
+6.39
+Case number 70: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 0.100000, beta = 0.100000 
+6.13
+Case number 71: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 0.100000, beta = 1.000000 
+6.46
+Case number 72: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 0.100000, beta = 10.000000 
+6.28
+Case number 73: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 1.000000, beta = 0.010000 
+6.38
+Case number 74: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 1.000000, beta = 0.100000 
+6.29
+Case number 75: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 1.000000, beta = 1.000000 
+6.32
+Case number 76: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 1.000000, beta = 10.000000 
+6.50
+Case number 77: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.120835e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.16
+Case number 78: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.121111e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.56
+Case number 79: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.123778e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.57
+Case number 80: 
+D0 = 0.100000, gammaD = 0.010000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.81
+Case number 81: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 0.010000, beta = 0.010000 
+6.30
+Case number 82: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 0.010000, beta = 0.100000 
+6.34
+Case number 83: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 0.010000, beta = 1.000000 
+6.70
+Case number 84: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 0.010000, beta = 10.000000 
+6.38
+Case number 85: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 0.100000, beta = 0.010000 
+6.28
+Case number 86: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 0.100000, beta = 0.100000 
+6.36
+Case number 87: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 0.100000, beta = 1.000000 
+6.41
+Case number 88: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 0.100000, beta = 10.000000 
+6.45
+Case number 89: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 1.000000, beta = 0.010000 
+6.37
+Case number 90: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 1.000000, beta = 0.100000 
+6.58
+Case number 91: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 1.000000, beta = 1.000000 
+6.26
+Case number 92: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 1.000000, beta = 10.000000 
+6.11
+Case number 93: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.121118e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.11
+Case number 94: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.123778e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.36
+Case number 95: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.47
+Case number 96: 
+D0 = 0.100000, gammaD = 0.100000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.415833e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.51
+Case number 97: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 0.010000, beta = 0.010000 
+5.97
+Case number 98: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 0.010000, beta = 0.100000 
+6.06
+Case number 99: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 0.010000, beta = 1.000000 
+6.37
+Case number 100: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 0.010000, beta = 10.000000 
+6.16
+Case number 101: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 0.100000, beta = 0.010000 
+6.38
+Case number 102: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 0.100000, beta = 0.100000 
+6.61
+Case number 103: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 0.100000, beta = 1.000000 
+6.22
+Case number 104: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 0.100000, beta = 10.000000 
+6.45
+Case number 105: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 1.000000, beta = 0.010000 
+6.34
+Case number 106: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 1.000000, beta = 0.100000 
+6.41
+Case number 107: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 1.000000, beta = 1.000000 
+6.48
+Case number 108: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 1.000000, beta = 10.000000 
+6.39
+Case number 109: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.123778e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.17
+Case number 110: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.52
+Case number 111: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.415883e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.45
+Case number 112: 
+D0 = 0.100000, gammaD = 1.000000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 5.692087e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.59
+Case number 113: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 0.010000, beta = 0.010000 
+6.34
+Case number 114: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 0.010000, beta = 0.100000 
+6.59
+Case number 115: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 0.010000, beta = 1.000000 
+6.17
+Case number 116: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 0.010000, beta = 10.000000 
+6.13
+Case number 117: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 0.100000, beta = 0.010000 
+6.42
+Case number 118: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 0.100000, beta = 0.100000 
+6.35
+Case number 119: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 0.100000, beta = 1.000000 
+6.23
+Case number 120: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 0.100000, beta = 10.000000 
+5.95
+Case number 121: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 1.000000, beta = 0.010000 
+6.11
+Case number 122: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 1.000000, beta = 0.100000 
+6.24
+Case number 123: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 1.000000, beta = 1.000000 
+6.20
+Case number 124: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 1.000000, beta = 10.000000 
+6.46
+Case number 125: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.18
+Case number 126: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.415846e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.35
+Case number 127: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 5.692087e+02).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.36
+Case number 128: 
+D0 = 0.100000, gammaD = 10.000000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.316884e+06).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.60
+Case number 129: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 0.010000, beta = 0.010000 
+6.25
+Case number 130: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 0.010000, beta = 0.100000 
+6.22
+Case number 131: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 0.010000, beta = 1.000000 
+6.32
+Case number 132: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 0.010000, beta = 10.000000 
+6.45
+Case number 133: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 0.100000, beta = 0.010000 
+6.28
+Case number 134: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 0.100000, beta = 0.100000 
+6.29
+Case number 135: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 0.100000, beta = 1.000000 
+6.40
+Case number 136: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 0.100000, beta = 10.000000 
+6.66
+Case number 137: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 1.000000, beta = 0.010000 
+6.63
+Case number 138: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 1.000000, beta = 0.100000 
+6.23
+Case number 139: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 1.000000, beta = 1.000000 
+6.44
+Case number 140: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 1.000000, beta = 10.000000 
+6.34
+Case number 141: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.120834e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.19
+Case number 142: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.121113e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.46
+Case number 143: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.123778e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.61
+Case number 144: 
+D0 = 1.000000, gammaD = 0.010000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.57
+Case number 145: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 0.010000, beta = 0.010000 
+6.60
+Case number 146: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 0.010000, beta = 0.100000 
+6.13
+Case number 147: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 0.010000, beta = 1.000000 
+6.39
+Case number 148: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 0.010000, beta = 10.000000 
+6.38
+Case number 149: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 0.100000, beta = 0.010000 
+6.16
+Case number 150: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 0.100000, beta = 0.100000 
+6.13
+Case number 151: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 0.100000, beta = 1.000000 
+5.93
+Case number 152: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 0.100000, beta = 10.000000 
+6.07
+Case number 153: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 1.000000, beta = 0.010000 
+6.30
+Case number 154: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 1.000000, beta = 0.100000 
+6.08
+Case number 155: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 1.000000, beta = 1.000000 
+6.33
+Case number 156: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 1.000000, beta = 10.000000 
+6.47
+Case number 157: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.121113e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.45
+Case number 158: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.123778e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.77
+Case number 159: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.55
+Case number 160: 
+D0 = 1.000000, gammaD = 0.100000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.415874e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.61
+Case number 161: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 0.010000, beta = 0.010000 
+6.14
+Case number 162: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 0.010000, beta = 0.100000 
+6.28
+Case number 163: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 0.010000, beta = 1.000000 
+6.28
+Case number 164: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 0.010000, beta = 10.000000 
+6.33
+Case number 165: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 0.100000, beta = 0.010000 
+6.35
+Case number 166: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 0.100000, beta = 0.100000 
+6.30
+Case number 167: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 0.100000, beta = 1.000000 
+6.48
+Case number 168: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 0.100000, beta = 10.000000 
+6.34
+Case number 169: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 1.000000, beta = 0.010000 
+6.73
+Case number 170: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 1.000000, beta = 0.100000 
+6.59
+Case number 171: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 1.000000, beta = 1.000000 
+6.31
+Case number 172: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 1.000000, beta = 10.000000 
+6.17
+Case number 173: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.123778e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.16
+Case number 174: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.48
+Case number 175: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.415864e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.44
+Case number 176: 
+D0 = 1.000000, gammaD = 1.000000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 5.692087e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.53
+Case number 177: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 0.010000, beta = 0.010000 
+6.12
+Case number 178: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 0.010000, beta = 0.100000 
+6.11
+Case number 179: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 0.010000, beta = 1.000000 
+6.10
+Case number 180: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 0.010000, beta = 10.000000 
+5.97
+Case number 181: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 0.100000, beta = 0.010000 
+6.45
+Case number 182: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 0.100000, beta = 0.100000 
+6.09
+Case number 183: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 0.100000, beta = 1.000000 
+6.45
+Case number 184: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 0.100000, beta = 10.000000 
+6.19
+Case number 185: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 1.000000, beta = 0.010000 
+6.28
+Case number 186: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 1.000000, beta = 0.100000 
+6.23
+Case number 187: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 1.000000, beta = 1.000000 
+6.37
+Case number 188: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 1.000000, beta = 10.000000 
+6.42
+Case number 189: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.30
+Case number 190: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.415880e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.47
+Case number 191: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 5.692087e+01).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.55
+Case number 192: 
+D0 = 1.000000, gammaD = 10.000000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.317842e+05).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.79
+Case number 193: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 0.010000, beta = 0.010000 
+6.61
+Case number 194: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 0.010000, beta = 0.100000 
+6.39
+Case number 195: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 0.010000, beta = 1.000000 
+6.47
+Case number 196: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 0.010000, beta = 10.000000 
+6.33
+Case number 197: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 0.100000, beta = 0.010000 
+6.35
+Case number 198: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 0.100000, beta = 0.100000 
+6.44
+Case number 199: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 0.100000, beta = 1.000000 
+6.37
+Case number 200: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 0.100000, beta = 10.000000 
+6.44
+Case number 201: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 1.000000, beta = 0.010000 
+6.38
+Case number 202: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 1.000000, beta = 0.100000 
+6.67
+Case number 203: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 1.000000, beta = 1.000000 
+6.34
+Case number 204: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 1.000000, beta = 10.000000 
+6.31
+Case number 205: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.120833e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.09
+Case number 206: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.121112e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.62
+Case number 207: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.123778e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.47
+Case number 208: 
+D0 = 10.000000, gammaD = 0.010000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.58
+Case number 209: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 0.010000, beta = 0.010000 
+6.04
+Case number 210: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 0.010000, beta = 0.100000 
+6.13
+Case number 211: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 0.010000, beta = 1.000000 
+6.30
+Case number 212: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 0.010000, beta = 10.000000 
+6.34
+Case number 213: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 0.100000, beta = 0.010000 
+6.50
+Case number 214: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 0.100000, beta = 0.100000 
+6.56
+Case number 215: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 0.100000, beta = 1.000000 
+6.43
+Case number 216: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 0.100000, beta = 10.000000 
+6.38
+Case number 217: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 1.000000, beta = 0.010000 
+6.52
+Case number 218: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 1.000000, beta = 0.100000 
+6.31
+Case number 219: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 1.000000, beta = 1.000000 
+6.31
+Case number 220: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 1.000000, beta = 10.000000 
+6.33
+Case number 221: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.121115e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.11
+Case number 222: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.123778e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.52
+Case number 223: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.54
+Case number 224: 
+D0 = 10.000000, gammaD = 0.100000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.415875e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.68
+Case number 225: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 0.010000, beta = 0.010000 
+6.34
+Case number 226: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 0.010000, beta = 0.100000 
+6.61
+Case number 227: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 0.010000, beta = 1.000000 
+6.36
+Case number 228: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 0.010000, beta = 10.000000 
+6.22
+Case number 229: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 0.100000, beta = 0.010000 
+6.37
+Case number 230: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 0.100000, beta = 0.100000 
+6.33
+Case number 231: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 0.100000, beta = 1.000000 
+6.29
+Case number 232: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 0.100000, beta = 10.000000 
+6.35
+Case number 233: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 1.000000, beta = 0.010000 
+6.32
+Case number 234: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 1.000000, beta = 0.100000 
+6.18
+Case number 235: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 1.000000, beta = 1.000000 
+6.33
+Case number 236: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 1.000000, beta = 10.000000 
+6.41
+Case number 237: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.123778e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.15
+Case number 238: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.49
+Case number 239: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.415875e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.50
+Case number 240: 
+D0 = 10.000000, gammaD = 1.000000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 5.692087e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.52
+Case number 241: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 0.010000, beta = 0.010000 
+6.41
+Case number 242: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 0.010000, beta = 0.100000 
+6.16
+Case number 243: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 0.010000, beta = 1.000000 
+6.49
+Case number 244: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 0.010000, beta = 10.000000 
+6.13
+Case number 245: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 0.100000, beta = 0.010000 
+6.37
+Case number 246: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 0.100000, beta = 0.100000 
+6.47
+Case number 247: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 0.100000, beta = 1.000000 
+6.16
+Case number 248: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 0.100000, beta = 10.000000 
+6.62
+Case number 249: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 1.000000, beta = 0.010000 
+6.43
+Case number 250: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 1.000000, beta = 0.100000 
+6.43
+Case number 251: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 1.000000, beta = 1.000000 
+6.39
+Case number 252: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 1.000000, beta = 10.000000 
+6.58
+Case number 253: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 10.000000, beta = 0.010000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.150240e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+4.05
+Case number 254: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 10.000000, beta = 0.100000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.415880e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.58
+Case number 255: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 10.000000, beta = 1.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 5.692087e+00).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.61
+Case number 256: 
+D0 = 10.000000, gammaD = 10.000000, k0 = 10.000000, beta = 10.000000 
+Traceback (most recent call last):
+  File "forward_sensitivity.py", line 267, in <module>
+    forward(initial_p, str(case)) 
+  File "forward_sensitivity.py", line 159, in forward
+    solver_RD.solve()
+RuntimeError: 
+
+*** -------------------------------------------------------------------------
+*** DOLFIN encountered an error. If you are not able to resolve this issue
+*** using the information listed below, you can ask for help at
+***
+***     fenics-support@googlegroups.com
+***
+*** Remember to include the error message listed below and, if possible,
+*** include a *minimal* running example to reproduce the error.
+***
+*** -------------------------------------------------------------------------
+*** Error:   Unable to solve linear system using PETSc Krylov solver.
+*** Reason:  Solution failed to converge in 1000 iterations (PETSc reason DIVERGED_ITS, residual norm ||r|| = 2.334736e+04).
+*** Where:   This error was encountered inside PETScKrylovSolver.cpp.
+*** Process: 0
+*** 
+*** DOLFIN version: 2017.2.0
+*** Git changeset:  
+*** -------------------------------------------------------------------------
+
+3.46

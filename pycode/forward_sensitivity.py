@@ -119,7 +119,7 @@ def forward(initial_p, name=None):
     vm   = vonmises(disp)
     D    = project(D0*exp(-gammaD*vm),V)
     #k    = project(k0*exp(-gammaK*vm),V)
-
+    '''
     u.rename('u_'+name,'displacement')
     p_n.rename('phi_T_'+name,'tumor fraction')
     vm.rename('vm_'+name,"Von Mises")
@@ -130,7 +130,7 @@ def forward(initial_p, name=None):
     f_notime.write(k,t)
     f_notime.write(vm,t)
     f_notime.write(D,t)
-    
+    '''
     # Set up reaction-diffusion problem
     dp   = TrialFunction(V)
     p    = Function(V)
@@ -164,7 +164,7 @@ def forward(initial_p, name=None):
         vm   = vonmises(disp)
         D    = project(D0*exp(-gammaD*vm),V)
         #k    = project(k0*exp(-gammaK*vm),V)
-      
+        '''
         u.rename('u_'+name,'displacement')
         p_n.rename('phi_T_'+name,'tumor fraction')
         vm.rename('vm_'+name,"Von Mises")
@@ -175,7 +175,7 @@ def forward(initial_p, name=None):
         f_notime.write(k,t)
         f_notime.write(vm,t)
         f_notime.write(D,t)
-    
+        '''
     return p
     
 #########################################################################
@@ -219,8 +219,8 @@ if __name__ == "__main__":
     
     # Model parameters
     t = 0.
-    T             = 2.0              # final time 
-    num_steps     = 20              # number of time steps
+    T             = 6.0              # final time 
+    num_steps     = 120              # number of time steps
     dt            = T/num_steps      # time step size
     theta         = 50970.           # carrying capacity - normalize data by this
     mu            = .42              # kPa, bulk shear modulus
@@ -256,6 +256,7 @@ if __name__ == "__main__":
     D0.vector()[v2d] = vecD[:]
     k0.vector()[v2d] = veck[:]
     '''
+    '''
     # Prepare output file - NEED TO FIX, IT'S ONLY SAVING ONE
     f_nosteps     = XDMFFile(osjoin(output_dir,'nosteps.xdmf'))
     f_nosteps.parameters["flush_output"] = True
@@ -264,6 +265,7 @@ if __name__ == "__main__":
     f_notime.parameters["flush_output"] = True
     f_notime.parameters["functions_share_mesh"] = True
     # run the forward model
+    '''
     forward(initial_p, str(case)) 
     
 '''    

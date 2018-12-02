@@ -1,0 +1,16 @@
+LE(0)/HE(1): 0
+D0 = 0.831665484255
+gammaD = 0.212689163148
+k0 = 1.0
+beta = 0.01
+day = 5
+output dirctory = ./output/rat05le_day5
+Elapsed time is 134.61750625 minutes
+gammaD = 1.0
+D0 = 2.3366354231274555
+beta = 1.0
+J_opt day 2 = 13.3422910652
+J_opt day 4 = 11.859394559
+J_opt day 5 = 7.46257825701
+J_opt day 6 = 11.3460616236
+J_opt day 9 = 29.0916359579

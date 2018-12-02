@@ -1,7 +1,0 @@
-LE(0)/HE(1): 0
-D0 = 0.5
-gammaD = 0.5
-k0 = 2.0
-beta = 0.1
-day = 4
-output dirctory = ./output/rat05le_day4

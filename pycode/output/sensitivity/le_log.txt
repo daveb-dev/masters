@@ -1,141 +1,24 @@
 Case number 1: 
 D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k = 0.010000 
-15.88
+159.08
+FAILED: STOPPED AT 449 
 Case number 2: 
 D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k = 0.100000 
-14.99
+149.13
+FAILED: STOPPED AT 449 
 Case number 3: 
 D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k = 1.000000 
-15.75
-FAILED 
+111.70
+FAILED: STOPPED AT 328 
 Case number 4: 
-D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k = 10.000000 
-4.28
-FAILED 
+D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k = 3.000000 
+32.16
+FAILED: STOPPED AT 85 
 Case number 5: 
-D0 = 0.010000, gammaD = 0.010000, beta = 0.100000, k = 0.010000 
-14.13
+D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k = 6.000000 
+16.76
+FAILED: STOPPED AT 39 
 Case number 6: 
-D0 = 0.010000, gammaD = 0.010000, beta = 0.100000, k = 0.100000 
-15.34
-Case number 7: 
-D0 = 0.010000, gammaD = 0.010000, beta = 0.100000, k = 1.000000 
-15.79
-FAILED 
-Case number 8: 
-D0 = 0.010000, gammaD = 0.010000, beta = 0.100000, k = 10.000000 
-4.60
-FAILED 
-Case number 9: 
-D0 = 0.010000, gammaD = 0.010000, beta = 1.000000, k = 0.010000 
-14.15
-Case number 10: 
-D0 = 0.010000, gammaD = 0.010000, beta = 1.000000, k = 0.100000 
-15.07
-Case number 11: 
-D0 = 0.010000, gammaD = 0.010000, beta = 1.000000, k = 1.000000 
-15.86
-FAILED 
-Case number 12: 
-D0 = 0.010000, gammaD = 0.010000, beta = 1.000000, k = 10.000000 
-4.46
-FAILED 
-Case number 13: 
-D0 = 0.010000, gammaD = 0.010000, beta = 10.000000, k = 0.010000 
-14.14
-Case number 14: 
-D0 = 0.010000, gammaD = 0.010000, beta = 10.000000, k = 0.100000 
-14.94
-Case number 15: 
-D0 = 0.010000, gammaD = 0.010000, beta = 10.000000, k = 1.000000 
-15.63
-FAILED 
-Case number 16: 
-D0 = 0.010000, gammaD = 0.010000, beta = 10.000000, k = 10.000000 
-4.83
-FAILED 
-Case number 17: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.010000, k = 0.010000 
-14.25
-Case number 18: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.010000, k = 0.100000 
-15.01
-Case number 19: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.010000, k = 1.000000 
-15.77
-FAILED 
-Case number 20: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.010000, k = 10.000000 
-4.25
-FAILED 
-Case number 21: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.100000, k = 0.010000 
-14.10
-Case number 22: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.100000, k = 0.100000 
-15.31
-Case number 23: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.100000, k = 1.000000 
-15.62
-FAILED 
-Case number 24: 
-D0 = 0.010000, gammaD = 0.100000, beta = 0.100000, k = 10.000000 
-4.39
-FAILED 
-Case number 25: 
-D0 = 0.010000, gammaD = 0.100000, beta = 1.000000, k = 0.010000 
-14.09
-Case number 26: 
-D0 = 0.010000, gammaD = 0.100000, beta = 1.000000, k = 0.100000 
-15.17
-Case number 27: 
-D0 = 0.010000, gammaD = 0.100000, beta = 1.000000, k = 1.000000 
-16.02
-FAILED 
-Case number 28: 
-D0 = 0.010000, gammaD = 0.100000, beta = 1.000000, k = 10.000000 
-4.48
-FAILED 
-Case number 29: 
-D0 = 0.010000, gammaD = 0.100000, beta = 10.000000, k = 0.010000 
-14.19
-Case number 30: 
-D0 = 0.010000, gammaD = 0.100000, beta = 10.000000, k = 0.100000 
-14.97
-Case number 31: 
-D0 = 0.010000, gammaD = 0.100000, beta = 10.000000, k = 1.000000 
-15.85
-FAILED 
-Case number 32: 
-D0 = 0.010000, gammaD = 0.100000, beta = 10.000000, k = 10.000000 
-4.44
-FAILED 
-Case number 33: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.010000, k = 0.010000 
-14.31
-Case number 34: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.010000, k = 0.100000 
-7.07
-FAILED 
-Case number 35: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.010000, k = 1.000000 
-0.39
-FAILED 
-Case number 36: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.010000, k = 10.000000 
-0.02
-FAILED 
-Case number 37: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.100000, k = 0.010000 
-0.01
-FAILED 
-Case number 38: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.100000, k = 0.100000 
-0.01
-FAILED 
-Case number 39: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.100000, k = 1.000000 
-0.03
-FAILED 
-Case number 40: 
-D0 = 0.010000, gammaD = 1.000000, beta = 0.100000, k = 10.000000 
+D0 = 0.010000, gammaD = 0.010000, beta = 0.010000, k = 9.000000 
+13.98
+FAILED: STOPPED AT 26 

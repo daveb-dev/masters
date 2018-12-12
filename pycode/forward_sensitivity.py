@@ -119,7 +119,7 @@ def forward(initial_p, name=None):
     vm   = vonmises(disp)
     D    = project(D0*exp(-gammaD*vm),V)
     #k    = project(k0*exp(-gammaK*vm),V)
-    '''
+
     u.rename('u_'+name,'displacement')
     p_n.rename('phi_T_'+name,'tumor fraction')
     vm.rename('vm_'+name,"Von Mises")
@@ -130,17 +130,17 @@ def forward(initial_p, name=None):
     f_notime.write(k,t)
     f_notime.write(vm,t)
     f_notime.write(D,t)
-    '''
+    
     # Set up reaction-diffusion problem
     dp   = TrialFunction(V)
     p    = Function(V)
     q    = TestFunction(V)
-    F_RD = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
+    F_RD = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p_n)*q*dx  
     J_RD = derivative(F_RD,p) 
     
     # Prepare the solution
     for n in range(num_steps):        
-        
+        print("Currently at step "+str(n))
         # Update current time and Compute solution
         t += dt
         problem_RD  = NonlinearVariationalProblem(F_RD, p, J=J_RD,form_compiler_parameters=ffc_options)
@@ -154,7 +154,7 @@ def forward(initial_p, name=None):
         prm['newton_solver']['preconditioner'] = 'ilu'
         prm['newton_solver']['krylov_solver']['absolute_tolerance'] = 1E-8
         prm['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-6
-        prm['newton_solver']['krylov_solver']['maximum_iterations'] = 1000
+        prm['newton_solver']['krylov_solver']['maximum_iterations'] = 1001
         prm['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
         solver_RD.solve()
         
@@ -164,7 +164,7 @@ def forward(initial_p, name=None):
         vm   = vonmises(disp)
         D    = project(D0*exp(-gammaD*vm),V)
         #k    = project(k0*exp(-gammaK*vm),V)
-        '''
+        
         u.rename('u_'+name,'displacement')
         p_n.rename('phi_T_'+name,'tumor fraction')
         vm.rename('vm_'+name,"Von Mises")
@@ -175,7 +175,7 @@ def forward(initial_p, name=None):
         f_notime.write(k,t)
         f_notime.write(vm,t)
         f_notime.write(D,t)
-        '''
+        
     return p
     
 #########################################################################
@@ -195,17 +195,8 @@ if __name__ == "__main__":
     beta     = float(sys.argv[5])
     case     = sys.argv[6]
                        
-#     if(len(sys.argv) != 7):
-#         print("wrong number of inputs, should be:\n ")
-#         print("Syntax: python <this file's name> [0=LE/1=HE] D0 gammaD beta k0 case ")
-#         quit()
-#     lin_hyp  = int(sys.argv[1])
-#     D0       = float(sys.argv[2])
-#     gammaD   = float(sys.argv[3])
-#     beta     = float(sys.argv[4])
-#     k0       = float(sys.argv[5])
-#     case     = sys.argv[6]
-    
+    print("lin_hyp = %i, D0 = %f, gammaD = %f, k0 = %f, beta = %f, case = %s\n" % (lin_hyp, D0, gammaD, k0, beta, case))
+
     t1         = time()
     input_dir  = "../rat-data/rat05/"
     if lin_hyp == 0:
@@ -215,17 +206,17 @@ if __name__ == "__main__":
 
     # Prepare a mesh
     mesh = Mesh(input_dir+"gmsh.xml")
-    V    = FunctionSpace(mesh, 'CG', 1)
+    V    = FunctionSpace(mesh, 'CG', 2)
     
     # Model parameters
-    t = 0.
-    T             = 6.0              # final time 
-    num_steps     = 120              # number of time steps
-    dt            = T/num_steps      # time step size
-    theta         = 50970.           # carrying capacity - normalize data by this
-    mu            = .42              # kPa, bulk shear modulus
-    nu            = .45              # poisson's ratio
-    lmbda         = 2*mu*nu/(1-2*nu) # lame parameter
+    t          = 0.
+    T          = 9.0              # final time 
+    num_steps  = 450              # number of time steps
+    dt         = T/num_steps      # time step size
+    theta      = 50970.           # carrying capacity - normalize data by this
+    mu         = .42              # kPa, bulk shear modulus
+    nu         = .45              # poisson's ratio
+    lmbda      = 2*mu*nu/(1-2*nu) # lame parameter
 
     # Load initial tumor condition data
     initial_p = interp(input_dir+"ic.mat","ic")
@@ -234,57 +225,20 @@ if __name__ == "__main__":
     # Parameters to be optimized
     D0     = Constant(D0)     # mobility or diffusion coefficient
     gammaD = Constant(gammaD)     # initial guess of gamma_D
-    # gammaK = Constant(gammaK)
     beta   = Constant(beta)     # force coefficient for HE
     k0     = Constant(k0)     # growth rate initial guess
     k      = project(k0,V)
     
 
-    '''
-    import h5py
-    D0  = Function(V)
-    k0  = Function(V)
-    # Open the result file for reading
-    fl = h5py.File("./output/rat05le/notime.h5", "r")
-    # Choose the first time step
-    vecD = fl["/VisualisationVector/0"]
-    veck = fl["/VisualisationVector/1"]
-    # Scalar FunctionSpace Q is required for mapping vertices to dofs 
-    Q = FunctionSpace(mesh, 'CG', 1)
-    v2d = vertex_to_dof_map(Q)
-    # Now map vertexfunction to the V function space
-    D0.vector()[v2d] = vecD[:]
-    k0.vector()[v2d] = veck[:]
-    '''
-    '''
     # Prepare output file - NEED TO FIX, IT'S ONLY SAVING ONE
-    f_nosteps     = XDMFFile(osjoin(output_dir,'nosteps.xdmf'))
-    f_nosteps.parameters["flush_output"] = True
-    f_nosteps.parameters["functions_share_mesh"] = True
-    f_notime     = XDMFFile(osjoin(output_dir,'notime.xdmf'))
-    f_notime.parameters["flush_output"] = True
-    f_notime.parameters["functions_share_mesh"] = True
+    f_notime     = XDMFFile(osjoin(output_dir,'notime'+case+'.xdmf'))
+    f_notime.parameters["flush_output"]          = True
+    f_notime.parameters["functions_share_mesh"]  = True
+    f_notime.parameters["rewrite_function_mesh"] = False
+
     # run the forward model
-    '''
-    forward(initial_p, str(case)) 
+    forward(initial_p, case) 
     
-'''    
-    t = 0.
-    day = 0
-    model_p = initial_p    
-    model_p.rename('opt_p','optimized tumor')
-    f_nosteps.write(model_p,float(day))
-    for T in [2,2,1,1,3]:
-        day      += T
-        num_steps = T*10              # number of time steps
-        dt        = T/float(num_steps)      # time step size
-        
-        # Run forward model using optimized values
-        model_p = forward(model_p,'test')
-        model_p.rename('opt_p','optimized tumor')
-        f_nosteps.write(model_p,float(day))
-'''     
-            
     
     
     

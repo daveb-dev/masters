@@ -4,7 +4,7 @@ from numpy import fliplr, linspace, inf
 from os.path import join as osjoin
 from scipy.io import loadmat as sc_io_loadmat
 from scipy.interpolate import RegularGridInterpolator
-import h5py
+#import h5py
 set_log_level(ERROR) 
 
 class InterpolatedParameter(Expression):
@@ -253,10 +253,10 @@ if __name__ == "__main__":
     input_dir  = "../rat-data/rat05/"
     if lin_hyp == 0:
         output_dir = './output/rat05le_day'+str(day)
-        fl = h5py.File("./output/rat05le_day2/notime.h5", "r")
+        #fl = h5py.File("./output/rat05le_day2/notime.h5", "r")
     else:
         output_dir = './output/rat05he_day'+str(day)
-        fl = h5py.File("./output/rat05he_day2/notime.h5", "r")
+        #fl = h5py.File("./output/rat05he_day2/notime.h5", "r")
 
     # Prepare output file
     f_timeseries = XDMFFile(osjoin(output_dir,'timeseries.xdmf'))
@@ -302,7 +302,7 @@ if __name__ == "__main__":
     annotate=False
 
     '''
-    ####################### D0 as a field and gammaK ##########################
+    ####################### D0 as a field and k = f(stress) ##########################
 
     # Initial guesses
     D0     = project(Constant(D0),V,annotate=False) # diffusion coefficient
@@ -326,13 +326,13 @@ if __name__ == "__main__":
     f_notime.write(k0,0.)
     '''
     
-    ####################### D0 as a field and gammaK ##########################
+    ####################### D0 as a constant and k as a field ##########################
     # Initial guesses
     D0     = Constant(D0)
     gammaD = Constant(gammaD)     # initial guess of gamma_D
     k      = project(Constant(k0),V,annotate=False)     # growth rate initial guess
     beta   = Constant(beta)
-
+    '''
     # Choose the first time step
     veck = fl["/VisualisationVector/0"]
     # Scalar FunctionSpace Q is required for mapping vertices to dofs 
@@ -340,7 +340,7 @@ if __name__ == "__main__":
     v2d = vertex_to_dof_map(Q)
     # Now map vertexfunction to the V function space
     k.vector()[v2d] = veck[:]
-    
+    '''
     # Optimization module
     [D0, gammaD, k, beta] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
     

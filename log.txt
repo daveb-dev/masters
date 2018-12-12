@@ -1,0 +1,83 @@
+** TODO
+Model
+O Validate reaction diffusion (use masa?)
+O Validate LE and HE (again, use manufactured solution?)
+O Validate parameter estimation 
+O Fix meshing matlab program to work for rats 06, 09, 12 that have tumors outside skull? Try using a single mesh
+O Fix boundary condition to allow movement along skull 
+O Need to check if there is an optimal mesh/time step
+O Why is carrying capacity not reached in data?
+O Need to test different cases of regularization with L curve
+O Use actual deformations? Ask David
+O Fix nonlinear solver not converging - trying explicit Euler didn't work, keep working on the math
+O Which other nonlinear models should we test?
+O Maybe try a different solver than LBFGS later
+
+Report
+O Need to write about validation for appendix
+O Change mesh picture in report? Might be wrong picture, shows coarse mesh in some places. 
+O In images of tumor, include bar for scale of mm
+O Need to fix figures for report - normalize correctly in paraview, include time points in figure caption, make a point in the caption about what's happening, make better montages
+
+** Completed items 
+* Drafted TOC
+* First try at RD discrete model/FEM formulation
+* Implemented RD forward model in fenics
+* Output RD data to paraview
+* Plotted RD output in paraview with cross section (plot over line)
+* Tried to validate RD
+* Checked RD formulation, rewrote for spatially varying D
+* First try at LE FEM formulation from fenics book
+* Found 2D, plane strain formulation in elasticity book
+* Wrote out plane strain and plane stress formulations for better understanding of simplifying assumptions
+* Implemented plane strain formulation
+* Cleaned up formulation documentation of LE and RD
+* Included boundary condition of zero displacement for LE
+* Found potential analytical solution for a plane strain problem with beam from elasticity book
+* Used airy stress function for analytical solution of beam under uniaxial tension
+* Ran LE notebook of plane strain with uniaxial tension, compared to analytical solution and got same answer
+* Found hyperelastic formulation in fenics documentation
+* Wrote hyperelastic formulation in fenics, using the energy minimization problem and Neo-Hookean stored energy model
+* Tested hyperelastic formulation with beam under uniaxial tension, got similar results for low stresses
+* Compared HE and LE models for beam under varying levels of uniaxial tension, plotted LE linear response vs HE softening response
+* Output stress and displacement tensors to XDMF files for viewing in paraview
+* Used warp by vector tool to visualize displacement
+* Saved all output into one file
+* Wrote RD, LE, HE and functions that can be moved around easily (originally saved in different files and imported, then aggregated into a single file)
+* Received tumor imaging data from David
+* Plotted tumor data in various slices
+* Plotted tumor area and "volume" (voxels with tumor cell count > 0) over time
+* Considered AIC: Akaike Information Criterion for model comparison
+* Considered minimizing difference in area or difference in celullarity
+* Plotted the skull in Matlab and used a boundary function to get outline
+* Discretized the boundary further and used Xinzeng's meshing files to mesh the brain slice
+* Followed similar procedure for creating tumor outline and mesh
+* Cleaned up figures - labeled axes, clarified titles, clarified colorbar, used bone colormap, used montage function in matlab, larger fonts, removed titles when using caption
+* Decided to use rat 05 for testing since it showed the least amount of necrosis
+* Ignored rats 06, 09, and 12 because tumor presence outside the skull
+* Debated whether we should try to find a "mean" tumor growth for model, but ended up calibrating for different rats
+* Spent a ton of time trying to get Paraview to work in linux subsystem by building and doing a ton of stuff but ended up installing on Windows which was far easier
+* Changed hyperelastic formulation to Danial's because we need to compare beta values? Need to check this
+* Installed dolfin-adjoint, couldn't get it to work with the installed version of Fenics on laptop. Spent a bunch of time trying to get it to work and finally used Python2.7, pip, pyadjoint. Should've taken more notes on this
+* Asked David why rat 6 time 5 - forgot why
+* Interpolated mesh on skull boundary for finer mesh (custom function)
+* Made finer mesh for tumor
+* Sent intro draft to Tom
+* Asked David about which objective function he used, forgot; he may have used difference in area, also used DICE
+* Saved rat forward model as a movie file
+* Asked David why rat 12 has more cells - forgot why
+* Asked David about pixel size - forgot why, it's .25x.25x1mm
+* Added time function to see how long runs are taking 
+* Increased time step to reduce solving time
+* Used carrying capacity from David's paper - he calculated packing fraction of cells in a square
+* Obtained mechanical values from Xinzeng/David's paper
+* Changed von Mises criterion for 2D
+* Xinzeng said to save strain, stress, E^S, E^G
+* Ran parameter estimation several times in different ways and then used the parameters estimated for forward model
+* Changed code lots along the way; put everything together in one python code, allowed it to take input and run, tried to fix parameters for solvers
+* Ran "sensitivity" analysis to see when nonlinear solver fails
+* Tried different cost functions; considered minimizing gradient at tumor boundary using Tikhonov regularization
+* Tried estimating for a D field as well, but decided diffusion should not be a local parameter, except maybe local to different regions of the brain (David said even then it doesn't change much)
+* Tried making growth field related to stress (stresses are capable of increasing pressure and reducing flow according to a source I had read) but ultimately decided not to 
+* Ignored AIC for now, simply base model comparison on which fits data better
+* Growth field should be a function of time, but we're not modeling here

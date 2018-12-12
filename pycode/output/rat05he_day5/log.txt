@@ -1,16 +1,16 @@
 LE(0)/HE(1): 1
-D0 = 1.01849141246
-gammaD = 1.9918771142
+D0 = 2.54
+gammaD = 1.0
 k0 = 1.0
-beta = 0.034372054592
+beta = 0.17
 day = 5
 output dirctory = ./output/rat05he_day5
-Elapsed time is 324.8612704 minutes
+Elapsed time is 57.7842568116 minutes
 gammaD = 1.0
-D0 = 1.8590774181913008
-beta = 0.3198794266090935
-J_opt day 2 = 13.2734716427
-J_opt day 4 = 11.5851180151
-J_opt day 5 = 7.12429819414
-J_opt day 6 = 11.0410650146
-J_opt day 9 = 30.3567369067
+D0 = 1.85593637514
+beta = 0.311854598349
+J_opt day 2 = 13.2695723201
+J_opt day 4 = 11.5740666598
+J_opt day 5 = 7.11944256016
+J_opt day 6 = 11.0299280011
+J_opt day 9 = 29.7712737248

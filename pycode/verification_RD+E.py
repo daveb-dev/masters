@@ -30,7 +30,7 @@ def interp(file_loc,mat_name):
     """
     file_print.write("Interpolating "+mat_name+"...\n")
     mat = sc_io_loadmat(file_loc)[mat_name]
-    mat = fliplr(mat.T)/theta  # Needs to be adjusted to fit the mesh correctly; also scaled
+    mat = fliplr(mat.T)/theta  # Needs to be adjusted to fit the mesh correctly
     x,y = mat.shape[0], mat.shape[1]
     mat_interp = InterpolatedParameter(linspace(1,x,x),linspace(1,y,y),mat,degree=1)
     return interpolate(mat_interp,V)
@@ -62,7 +62,7 @@ def vis_obs(quantity1,quantity2,title1,title2,take_diff=False):
         diff.vector()[:] = quantity1.vector()-quantity2.vector()
         diff_results.write(diff)
 
-def forward(initial_p, name, record=False, annotate=False):    
+def forward(initial_p, name, record=False,  annotate=False):
     """ 
         Here, we define the forward problem. 
     """
@@ -72,55 +72,37 @@ def forward(initial_p, name, record=False, annotate=False):
         - sigma_form(...) returns the stress tensor based on the cells (phi), elasticity coefficients, and a coefficient beta
         - vonmises(...) calculates the von Mises stress based on the actual stress tensor
     '''
-    
-    ## Define functions
     def E(u):
         return 0.5*(nabla_grad(u) + nabla_grad(u).T)
     def sigma(u):
-        I = Identity(2)             # Identity tensor
-        F = I + grad(u)             # Deformation gradient
-        B = F*F.T
-        C = F.T*F
-        J = det(F)
-        I1 = tr(C)
-        sigma = lmbda*(J-1)*I+mu*(B-1./2*I1*I)/(J**(5./3))
-        return sigma
+        return 2*mu*E(u)+lmbda*tr(E(u))*Identity(2)
     def vonmises(u):
-        s = sigma(u) - (1./2)*tr(sigma(u))*Identity(2)  # deviatoric stress
+        s         = sigma(u) - (1./2)*tr(sigma(u))*Identity(2)  # deviatoric stress
         von_Mises = sqrt(3./2*inner(s, s))
-        return project(von_Mises, V, annotate=annotate)
-    def sigma_form(u, phi):
-        I = Identity(2)             # Identity tensor
-        F = I + grad(u)             # Deformation gradient
-        Fs = F/(1+beta*phi)
-        Bs = Fs*Fs.T
-        Js  = det(Fs)
-        return 1/(1+beta*phi)*(mu/(Js**(5./3))*(Bs-1./2*tr(Bs)*I)+lmbda*(Js-1)*I)
-
-    # Set up linear elasticity problem
+        return project(von_Mises, V,annotate=annotate)
+    def sigma_form(u,phi):
+        return 2*mu*(E(u)-beta*phi*Identity(2))+lmbda*(tr(E(u))-2*beta*phi)*Identity(2)
+    
     U           = VectorFunctionSpace(mesh,'Lagrange',1)
     def boundary(x, on_boundary):
         return on_boundary
     bc          = DirichletBC(U, Constant((0.,0.)), boundary)
-    du          = TrialFunction(U)
-    u           = Function(U, annotate=annotate) 
-    v           = TestFunction(U)
     p_n         = interpolate(initial_p,V)
-    F_HE        = inner(sigma_form(u, p_n), E(v))*dx
-    J_HE        = derivative(F_HE,u,du)
+    u           = TrialFunction(U)
+    v           = TestFunction(U)
+    F_LE        = inner(sigma_form(u, p_n), E(v))*dx 
+    a, L        = lhs(F_LE), rhs(F_LE)
+    u           = Function(U,annotate=annotate)
     parameters["form_compiler"]["quadrature_degree"] = 2
     parameters["form_compiler"]["cpp_optimize"] = True
     parameters['krylov_solver']['nonzero_initial_guess'] = True
     ffc_options = {"quadrature_degree": 2}
-    problem_HE  = NonlinearVariationalProblem(F_HE, u, bc, J=J_HE,form_compiler_parameters=ffc_options)
-    solver_HE   = NonlinearVariationalSolver(problem_HE)
-    solver_HE.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
 
     # First iteration solving for displacement, and using the von mises stress field for D
-    solver_HE.solve(annotate=annotate)
-    vm   = vonmises(u)
-    D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
-    
+    solve(a == L, u, bc, form_compiler_parameters=ffc_options,annotate=annotate)
+    vm          = vonmises(u)
+    D           = project(D0*exp(-gammaD*vm),V,annotate=annotate)
+
     # Set up reaction-diffusion problem
     dp          = TrialFunction(V)
     p           = Function(V,annotate=annotate)
@@ -130,39 +112,38 @@ def forward(initial_p, name, record=False, annotate=False):
     problem_RD  = NonlinearVariationalProblem(F_RD, p, J=J_RD,form_compiler_parameters=ffc_options)
     solver_RD   = NonlinearVariationalSolver(problem_RD)
     solver_RD.parameters['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
-    
+
     # Prepare the solution
     t = dt
         
     for n in range(num_steps):
         if (n%rtime == 0):
-            print("Solving reaction diffusion for time = "+str(t))
+            print("Solved reaction diffusion for time = "+str(t))
             if record:        # save the current solution, k field, displacement, and diffusion
                 u.rename('u_'+name,'displacement')
                 p_n.rename('phi_T_'+name,'tumor fraction')
                 vm.rename('vm_'+name,'Von Mises')
                 D.rename('D_'+name,'diffusion coefficient')
-                k.rename('k_'+name,'k field')  
-                file_results.write(u,t)
+                k.rename('k_'+name,'k field')          
                 file_results.write(p_n,t)
+                file_results.write(u,t)
                 file_results.write(k,t)
                 file_results.write(vm,t)
                 file_results.write(D,t)
-        
-        # Update current time and Compute solution
+        # Update current time
         solver_RD.solve(annotate=annotate)
         p_n.assign(p)
         
         # Update previous solution
-        solver_HE.solve(annotate=annotate)
+        solve(a == L, u, bc, form_compiler_parameters=ffc_options,annotate=annotate)
         vm   = vonmises(u)
         D    = project(D0*exp(-gammaD*vm),V,annotate=annotate)
-        
+
         t += dt
-        
     return p
 
-# Callback function for the optimizer; Writes intermediate results to a logfile
+# Callback function for the optimizer
+# Writes intermediate results to a logfile
 def eval_cb(j, m):
     """ The callback function keeping a log """
     file_print.write("objective = %15.10e \n" % j)
@@ -178,13 +159,13 @@ def optimize(dbg=False):
     m = [Control(k), Control(D0)]
     
     # Execute first time to annotate and record the tape
-    p = forward(initial_p,'true', True, True)
+    p = forward(initial_p, 'true', True, True)
 
     J = objective(p, target_p, r_coeff1, r_coeff2)
 
     # Prepare the reduced functional
     rf = ReducedFunctional(J,m,eval_cb_post=eval_cb)
-
+    
     # upper and lower bound for the parameter field
     k_lb, k_ub = Function(V,annotate=False), Function(V,annotate=False)
     k_lb.vector()[:] = 0.
@@ -192,10 +173,10 @@ def optimize(dbg=False):
     D_lb = 0.
     D_ub = 4.
     bnds = [[k_lb,D_lb],[k_ub,D_ub]]
-    
+
     # Run the optimization
     m_opt = minimize(rf,method='L-BFGS-B', bounds=bnds, tol=1.0e-4,options={"disp":True,"gtol":1.0e-4})
-        
+    
     return m_opt
 
 #########################################################################
@@ -206,10 +187,10 @@ case       = 0
 r_coeff1   = 0.01
 r_coeff2   = 0.01
 input_dir  = "../rat-data/rat05/"
-output_dir = './output/rat05/he'
+output_dir = './output/rat05/le'
 
 # Prepare output file
-file_results = XDMFFile(osjoin(output_dir,'he.xdmf'))
+file_results = XDMFFile(osjoin(output_dir,'le.xdmf'))
 file_results.parameters["flush_output"] = True
 file_results.parameters["functions_share_mesh"] = True
 file_print = open(osjoin(output_dir,'info.log'),'w+')
@@ -220,15 +201,15 @@ mesh = Mesh(input_dir+"gmsh.xml")
 V    = FunctionSpace(mesh, 'CG', 1)
 
 # Model parameters
-T             = 2.0              # final time 
+T             = 2.               # final time 
 num_steps     = 100              # number of time steps
 dt            = T/num_steps      # time step size
-theta         = 50970.           # carrying capacity - normalize data by this
+theta         = 50970.           # carrying capacity - normalize cell data by this 
 mu            = .42              # kPa, bulk shear modulus
-nu            = .45              # poisson's ratio
-lmbda         = 2*mu*nu/(1-2*nu) # lame parameter
-beta          = 1.               # force coefficient for HE
-gammaD        = 2.           # initial guess of gamma_D
+nu            = .45
+lmbda         = 2*mu*nu/(1-2*nu)
+beta          = 1.
+gammaD        = 2.     # initial guess of gamma_D
 
 # Parameters to be optimized
 D0     = Constant(1.)            # mobility or diffusion coefficient
@@ -242,13 +223,13 @@ initial_p.rename('initial','tumor at day 0')
 # target_p.rename('target','tumor at day 2')
 
 annotate=False
-target_p = forward(initial_p, None, False, False)
+target_p = forward(initial_p, None,False,False)
 
 # Visualize initial cellularity and target cellularity
 vis_obs(initial_p,target_p,'initial','target') 
 
 # Initial guesses
-D0     = Constant(2.)   # mobility or diffusion coefficient
+D0     = Constant(2.)     # mobility or diffusion coefficient
 k0     = Constant(1.5)    # growth rate initial guess
 k      = project(k0,V)
 
@@ -256,12 +237,12 @@ k      = project(k0,V)
 [k, D0] = optimize() # optimize the k field, gammaD, and D0 using the adjoint method provided by adjoint_dolfin
 file_print.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')
 
-model_p = forward(initial_p,'opt',False, False) # run the forward model using the optimized k field
-vis_obs(initial_p,target_p,'model','target', True) 
+model_p = forward(initial_p,'opt',True,False) # run the forward model using the optimized k field
+vis_obs(model_p,target_p,'model','actual',True)
 
 file_print.write('J_opt = '+str(objective(model_p, target_p, r_coeff1, r_coeff2))+'\n')
 file_print.write('J_opt (without regularization) = '+str(objective(model_p, target_p, 0., 0.))+'\n')
 file_print.write('D0 = '+str(D0.values()[0])+'\n')
 
 file_print.close()
-# xp('/output/rat05/he/he.xdmf')
+# xp('/output/rat05/le/le.xdmf')

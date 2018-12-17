@@ -1,6 +1,7 @@
 ** TODO
 Model
 O Validate reaction diffusion (use masa?)
+   - Want to see what a finer mesh/different time step does? This should show error convergence?
 O Validate LE and HE (again, use manufactured solution?)
 O Validate parameter estimation 
 O Fix meshing matlab program to work for rats 06, 09, 12 that have tumors outside skull? Try using a single mesh

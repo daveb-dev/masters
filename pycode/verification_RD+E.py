@@ -147,6 +147,10 @@ nu         = .45              # poisson's ratio
 lmbda      = 2*mu*nu/(1-2*nu) # lame parameter
 k          = project(k0, V)
 
+u = .1*(cos(pi*x/50)+cos(pi*y/50)+e^(.88*t)+2)
+R = .088*e^(.88*t)+.1*(pi/50)^2*(cos(pi*x/50)+cos(pi*y/50)) - .1*u*(1-u)
+pde = Dt-Dxx-Dyy-k-R = 0
+error = pde-u
 # Load initial tumor condition data
 initial_p = interp(input_dir+"ic.mat","ic")
 initial_p.rename('initial','tumor at day 0')

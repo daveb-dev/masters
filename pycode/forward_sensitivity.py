@@ -32,6 +32,26 @@ def interp(file_loc,mat_name):
     mat_interp = InterpolatedParameter(linspace(1,x,x),linspace(1,y,y),mat,degree=1)
     return interpolate(mat_interp,V)
 
+def param_update(nonlinear_solver):
+    prm1 = nonlinear_solver.parameters
+    prm1['newton_solver']['absolute_tolerance'] = 1E-7
+    prm1['newton_solver']['relative_tolerance'] = 1E-6
+    prm1['newton_solver']['maximum_iterations'] = 51
+    prm1['newton_solver']['relaxation_parameter'] = 1.0
+    prm1['newton_solver']['linear_solver'] = 'gmres'
+    prm1['newton_solver']['preconditioner'] = 'ilu'
+    prm1['newton_solver']['krylov_solver']['absolute_tolerance'] = 1E-8
+    prm1['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-6
+    prm1['newton_solver']['krylov_solver']['maximum_iterations'] = 1000
+    prm1['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
+    return None
+
+def recorder(variables,names,name,t):
+    for i, var in enumerate(variables):
+        var.rename(names[i]+'_'+name,names[i])
+        f_notime.write(var,t)
+    return None
+
 def forward(initial_p, name=None):    
     """ 
         Here, we define the forward problem. 
@@ -99,17 +119,7 @@ def forward(initial_p, name=None):
         J_HE        = derivative(F_HE,u,du)
         problem_HE  = NonlinearVariationalProblem(F_HE, u, bc, J=J_HE,form_compiler_parameters=ffc_options)
         solver_HE   = NonlinearVariationalSolver(problem_HE)
-        prm1 = solver_HE.parameters
-        prm1['newton_solver']['absolute_tolerance'] = 1E-7
-        prm1['newton_solver']['relative_tolerance'] = 1E-6
-        prm1['newton_solver']['maximum_iterations'] = 51
-        prm1['newton_solver']['relaxation_parameter'] = 1.0
-        prm1['newton_solver']['linear_solver'] = 'gmres'
-        prm1['newton_solver']['preconditioner'] = 'ilu'
-        prm1['newton_solver']['krylov_solver']['absolute_tolerance'] = 1E-8
-        prm1['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-6
-        prm1['newton_solver']['krylov_solver']['maximum_iterations'] = 1000
-        prm1['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
+        param_update(solver_HE)
         def mech():
             solver_HE.solve()
             return u
@@ -120,16 +130,7 @@ def forward(initial_p, name=None):
     D    = project(D0*exp(-gammaD*vm),V)
     #k    = project(k0*exp(-gammaK*vm),V)
 
-    u.rename('u_'+name,'displacement')
-    p_n.rename('phi_T_'+name,'tumor fraction')
-    vm.rename('vm_'+name,"Von Mises")
-    D.rename('D_'+name,"diffusion coefficient")
-    k.rename('k_'+name,'k field') 
-    f_notime.write(p_n,t)
-    f_notime.write(u,t)
-    f_notime.write(k,t)
-    f_notime.write(vm,t)
-    f_notime.write(D,t)
+    recorder([u,p_n,vm,D,k],['u','p_n','vm','D','k'],name,t)
     
     # Set up reaction-diffusion problem
     dp   = TrialFunction(V)
@@ -145,17 +146,7 @@ def forward(initial_p, name=None):
         t += dt
         problem_RD  = NonlinearVariationalProblem(F_RD, p, J=J_RD,form_compiler_parameters=ffc_options)
         solver_RD   = NonlinearVariationalSolver(problem_RD)
-        prm = solver_RD.parameters
-        prm['newton_solver']['absolute_tolerance'] = 1E-7
-        prm['newton_solver']['relative_tolerance'] = 1E-6
-        prm['newton_solver']['maximum_iterations'] = 51
-        prm['newton_solver']['relaxation_parameter'] = 1.0
-        prm['newton_solver']['linear_solver'] = 'gmres'
-        prm['newton_solver']['preconditioner'] = 'ilu'
-        prm['newton_solver']['krylov_solver']['absolute_tolerance'] = 1E-8
-        prm['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-6
-        prm['newton_solver']['krylov_solver']['maximum_iterations'] = 1001
-        prm['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
+        param_update(solver_RD)
         solver_RD.solve()
         
         # Update previous solution
@@ -165,16 +156,7 @@ def forward(initial_p, name=None):
         D    = project(D0*exp(-gammaD*vm),V)
         #k    = project(k0*exp(-gammaK*vm),V)
         
-        u.rename('u_'+name,'displacement')
-        p_n.rename('phi_T_'+name,'tumor fraction')
-        vm.rename('vm_'+name,"Von Mises")
-        D.rename('D_'+name,"diffusion coefficient")
-        k.rename('k_'+name,'k field') 
-        f_notime.write(p_n,t)
-        f_notime.write(u,t)
-        f_notime.write(k,t)
-        f_notime.write(vm,t)
-        f_notime.write(D,t)
+        recorder([u,p_n,vm,D,k],['u','p_n','vm','D','k'],name,t)
         
     return p
     
@@ -210,8 +192,8 @@ if __name__ == "__main__":
     
     # Model parameters
     t          = 0.
-    T          = 9.0              # final time 
-    num_steps  = 450              # number of time steps
+    T          = 1.0              # final time 
+    num_steps  = 10              # number of time steps
     dt         = T/num_steps      # time step size
     theta      = 50970.           # carrying capacity - normalize data by this
     mu         = .42              # kPa, bulk shear modulus

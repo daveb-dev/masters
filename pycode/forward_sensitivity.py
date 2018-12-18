@@ -27,7 +27,7 @@ def interp(file_loc,mat_name):
         Function to accept matlab .mat file with tumor data and interpolate values onto mesh
     """
     mat = sc_io_loadmat(file_loc)[mat_name]
-    mat = fliplr(mat.T)/theta  # Needs to be adjusted to fit the mesh correctly; also scaled
+    mat = fliplr(mat.T)/theta  # Needs to be adjusted to fit the mesh correctly; scaled
     x,y = mat.shape[0], mat.shape[1]
     mat_interp = InterpolatedParameter(linspace(1,x,x),linspace(1,y,y),mat,degree=1)
     return interpolate(mat_interp,V)

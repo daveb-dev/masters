@@ -48,9 +48,11 @@
 ehthumbs.db
 Thumbs.db
 
-# VTU files #
+# Paraview files #
 #############
 *.vtu
+*.h5
+*.xdmf
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

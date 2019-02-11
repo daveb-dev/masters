@@ -1,7 +1,21 @@
+
+% Description: this file takes the rat data provided by David and creates
+% various plots, images, or matrices for other uses.
+
+% The files are known to be named "ratXX" where XX = two digit ID. A struct
+% is created to hold useful data from each rat:
+%   - tslices:  tx16 matrix, where t = number of time steps, holding number
+%       of tumor cells at time t and slice z.
+%   - area:     tx16 matrix, where t = number of time steps, holding number
+%       of pixels with nonzero tumor cell count at time t and slice z.
+%   - time:     vector with the time steps at which data was collected
+%   - sbound:   cell with matrix of pixel coords. of skull bounds at each t
+%   - tbound:   cell with matrix of pixel coords. of tumor bounds at each t
+%   - maxlayer: scalar, z-slice with max # of tumor cells at initial t
+
 close all
 filesNums = {'01','02','05','06','09','12'};
-rat = struct('tslices',[],'area',[],'initial',[],'time',[],...
-    'sbound',[],'tbound',{},'meanarea',[],'maxlayer',[]);
+rat = struct('tslices',[],'area',[],'time',[],'sbound',[],'tbound',{},'maxlayer',[]);
 
 % Number of cells in slice z at time t
 close all
@@ -25,20 +39,18 @@ legend(filesNums,'Location','Northwest','FontSize',14);
 set(get(legend,'Title'),'String','Rat ID')
 saveas(gcf,'images/numtumorcells','png');
 
-% Time
+% Time steps
 for n = 1:length(filesNums)
     load(strcat('W',filesNums{n},'_model_data.mat'));
     rat(n).time = time;
 end
 
-% Initial condition & data based on max initial count
+% Tumor cells at each time step for layer with max initial cell count
 for n = 1:length(filesNums)
     load(strcat('W',filesNums{n},'_model_data.mat'));
     [~,rat(n).maxlayer] = max(rat(n).tslices(1,:));  % Slice with most cells
-    ic = cells(:,:,rat(n).maxlayer,1);   % Initial value rat(n).initial
     fstr = strcat('rat',filesNums{n});
-    eval(strcat('save(''./',fstr,'/ic.mat'',''ic'');'));
-    for t = 2:length(rat(n).time)
+    for t = 1:length(rat(n).time)
         tumor = cells(:,:,rat(n).maxlayer,t);  
         days = num2str(rat(n).time(t)-rat(n).time(1));
         eval(strcat('save(''./',fstr,'/tumor_t',days,'.mat'',''tumor'');'));
@@ -52,9 +64,9 @@ for n = 1:length(filesNums)
     
     % Skull
     skull_out = [];
-    [row,col,~] = find(skull(:,:,z) == 1);
-    k = boundary(row,col);
-    s = [col(k) 41-row(k)];
+    [row,col,~] = find(skull(:,:,z) == 1); % Skull matrix is binary
+    k = boundary(row,col);  % Boundary of previous data
+    s = [col(k) 41-row(k)]; 
     for i = 1:length(s)-1
         skull_out = [skull_out(1:end-1,:); bresenham(s(i,1),s(i,2),s(i+1,1),s(i+1,2))];
     end
@@ -107,6 +119,7 @@ set(get(legend,'Title'),'String','Rat ID')
 saveas(gcf,'images/voxtumorcells','png');
 
 %% Montages
+% This section creates images that show the progression of tumor growth.
 for n = 1:length(filesNums)
     close all
     load(strcat('W',filesNums{n},'_model_data.mat'));
@@ -143,7 +156,6 @@ for n = 1:length(filesNums)
     caxis([mincell maxcell]); colormap jet;
     saveas(gcf,strcat('images/Montage',filesNums{n}),'png');
 end
-%% Test Mean
 
 
 save('finaldata.mat','rat');

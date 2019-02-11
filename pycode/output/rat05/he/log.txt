@@ -1,8 +1,0 @@
-Interpolating ic...
-Plotting initial and target
-Optimizing...
-Elapsed time is 78.9333644201 minutes
-Plotting model and target
-J_opt = 6.91135074873
-J_opt (without regularization) = 1.21888864996
-D0 = 2.10068951722

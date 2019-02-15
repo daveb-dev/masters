@@ -231,7 +231,7 @@ def optimize(dbg=False):
 output_dir = "./output/"
 f_log = open(osjoin(output_dir,'log.txt'),'a')
 rat_num = sys.argv[1]
-rat_idx = sys.argv[2]
+rat_idx = int(sys.argv[2])
 day_idx = int(sys.argv[3])
 
   

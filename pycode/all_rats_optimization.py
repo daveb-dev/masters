@@ -228,17 +228,16 @@ def optimize(dbg=False):
 ########################################################################
     
 rat_nums = ["01","02","05","06","09","12"]
+output_dir = "./output/"
+f_log = open(osjoin(output_dir,'log.txt'),'w+')
 for index, rat_num in enumerate(rat_nums):
-    
-    input_dir  = "../rat-data/rat"+rat_num+"/"
-    output_dir = "./output/"
-    f_log = open(osjoin(output_dir,'log.txt'),'w+')
-    
+        
     # Days data and time steps
-    alldata  = sc_io_loadmat("../rat-data/finaldata.mat",)
-    days     = alldata['rat'][0][index][3][0]
-    days[:]  = [x-days[0] for x in days];
-    steps    = []
+    input_dir = "../rat-data/rat"+rat_num+"/"
+    alldata   = sc_io_loadmat("../rat-data/finaldata.mat",)
+    days      = alldata['rat'][0][index][3][0]
+    days[:]   = [x-days[0] for x in days];
+    steps     = []
     for i in range(1,len(days)):
         steps.append(days[i]-days[i-1])
         
@@ -301,9 +300,9 @@ for index, rat_num in enumerate(rat_nums):
             [D0, gammaD, k, beta] = optimize() # optimize these params using the adjoint method provided by adjoint_dolfin
 
             # Record time and optimized values
-            f_log.write('Rat'+rat_num)
-            f_log.write('Linear(0) or Hyper(1): '+str(lin_hyp))
-            f_log.write('Day used for optimization: '+str(day))
+            f_log.write('Rat'+rat_num+'\n')
+            f_log.write('Linear(0) or Hyper(1): '+str(lin_hyp)+'\n')
+            f_log.write('Day used for optimization: '+str(day)+'\n')
             f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')   
             f_log.write('gammaD = '+str(gammaD.values()[0])+'\n')
             f_log.write('D0 = '+str(D0.values()[0])+'\n')
@@ -342,5 +341,5 @@ for index, rat_num in enumerate(rat_nums):
                 f_log.write('J_opt day '+str(days[index2+1])+' = '
                             +str(objective(model_p, target_p))+'\n')
 
-    f_log.close()
+f_log.close()
 

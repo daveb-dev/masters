@@ -324,7 +324,7 @@ for index, rat_num in enumerate(rat_nums):
             target_p.rename('true_p', 'optimized tumor')
             f_nosteps.write(target_p, 0.)
 
-            for index2, step in steps:
+            for index2, step in enumerate(steps):
                 num_steps = step*10              # number of time steps
                 dt        = step/float(num_steps)      # time step size
 

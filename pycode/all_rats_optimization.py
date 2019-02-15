@@ -231,12 +231,14 @@ def optimize(dbg=False):
 output_dir = "./output/"
 f_log = open(osjoin(output_dir,'log.txt'),'a')
 rat_num = sys.argv[1]
-day_idx = int(sys.argv[2])
+rat_idx = sys.argv[2]
+day_idx = int(sys.argv[3])
+
   
 # Days data and time steps
 input_dir = "../rat-data/rat"+rat_num+"/"
 alldata   = sc_io_loadmat("../rat-data/finaldata.mat",)
-days      = alldata['rat'][0][index][3][0]
+days      = alldata['rat'][0][rat_idx][3][0]
 days[:]   = [x-days[0] for x in days];
 day       = days[day_idx]
 steps     = []

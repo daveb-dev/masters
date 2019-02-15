@@ -227,119 +227,120 @@ def optimize(dbg=False):
 # call the function with: python <this file> 
 ########################################################################
     
-rat_nums = ["01","02","05","06","09","12"]
+
 output_dir = "./output/"
-f_log = open(osjoin(output_dir,'log.txt'),'w+')
-for index, rat_num in enumerate(rat_nums):
-        
-    # Days data and time steps
-    input_dir = "../rat-data/rat"+rat_num+"/"
-    alldata   = sc_io_loadmat("../rat-data/finaldata.mat",)
-    days      = alldata['rat'][0][index][3][0]
-    days[:]   = [x-days[0] for x in days];
-    steps     = []
-    for i in range(1,len(days)):
-        steps.append(days[i]-days[i-1])
-        
-    # Constant inputs for optimization
-    D0       = 1.
-    gammaD   = .5
-    k0       = 1.
-    beta     = .5
-    theta    = 50970.       # carrying capacity - normalize cell data by this 
-    mu       = .42          # kPa, bulk shear modulus
-    nu       = .45
-    lmbda    = 2*mu*nu/(1-2*nu)
-    t1       = time()
-    rtime    = 1 # How often to record results
-    
-    #fl = h5py.File("./output/rat05le_day2/notime.h5", "r")
-    
-    # Prepare a mesh
-    mesh = Mesh(input_dir+"gmsh.xml")
-    V    = FunctionSpace(mesh, 'CG', 1)
-    
-    # Load initial tumor condition data
-    initial_p = interp(input_dir+"tumor_t0.mat","tumor")
-    initial_p.rename('initial','tumor at day 0')
-    
-    for day in days[1:4]:
-        
-        for lin_hyp in [0,1]:
-            
-            # Model parameters
-            t         = 0.           # initial time 
-            T         = day           # final time 
-            num_steps = T*10           # number of time steps
-            dt        = T/float(num_steps)  # time step size
+f_log = open(osjoin(output_dir,'log.txt'),'a')
+rat_num = sys.argv[1]
+day_idx = int(sys.argv[2])
+  
+# Days data and time steps
+input_dir = "../rat-data/rat"+rat_num+"/"
+alldata   = sc_io_loadmat("../rat-data/finaldata.mat",)
+days      = alldata['rat'][0][index][3][0]
+days[:]   = [x-days[0] for x in days];
+day       = days[day_idx]
+steps     = []
+for i in range(1,len(days)):
+    steps.append(days[i]-days[i-1])
 
-            # Load tumor condition data for day to optimize
-            target_p  = interp(input_dir+"tumor_t"+str(day)+".mat","tumor")  
-            target_p.rename('p_day'+str(day),'tumor at day '+str(day))
+# Constant inputs for optimization
+D0       = 1.
+gammaD   = .5
+k0       = 1.
+beta     = .5
+theta    = 50970.       # carrying capacity - normalize cell data by this 
+mu       = .42          # kPa, bulk shear modulus
+nu       = .45
+lmbda    = 2*mu*nu/(1-2*nu)
+t1       = time()
+rtime    = 1 # How often to record results
 
-            # Prepare output file
-            rat_id = rat_num+"-"+str(day)
-            f_timeseries = XDMFFile(osjoin(output_dir,rat_id+"timeseries.xdmf"))
-            f_timeseries.parameters["flush_output"] = True
-            f_timeseries.parameters["functions_share_mesh"] = True
-            f_nosteps    = XDMFFile(osjoin(output_dir,rat_id+"nosteps.xdmf"))
-            f_nosteps.parameters["flush_output"] = True
-            f_nosteps.parameters["functions_share_mesh"] = True
-            f_notime     = XDMFFile(osjoin(output_dir,rat_id+"notime.xdmf"))
-            f_notime.parameters["flush_output"] = True
-            f_notime.parameters["functions_share_mesh"] = True
+#fl = h5py.File("./output/rat05le_day2/notime.h5", "r")
 
-            ####################### D0 as a constant and k as a field ##########################
-            # Initial guesses
-            D0     = Constant(D0)
-            gammaD = Constant(gammaD)     # initial guess of gamma_D
-            k      = project(Constant(k0),V,annotate=False)     # growth rate initial guess
-            beta   = Constant(beta)
+# Prepare a mesh
+mesh = Mesh(input_dir+"gmsh.xml")
+V    = FunctionSpace(mesh, 'CG', 1)
 
-            # Optimization 
-            [D0, gammaD, k, beta] = optimize() # optimize these params using the adjoint method provided by adjoint_dolfin
+# Load initial tumor condition data
+initial_p = interp(input_dir+"tumor_t0.mat","tumor")
+initial_p.rename('initial','tumor at day 0')
 
-            # Record time and optimized values
-            f_log.write('Rat'+rat_num+'\n')
-            f_log.write('Linear(0) or Hyper(1): '+str(lin_hyp)+'\n')
-            f_log.write('Day used for optimization: '+str(day)+'\n')
-            f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')   
-            f_log.write('gammaD = '+str(gammaD.values()[0])+'\n')
-            f_log.write('D0 = '+str(D0.values()[0])+'\n')
-            f_log.write('beta = '+str(beta.values()[0])+'\n')
-            f_log.write('\n')
 
-            k.rename('k0','diffusion field')
-            f_notime.write(k,0.)
+for lin_hyp in [0,1]:
 
-            # Compare optimized tumor growth to actual at several time points
-            t   = 0.
+    # Model parameters
+    t         = 0.           # initial time 
+    T         = day           # final time 
+    num_steps = T*10           # number of time steps
+    dt        = T/float(num_steps)  # time step size
 
-            model_p = initial_p  # Initialize
-            model_p.rename('opt_p','optimized tumor')
-            f_nosteps.write(model_p, 0.)
+    # Load tumor condition data for day to optimize
+    target_p  = interp(input_dir+"tumor_t"+str(day)+".mat","tumor")  
+    target_p.rename('p_day'+str(day),'tumor at day '+str(day))
 
-            target_p = initial_p  # Initialize
-            target_p.rename('true_p', 'optimized tumor')
-            f_nosteps.write(target_p, 0.)
+    # Prepare output file
+    rat_id = rat_num+"-"+str(day)
+    f_timeseries = XDMFFile(osjoin(output_dir,rat_id+"timeseries.xdmf"))
+    f_timeseries.parameters["flush_output"] = True
+    f_timeseries.parameters["functions_share_mesh"] = True
+    f_nosteps    = XDMFFile(osjoin(output_dir,rat_id+"nosteps.xdmf"))
+    f_nosteps.parameters["flush_output"] = True
+    f_nosteps.parameters["functions_share_mesh"] = True
+    f_notime     = XDMFFile(osjoin(output_dir,rat_id+"notime.xdmf"))
+    f_notime.parameters["flush_output"] = True
+    f_notime.parameters["functions_share_mesh"] = True
 
-            for index2, step in enumerate(steps):
-                num_steps = step*10              # number of time steps
-                dt        = step/float(num_steps)      # time step size
+    ####################### D0 as a constant and k as a field ##########################
+    # Initial guesses
+    D0     = Constant(D0)
+    gammaD = Constant(gammaD)     # initial guess of gamma_D
+    k      = project(Constant(k0),V,annotate=False)     # growth rate initial guess
+    beta   = Constant(beta)
 
-                # Run forward model using optimized values
-                model_p = forward(model_p,'opt',True,False) 
-                model_p.rename('opt_p','optimized tumor')
-                f_nosteps.write(model_p,float(days[index2+1]))
+    # Optimization 
+    [D0, gammaD, k, beta] = optimize() # optimize these params using the adjoint method provided by adjoint_dolfin
 
-                # Save actual tumor for comparison
-                target_p = interp(input_dir+"tumor_t"+str(days[index2+1])+".mat","tumor")
-                target_p.rename('true_p','actual tumor')
-                f_nosteps.write(target_p,float(days[index2+1]))
+    # Record time and optimized values
+    f_log.write('Rat'+rat_num+'\n')
+    f_log.write('Linear(0) or Hyper(1): '+str(lin_hyp)+'\n')
+    f_log.write('Day used for optimization: '+str(day)+'\n')
+    f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')   
+    f_log.write('gammaD = '+str(gammaD.values()[0])+'\n')
+    f_log.write('D0 = '+str(D0.values()[0])+'\n')
+    f_log.write('beta = '+str(beta.values()[0])+'\n')
+    f_log.write('\n')
 
-                # Save J_opt
-                f_log.write('J_opt day '+str(days[index2+1])+' = '
-                            +str(objective(model_p, target_p))+'\n')
+    k.rename('k0','diffusion field')
+    f_notime.write(k,0.)
+
+    # Compare optimized tumor growth to actual at several time points
+    t   = 0.
+
+    model_p = initial_p  # Initialize
+    model_p.rename('opt_p','optimized tumor')
+    f_nosteps.write(model_p, 0.)
+
+    target_p = initial_p  # Initialize
+    target_p.rename('true_p', 'optimized tumor')
+    f_nosteps.write(target_p, 0.)
+
+    for index2, step in enumerate(steps):
+        num_steps = step*10              # number of time steps
+        dt        = step/float(num_steps)      # time step size
+
+        # Run forward model using optimized values
+        model_p = forward(model_p,'opt',True,False) 
+        model_p.rename('opt_p','optimized tumor')
+        f_nosteps.write(model_p,float(days[index2+1]))
+
+        # Save actual tumor for comparison
+        target_p = interp(input_dir+"tumor_t"+str(days[index2+1])+".mat","tumor")
+        target_p.rename('true_p','actual tumor')
+        f_nosteps.write(target_p,float(days[index2+1]))
+
+        # Save J_opt
+        f_log.write('J_opt day '+str(days[index2+1])+' = '
+                    +str(objective(model_p, target_p))+'\n')
 
 f_log.close()
 

@@ -5,11 +5,11 @@ Elapsed time is 11.3339291598 minutes
 gammaD = 0.997569200522
 D0 = 0.569533091158
 beta = 0.997569200527
-
 J_opt day 2 = 0.535455489981
 J_opt day 4 = 26.7678295195
 J_opt day 5 = 40.0268401036
 J_opt day 6 = 51.6638535985
+
 Rat01
 Linear(0) or Hyper(1): 1
 Day used for optimization: 2

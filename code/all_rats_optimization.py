@@ -186,7 +186,7 @@ def eval_cb(j, m):
     f_log.write("objective = %15.10e \n" % j)
 
 def objective(p, target_p):
-    return assemble(inner(p-target_p, p-target_p)*dx) \
+    return assemble(inner(p-target_p, p-target_p)*dx) 
        
 def optimize(dbg=False):
     # Define the control
@@ -267,6 +267,8 @@ V    = FunctionSpace(mesh, 'CG', 1)
 initial_p = interp(input_dir+"tumor_t0.mat","tumor")
 initial_p.rename('initial','tumor at day 0')
 
+le_he = ['LE','HE']
+
 
 for lin_hyp in [0,1]:
 
@@ -281,7 +283,7 @@ for lin_hyp in [0,1]:
     target_p.rename('p_day'+str(day),'tumor at day '+str(day))
 
     # Prepare output file
-    rat_id = rat_num+"-"+str(day)
+    rat_id = rat_num+"-"+str(day)+le_he[lin_hyp]
     f_timeseries = XDMFFile(osjoin(output_dir,rat_id+"timeseries.xdmf"))
     f_timeseries.parameters["flush_output"] = True
     f_timeseries.parameters["functions_share_mesh"] = True
@@ -303,14 +305,14 @@ for lin_hyp in [0,1]:
     [D0, gammaD, k, beta] = optimize() # optimize these params using the adjoint method provided by adjoint_dolfin
 
     # Record time and optimized values
-    f_log.write('Rat'+rat_num+'\n')
+    f_log.write('-------------------------------------------------------------')
+    f_log.write('RAT '+rat_num+'\n')
     f_log.write('Linear(0) or Hyper(1): '+str(lin_hyp)+'\n')
     f_log.write('Day used for optimization: '+str(day)+'\n')
     f_log.write('Elapsed time is ' + str((time()-t1)/60) + ' minutes\n')   
     f_log.write('gammaD = '+str(gammaD.values()[0])+'\n')
     f_log.write('D0 = '+str(D0.values()[0])+'\n')
     f_log.write('beta = '+str(beta.values()[0])+'\n')
-    f_log.write('\n')
 
     k.rename('k0','diffusion field')
     f_notime.write(k,0.)
@@ -342,7 +344,7 @@ for lin_hyp in [0,1]:
 
         # Save J_opt
         f_log.write('J_opt day '+str(days[index2+1])+' = '
-                    +str(objective(model_p, target_p))+'\n')
+                    +str(objective(model_p, target_p))+'\n\n')
 
 f_log.close()
 

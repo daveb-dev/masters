@@ -64,5 +64,8 @@ for n=Np_skull+1:Np_skull+Np_tumor-1
     fprintf(fp,[num2str(n),',']);
 end
 fprintf(fp,[num2str(Np_skull+Np_tumor),'};\n']);
+%fprintf(fp,'Mesh.CharacteristicLengthExtendFromBoundary = 10;\n');
+%fprintf(fp,'Mesh.CharacteristicLengthFromPoints = 10;\n');
+%fprintf(fp,'Mesh.CharacteristicLengthFromCurvature = 10;\n');
 fclose all;
 end

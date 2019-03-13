@@ -1,5 +1,10 @@
 ** TODO
 Model
+O Verify parameter estimation capability using synthetic data: Use forward model with pre-selected parameters, then run parameter estimation and see how close
+  - Nonlinear
+O Run model faster
+   - Fewer time steps
+   - Lower tolerance 
 O Validate reaction diffusion (use masa?)
    - Want to see what a finer mesh/different time step does? This should show error convergence?
 O Validate LE and HE (again, use manufactured solution?)
@@ -19,7 +24,11 @@ O Change mesh picture in report? Might be wrong picture, shows coarse mesh in so
 O In images of tumor, include bar for scale of mm
 O Need to fix figures for report - normalize correctly in paraview, include time points in figure caption, make a point in the caption about what's happening, make better montages
 
-** Completed items 
+** Completed items
+* Verify parameter estimation capability using synthetic data: Use forward model with pre-selected parameters, then run parameter estimation and see how close
+  - Linear
+* Run model faster
+   - Separate tumor and brain mesh when possible, and have coarser brain mesh
 * Fixed meshing matlab program to work for rats 06, 09, 12 that have tumors outside skull. Used a single mesh since program interpolates actual data onto mesh well
 * Growth field should be a function of time, but we're not modeling here
 * Ignored AIC for now, simply base model comparison on which fits data better

@@ -19,7 +19,7 @@ for i = 1:length(filesNums)
     x_tumor = tumor_out(1:end-1,1);
     y_tumor = tumor_out(1:end-1,2);
     output_filename = 'gmsh.geo';
-    util_generateGmshGeo(output_filename,1,1);
+    util_generateGmshGeo(output_filename,15,10);
     !/usr/bin/gmsh gmsh.geo -2 -o gmsh.msh
     !/usr/bin/gmsh gmsh.msh
     cd ..

@@ -2,8 +2,8 @@
 % Description: this file takes the rat data provided by David and creates
 % various plots, images, or matrices for other uses.
 
-% The files are known to be named "ratXX" where XX = two digit ID. A struct
-% is created to hold useful data from each rat:
+% The input files are known to be named "ratXX" where XX = two digit ID. A 
+% struct is created to hold useful data from each rat:
 %   - tslices:  tx16 matrix, where t = number of time steps, holding number
 %       of tumor cells at time t and slice z.
 %   - area:     tx16 matrix, where t = number of time steps, holding number
@@ -12,6 +12,8 @@
 %   - sbound:   cell with matrix of pixel coords. of skull bounds at each t
 %   - tbound:   cell with matrix of pixel coords. of tumor bounds at each t
 %   - maxlayer: scalar, z-slice with max # of tumor cells at initial t
+% Additionally, the boundaries of tumor and skull are calculated to be used
+% in the meshing process.
 
 close all
 filesNums = {'01','02','05','06','09','12'};
@@ -66,10 +68,10 @@ for n = 1:length(filesNums)
     skull_out = [];
     [row,col,~] = find(skull(:,:,z) == 1); % Skull matrix is binary
     k = boundary(row,col);  % Boundary of previous data
-    s = [col(k) 41-row(k)]; 
-    for i = 1:length(s)-1
-        skull_out = [skull_out(1:end-1,:); bresenham(s(i,1),s(i,2),s(i+1,1),s(i+1,2))];
-    end
+    skull_out = [col(k) 41-row(k)]; 
+%     for i = 1:length(s)-1
+%         skull_out = [skull_out(1:end-1,:); bresenham(s(i,1),s(i,2),s(i+1,1),s(i+1,2))];
+%     end
     rat(n).sbound = skull_out;
     fstr = strcat('rat',filesNums{n});
     eval(strcat('save(''./',fstr,'/skull_out.mat'',''skull_out'');'));
@@ -78,10 +80,10 @@ for n = 1:length(filesNums)
     tumor_out = [];
     [row,col,~] = find(cells(:,:,z,1) > 0);
     k = boundary(row,col,.9);
-    tu = [col(k) 41-row(k)];
-    for i = 1:length(tu)-1
-        tumor_out = [tumor_out(1:end-1,:); bresenham(tu(i,1),tu(i,2),tu(i+1,1),tu(i+1,2))];
-    end
+    tumor_out = [col(k) 41-row(k)];
+%     for i = 1:length(tu)-1
+%         tumor_out = [tumor_out(1:end-1,:); bresenham(tu(i,1),tu(i,2),tu(i+1,1),tu(i+1,2))];
+%     end
     rat(n).tbound = tumor_out;
     eval(strcat('save(''./',fstr,'/tumor_out.mat'',''tumor_out'');'));
 end

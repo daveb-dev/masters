@@ -60,4 +60,4 @@ for i = 1:length(xq)
 end
 
 imshow(k)
-save("./k_synth.mat",'k');
+save("./k_synth7.mat",'k');

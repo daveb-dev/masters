@@ -250,9 +250,9 @@ D_vals    = [.25, .5, 1, 1.5, 2., 2.5, 3.]
 p_init = interp(input_dir+"tumor_t0.mat","tumor", theta)
 p_init.rename('initial','tumor at day 0')
 
-for lin_hyp in [0,1]:
+for lin_hyp in [0]:
     
-    for i in range(len(D_vals)):
+    for i in range(4,7):
         t = 0.
         D_true = D_vals[i]
         # Prepare values for forward model

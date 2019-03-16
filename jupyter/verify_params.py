@@ -54,14 +54,14 @@ def vis_obs(first,second,title1,title2):
     f.colorbar(c, ticks = linspace(0,ceil(m),10))
 
 def set_nonlinear_params(param):
-    param['newton_solver']['absolute_tolerance'] = 1E-6
-    param['newton_solver']['relative_tolerance'] = 1E-5
-    param['newton_solver']['maximum_iterations'] = 51
-    param['newton_solver']['relaxation_parameter'] = 1.0
+    param['newton_solver']['absolute_tolerance'] = 1E-8
+    param['newton_solver']['relative_tolerance'] = 1E-8
+    param['newton_solver']['maximum_iterations'] = 50
+    param['newton_solver']['relaxation_parameter'] = 1.
     param['newton_solver']['linear_solver'] = 'gmres'
     param['newton_solver']['preconditioner'] = 'ilu'
-    param['newton_solver']['krylov_solver']['absolute_tolerance'] = 1E-6
-    param['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-5
+    param['newton_solver']['krylov_solver']['absolute_tolerance'] = 1E-8
+    param['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-8
     param['newton_solver']['krylov_solver']['maximum_iterations'] = 1000
     param['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
 
@@ -240,8 +240,8 @@ theta     = 50970.       # carrying capacity - normalize cell data by this
 mu        = .42          # kPa, bulk shear modulus
 nu        = .45
 lmbda     = 2*mu*nu/(1-2*nu)
-gammaD    = .5
-beta      = .5
+gammaD    = .1
+beta      = 1.
 r_coeff1  = 0.0005
 r_coeff2  = 0.1
 D_vals    = [.25, .5, 1, 1.5, 2., 2.5, 3.]
@@ -250,9 +250,9 @@ D_vals    = [.25, .5, 1, 1.5, 2., 2.5, 3.]
 p_init = interp(input_dir+"tumor_t0.mat","tumor", theta)
 p_init.rename('initial','tumor at day 0')
 
-for lin_hyp in [0]:
+for lin_hyp in [1]:
     
-    for i in range(4,7):
+    for i in range(4,6):
         t = 0.
         D_true = D_vals[i]
         # Prepare values for forward model

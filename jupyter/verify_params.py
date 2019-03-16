@@ -244,7 +244,7 @@ gammaD    = .5
 beta      = .5
 r_coeff1  = 0.0005
 r_coeff2  = 0.1
-D_vals    = [0., .5, 1, 1.5, 2., 2.5, 3.]
+D_vals    = [.25, .5, 1, 1.5, 2., 2.5, 3.]
 
 # Load initial tumor condition data 
 p_init = interp(input_dir+"tumor_t0.mat","tumor", theta)
@@ -252,7 +252,7 @@ p_init.rename('initial','tumor at day 0')
 
 for lin_hyp in [0,1]:
     
-    for i in range(len(D_true)):
+    for i in range(len(D_vals)):
         t = 0.
         D_true = D_vals[i]
         # Prepare values for forward model

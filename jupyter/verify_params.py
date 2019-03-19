@@ -29,7 +29,7 @@ def interp(file_loc,mat_name,norm_factor):
         and interpolate values onto mesh
     """
     mat = sc_io_loadmat(file_loc)[mat_name]
-    mat = fliplr(mat.T)/norm_factor  # Needs to be adjusted to fit the mesh correctly
+    mat = fliplr(mat.T)/norm_factor  # Needs to be adjusted to fit the mesh correctly; also scaled
     x,y = mat.shape[0], mat.shape[1]
     mat_interp = InterpolatedParameter(linspace(1,x,x),linspace(1,y,y),mat,degree=1)
     return interpolate(mat_interp,V)
@@ -54,14 +54,14 @@ def vis_obs(first,second,title1,title2):
     f.colorbar(c, ticks = linspace(0,ceil(m),10))
 
 def set_nonlinear_params(param):
-    param['newton_solver']['absolute_tolerance'] = 1E-8
-    param['newton_solver']['relative_tolerance'] = 1E-8
-    param['newton_solver']['maximum_iterations'] = 50
+    param['newton_solver']['absolute_tolerance'] = 1E-7
+    param['newton_solver']['relative_tolerance'] = 1E-6
+    param['newton_solver']['maximum_iterations'] = 51
     param['newton_solver']['relaxation_parameter'] = 1.
     param['newton_solver']['linear_solver'] = 'gmres'
     param['newton_solver']['preconditioner'] = 'ilu'
     param['newton_solver']['krylov_solver']['absolute_tolerance'] = 1E-8
-    param['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-8
+    param['newton_solver']['krylov_solver']['relative_tolerance'] = 1E-6
     param['newton_solver']['krylov_solver']['maximum_iterations'] = 1000
     param['newton_solver']['krylov_solver']['nonzero_initial_guess'] = True
 
@@ -77,7 +77,6 @@ def forward(p_init, name, record=False,  annotate=False):
         -vonmises(...) calculates the von Mises stress based 
           on the actual stress tensor
     """
-    global t
     I = Identity(2)  # Identity tensor
     def E(u):
         return 0.5*(nabla_grad(u) + nabla_grad(u).T)
@@ -155,6 +154,7 @@ def forward(p_init, name, record=False,  annotate=False):
     F_RD = (1/dt)*(p - p_n)*q*dx + D*dot(grad(q),grad(p))*dx - k*p*(1 - p)*q*dx  
     J_RD = derivative(F_RD,p,dp) 
     
+    t = 0.
     for n in range(num_steps):
         # Solve reaction diffusion
         t += dt
@@ -240,8 +240,8 @@ theta     = 50970.       # carrying capacity - normalize cell data by this
 mu        = .42          # kPa, bulk shear modulus
 nu        = .45
 lmbda     = 2*mu*nu/(1-2*nu)
-gammaD    = .1
-beta      = 1.
+gammaD    = .5
+beta      = .5
 r_coeff1  = 0.0005
 r_coeff2  = 0.1
 D_vals    = [.25, .5, 1, 1.5, 2., 2.5, 3.]
@@ -252,8 +252,7 @@ p_init.rename('initial','tumor at day 0')
 
 for lin_hyp in [1]:
     
-    for i in range(4,6):
-        t = 0.
+    for i in range(0,6):
         D_true = D_vals[i]
         # Prepare values for forward model
         D0     = Constant(D_true)
